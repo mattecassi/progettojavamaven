@@ -31,7 +31,7 @@ public class Main2 extends Application {
 
     public Stage createStage(String fxml, String title) throws Exception{
 
-
+        System.out.println( "Ciao bizz" + fxml);
 
         Stage popUpStage;
         Scene popUpScene;
