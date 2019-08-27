@@ -31,7 +31,8 @@ public class Main2 extends Application {
 
     public Stage createStage(String fxml, String title) throws Exception{
 
-        System.out.println( "Ciao bizz" + fxml);
+
+        System.out.println("Sono una prova");
 
         Stage popUpStage;
         Scene popUpScene;
@@ -71,6 +72,10 @@ public class Main2 extends Application {
         primaryStage.getIcons().add(new Image("/asset/box.png"));
         initRootLayout();
         showPersonOverview("/view/logo.fxml");
+    }
+
+    void prova(){
+        System.out.println("Sono prova");
     }
 
     /**
@@ -141,6 +146,8 @@ public class Main2 extends Application {
             System.out.println("Inserisci annata");
             bottiglia.setAnnata(reader.read());
             listaVini.addVino(bottiglia);
+
+
         }*/
 
 
