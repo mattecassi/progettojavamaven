@@ -152,7 +152,7 @@ public class API {
                  */
                 try {
                    Integer id = dao.insert(data);
-                   System.out.println(id);
+                  // System.out.println(id);
                     stato = "success";
                     dato_ret="[{\"ID\":"+id+"}]";
                     //dao.close();
@@ -189,7 +189,7 @@ public class API {
         ret.put("stato",stato);
         ret.put("data",dato_ret);
 
-//        System.out.println(ret);
+//        System.out.println("RET" + ret);
 
         return  ret;
     }

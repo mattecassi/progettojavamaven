@@ -140,7 +140,7 @@ public class DAO {
 
         sql.append(" " + creaClausola(clausole));
 
-        System.out.println(sql.toString());
+//        System.out.println(sql.toString());
 
         execQueryUID(sql.toString());
 
@@ -156,7 +156,7 @@ public class DAO {
     public void delete(JSONArray clausole) throws SQLException,JSONException{
 
         String sql = new String("DELETE FROM " + this.getTable() + " " + creaClausola(clausole));
-        System.out.println(sql.toString());
+//        System.out.println(sql.toString());
         execQueryUID(sql.toString());
 
 
@@ -297,7 +297,7 @@ public class DAO {
             valori = new StringBuffer(valori.substring(0, valori.length() - 1));
             values = new StringBuffer(values.substring(0, values.length() - 1));
             sql.append("("+values.toString()+")" + " VALUES " + "(" + valori + ");");
-            System.out.println(sql.toString());
+//            System.out.println(sql.toString());
             s.executeUpdate(sql.toString());
             s.close();
             s = this.getConnection().connection.createStatement();

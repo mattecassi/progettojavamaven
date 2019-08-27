@@ -23,8 +23,8 @@ public class Main {
 
 
         //prova update
-        f.setMail("cassicinema@gmail.com");
-        f.setNome("cassi");
+        f.setMail("provaUp@gmail.com");
+        f.setNome("provaUp");
         retf = f.update();
         System.out.println(retf.getStatus() + "\n" + retf.getData());
         System.out.println(f);
@@ -32,7 +32,7 @@ public class Main {
 
 
 //        prova delete
-        f.delete();
+   //     f.delete();
 
 
         //es select da API

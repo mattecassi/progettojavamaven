@@ -41,6 +41,8 @@ public class UpdateElem {
 
     public static JSONArray convertListUpdateElemToJSONArray(List<UpdateElem> list){
 
+        if (list.isEmpty())
+            return  new JSONArray("[]");
         JSONArray jsonArray = new JSONArray();
 
         for (UpdateElem elem: list) {

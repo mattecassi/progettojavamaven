@@ -29,7 +29,7 @@ public class GetConnection {
             // create a connection to the database
             conn = DriverManager.getConnection(this.getConnectionString());
 
-            System.out.println("Connection to SQLite has been established.");
+//            System.out.println("Connection to SQLite has been established.");
 
             return  conn;
         } catch (SQLException e) {
