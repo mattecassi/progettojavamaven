@@ -55,6 +55,11 @@ public class Main2 extends Application {
         window.show();
         }
 
+
+        public void funct(){
+
+            System.out.println("cioa");
+        }
     private Stage primaryStage;
     static public BorderPane rootLayout;
 
