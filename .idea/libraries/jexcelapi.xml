@@ -1,15 +1,15 @@
 <component name="libraryTable">
   <library name="jexcelapi">
     <CLASSES>
-      <root url="file://$USER_HOME$/Desktop/ApplicationOOP/jexcelapi" />
+      <root url="file://$PROJECT_DIR$/../../../java11/jexcelapi" />
     </CLASSES>
     <JAVADOC>
-      <root url="file://$USER_HOME$/Desktop/ApplicationOOP/jexcelapi/docs" />
+      <root url="file://$PROJECT_DIR$/../../../java11/jexcelapi/docs" />
     </JAVADOC>
     <SOURCES>
-      <root url="file://$USER_HOME$/Desktop/ApplicationOOP/jexcelapi/build" />
-      <root url="file://$USER_HOME$/Desktop/ApplicationOOP/jexcelapi/src" />
+      <root url="file://$PROJECT_DIR$/../../../java11/jexcelapi/build" />
+      <root url="file://$PROJECT_DIR$/../../../java11/jexcelapi/src" />
     </SOURCES>
-    <jarDirectory url="file://$USER_HOME$/Desktop/ApplicationOOP/jexcelapi" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../java11/jexcelapi" recursive="false" />
   </library>
 </component>
