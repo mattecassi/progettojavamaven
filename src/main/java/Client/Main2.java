@@ -69,6 +69,10 @@ public class Main2 extends Application {
         showPersonOverview("/view/logo.fxml");
     }
 
+    void prova(){
+        System.out.println("Sono prova");
+    }
+
     /**
      * Initializes the root layout.
      */
