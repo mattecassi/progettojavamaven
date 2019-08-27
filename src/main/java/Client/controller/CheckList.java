@@ -26,7 +26,7 @@ public class CheckList {
     @FXML
     void addGiornaliero(ActionEvent event) {
         try{
-            main.createStage("view/addGiornaliero.view","Aggiungi compito giornaliero");
+            main.createStage("/view/addGiornaliero.view","Aggiungi compito giornaliero");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class CheckList {
     @FXML
     void addSettimanale(ActionEvent event) {
         try{
-            main.createStage("view/addSettimanale.view","Aggiungi compito settimanale");
+            main.createStage("/view/addSettimanale.view","Aggiungi compito settimanale");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -44,7 +44,7 @@ public class CheckList {
     @FXML
     void addMensile(ActionEvent event) {
         try{
-            main.createStage("view/addMensile.view","Aggiungi compito mensile");
+            main.createStage("/view/addMensile.view","Aggiungi compito mensile");
         } catch (Exception e) {
             e.printStackTrace();
         }

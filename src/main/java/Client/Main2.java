@@ -1,4 +1,4 @@
-//--module-path C:\Users\bizza\OneDrive\Desktop\Java11\javafx-sdk-11.0.2\lib --add-modules javafx.controls,javafx.fxml
+//--module-path C:\Users\bizza\Desktop\ApplicationOOp\FX\javafx-sdk-12.0.2\lib --add-modules javafx.controls,javafx.fxml
 
 package Client;
 import API.APIC;
@@ -92,7 +92,7 @@ public class Main2 extends Application {
 
     @FXML
     public void change(){
-        showPersonOverview("view/aggiorna.fxml");
+        showPersonOverview("/view/aggiorna.fxml");
     }
 
     /**
