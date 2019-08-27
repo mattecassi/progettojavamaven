@@ -12,7 +12,10 @@ public class GetConnection {
 
 
     public GetConnection(){
-        this.connectionString = "jdbc:sqlite:D:/db2.db";
+        //cassi
+        //this.connectionString = "jdbc:sqlite:D:/db2.db";
+        //bizzo
+        this.connectionString = "jdbc:sqlite:C:/Users/bizza/Desktop/ApplicationOOP/db2.db";
         this.connection = connect();
     }
 
