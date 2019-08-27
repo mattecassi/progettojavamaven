@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:id="menuAP" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.CheckList">
+    <children>
+      <ListView layoutX="47.0" layoutY="60.0" prefHeight="200.0" prefWidth="800.0" />
+      <ListView layoutX="47.0" layoutY="560.0" prefHeight="200.0" prefWidth="800.0" />
+      <ListView layoutX="47.0" layoutY="300.0" prefHeight="200.0" prefWidth="800.0" />
+      <Label layoutX="118.0" layoutY="22.0" text="Giornaliero" />
+      <Label layoutX="118.0" layoutY="271.0" text="Settimanale" />
+      <Label layoutX="118.0" layoutY="521.0" text="Mensile" />
+      <JFXButton fx:id="btnAddGiornaliero" layoutX="871.0" layoutY="129.0" onAction="#addGiornaliero" prefHeight="60.0" prefWidth="60.0" text="+" />
+      <JFXButton fx:id="btnAddSettimanale" layoutX="871.0" layoutY="370.0" onAction="#addSettimanale" prefHeight="60.0" prefWidth="60.0" text="+" />
+      <JFXButton fx:id="btnAddMensile" layoutX="871.0" layoutY="630.0" onAction="#addMensile" prefHeight="60.0" prefWidth="60.0" text="+" />
+    </children>
+</AnchorPane>
