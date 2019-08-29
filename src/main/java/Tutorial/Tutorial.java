@@ -1,3 +1,5 @@
+package Tutorial;
+
 import API.APIC;
 import ClientUtils.Clausola;
 import ClientUtils.UpdateElem;
@@ -33,6 +35,10 @@ public class Tutorial {
      *
      * ES query apic che posso creare con APIC
      * update vino set nome="Cassi Rosso" where costo=15.00 AND nome="Cassi Rosso"
+     *
+     * TODO BIZZUCCIO
+     * HO aggiornato le classi APIC e Model, nel caso non vada a buon fine l'operazione di insert|update|delete
+     * hai un Exception, coglione.
      */
     public static void main(String[] args){
 
@@ -47,6 +53,9 @@ public class Tutorial {
          * però io consiglio di farlo tramite le classi Model
          *
          */
+
+        try {
+
 
         Vino vino = new Vino();
         vino.setAnno(1998);
@@ -103,6 +112,72 @@ public class Tutorial {
         for (Vino elem: ret.toList(Vino.class)){ //toList(classe.class) mi restituisce un'array list contenente tt gli elementi
             System.out.println(elem.toString());
         }
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+
+        /*
+        TODO PROVA A RUNNARE IL CODICE SOTTOSTANTE E GUARDA COM'E' BLL
+
+        try {
+            Cantina c = new Cantina();
+            c.setNome("Cantina di DIO");
+            c.setRegione("Veneto");
+            c.setStato("Italia");
+            c.setVia("Via Jotaro");
+            c.setUvaggio("Uva");
+            c.insert();
+
+            c.setVia("via m.l.king 1");
+            c.update();
+
+            c.delete();
+
+
+            TipoVino tipoVino = new TipoVino("VerdeFuxia");
+            tipoVino.insert();
+
+            tipoVino.setTipo("Rosso Frizzantino");
+            tipoVino.update();
+
+            tipoVino.delete();
+
+
+            Vino v = new Vino();
+            v.setNome("Bianco JOJO");
+            v.setIdCantina(5);
+            v.setTipo("Bianco");
+            v.setAnno(2001);
+            v.setCosto(50.00);
+            v.setPrezzoVendita(500.00);
+            v.setQta(100);
+            v.insert();
+            v.delete();
+
+
+
+            //es select da API
+            APIC a = new APIC("vino");
+            ArrayList<Clausola> listClausole = new ArrayList<>();
+            String[] arr = {};
+
+
+            APIReturn result = a.select(arr, listClausole);
+            for (Vino vino: result.toList(Vino.class)){
+                System.out.println(vino);
+            }
+
+        }catch (Exception e){
+            //e.printStackTrace();
+            System.out.println(e.getMessage());
+        }
+
+
+         */
+
+
+
+
 
 
     }

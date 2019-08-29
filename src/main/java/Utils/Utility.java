@@ -2,6 +2,10 @@ package Utils;
 
 import org.json.JSONArray;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 public class Utility {
 
     public static StringBuffer removeLast(StringBuffer result){
@@ -13,6 +17,14 @@ public class Utility {
         }
 
     }
+
+    public static LocalDateTime convertStringSQLiteToLocalDateTime(String datetime){
+        datetime.replace("T"," ");
+        DateTimeFormatter f = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        return LocalDateTime.from(f.parse(datetime));
+    }
+
+
 
     public static JSONArray convertStringArrayIntoJSONArray(String[] arr){
 

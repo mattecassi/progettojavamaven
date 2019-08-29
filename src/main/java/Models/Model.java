@@ -18,8 +18,18 @@ public abstract class Model {
     protected Integer ID; //E' la PK di tt le tabelle
 
 
-    public APIReturn insert() {
 
+    /**
+     * Funzione che si occupa di inserire l'oggetto nel db
+     * e di settarne l'ID.
+     *
+     * @return APIreturn oggetto che contiene i dati di ritorno(Posso non controllarlo)
+     * @throws Exception In caso di errore ritorna un'eccezione con l'errore
+     *
+     */
+    public APIReturn insert() throws Exception {
+
+//        System.out.println(this.toString());
         APIReturn apiReturn = apic.insert(new JSONObject(this.toString()));
         JSONObject tmp = (JSONObject) apiReturn.getData().get(0);
         this.setID(tmp.getInt("ID"));
@@ -27,14 +37,17 @@ public abstract class Model {
 
     }
 
-    public APIReturn update() {
+    public APIReturn update() throws Exception{
 
         try {
+            if (this.getID() == null)
+                throw new Exception("Non puoi modificare un oggetto " + this.getClass().getSimpleName() + " senza specificarne l\'ID\nProva ad istanziarlo!!");
+
             ArrayList<Clausola> clausolaArrayList = new ArrayList<>();
             clausolaArrayList.add(new Clausola("ID", "=", this.getID().toString()));
 
             JSONObject jsonObject = new JSONObject(this.toString());
-            System.out.println(jsonObject);
+//            System.out.println(jsonObject);
 
             ArrayList<UpdateElem> updateElems = new ArrayList<>();
 
@@ -43,20 +56,27 @@ public abstract class Model {
 
 
             return this.apic.update(updateElems, clausolaArrayList);
+
+
         }catch (Exception e){
-            return new APIReturn("error",new JSONArray("[\""+e.getMessage()+"\"]"));
+            throw new Exception(e.getMessage());
         }
     }
 
 
 
-    public APIReturn delete(){
+    public APIReturn delete() throws Exception{
         try {
+            if (this.getID() == null)
+                throw new Exception("Non puoi modificare un oggetto " + this.getClass().getSimpleName() + " senza specificarne l\'ID\nProva ad istanziarlo!!");
+
             List<Clausola> list = new ArrayList<>();
             list.add(new Clausola("ID","=",this.getID().toString()));
-            return  this.apic.delete(list);
+            return this.apic.delete(list);
+
+
         }catch (Exception e){
-            return new APIReturn("error",new JSONArray("[\""+e.getMessage()+"\"]"));
+            throw new Exception(e.getMessage());
         }
     }
 
@@ -83,6 +103,19 @@ public abstract class Model {
 
     public void setID(Integer ID) {
         this.ID = ID;
+    }
+
+
+    /**
+     * Questa funzione verrà usato quando devo creare un elemento
+     * appartenente ad una gerarchia.
+     * Es. se devo creare un enoteca DEVO specificargli l'ID di un fornitore
+     * @param tabellaEsterna nome della tabella esterna alla quale mi riferisco
+     * @throws Exception
+     */
+    protected void checkBeforeInsert(String tabellaEsterna) throws Exception{
+            if (this.getID() == null)
+                throw new Exception("Per creare un "+this.getClass().getCanonicalName()+" bisogna specificare l'ID(Esistente) di un " + tabellaEsterna);
     }
 
     /**

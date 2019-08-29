@@ -152,7 +152,7 @@ public class API {
                  */
                 try {
                    Integer id = dao.insert(data);
-                  // System.out.println(id);
+//                   System.out.println(id);
                     stato = "success";
                     dato_ret="[{\"ID\":"+id+"}]";
                     //dao.close();
@@ -170,7 +170,7 @@ public class API {
                     try {
                         dao.close();
                     } catch (SQLException e) {
-                        stato = "Errore chiusura connessione";
+                        stato = "Error";
                         dato_ret = "[Errore chiusura connessio]";
                     }
                 }
