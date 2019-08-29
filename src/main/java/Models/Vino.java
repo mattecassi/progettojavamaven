@@ -97,6 +97,7 @@ public class Vino extends Model {
                 ", qta:" + qta +
                 ", costo:" + costo +
                 ", prezzoVendita:" + prezzoVendita +
+                ", ID:"+ this.getID() +
                 '}';
     }
 }

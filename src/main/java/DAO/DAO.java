@@ -40,11 +40,26 @@ public class DAO {
      */
     protected void execQueryUID(String sql) throws SQLException{
 
+        Integer beforeViolation = getNumberForeignKeyViolation();
+
+        this.getConnection().getConnection().setAutoCommit(false);
+
         Statement s = this.getConnection().connection.createStatement();
         s.executeUpdate(sql);
+
+        Integer afterViolation = getNumberForeignKeyViolation();
+        if (beforeViolation < afterViolation){
+            this.getConnection().getConnection().rollback();
+            s.close();
+            throw new SQLException("Vincolo di foreign key violato durante l'esecuzione della query");
+        }else{
+            this.getConnection().getConnection().commit();
+        }
+
         s.close();
 
     }
+
 
     /**
      *  Questa funzione si occupa di trasformare un array di JSON del tipo
@@ -99,6 +114,21 @@ public class DAO {
 
     }
 
+    /**
+     * Funzione che conta quante violazioni delle foreign key sono presenti nel db
+     *
+     * @return int numero di violazioni presenti
+     * @throws SQLException
+     */
+    protected Integer getNumberForeignKeyViolation() throws SQLException{
+        Statement s = this.getConnection().getConnection().createStatement();
+        ResultSet resultSet = s.executeQuery("PRAGMA foreign_key_check ");
+        int count = 0;
+        while (resultSet.next())
+            count++;
+        s.close();
+        return count;
+    }
 
     /**
      *
@@ -141,7 +171,6 @@ public class DAO {
         sql.append(" " + creaClausola(clausole));
 
 //        System.out.println(sql.toString());
-
         execQueryUID(sql.toString());
 
 
@@ -158,7 +187,6 @@ public class DAO {
         String sql = new String("DELETE FROM " + this.getTable() + " " + creaClausola(clausole));
 //        System.out.println(sql.toString());
         execQueryUID(sql.toString());
-
 
 
 
@@ -266,7 +294,6 @@ public class DAO {
         StringBuffer valori = new StringBuffer("");
 
 
-        int count = 0;
         for (TableInfoRow tb : this.getColumnList()){
 
             try {
@@ -298,11 +325,43 @@ public class DAO {
             values = new StringBuffer(values.substring(0, values.length() - 1));
             sql.append("("+values.toString()+")" + " VALUES " + "(" + valori + ");");
 //            System.out.println(sql.toString());
+
+
+
+            //Da qui inizia la tranasction
+//          Le operazioni che farò saranno
+//            1. eseguire la query
+//            2. ottenere l'id dell'elemento inserito
+//            3. Controllare che l'inserimento non violi il vincolo di FK
+            this.getConnection().getConnection().setAutoCommit(false);
+
+            //1.
             s.executeUpdate(sql.toString());
+            //System.out.println(ret);
             s.close();
+
+
+            //2. Richiedo al db di restituirmi l'ultimo ID inserito in modo da poterlo ritornare
             s = this.getConnection().connection.createStatement();
             Integer id =s.executeQuery("SELECT last_insert_rowid() as id;").getInt("ID");
+
+
+            //3.
+            ResultSet resultSet = s.executeQuery("PRAGMA foreign_key_check ");
+//            System.out.println(resultSet.getInt("rowid"));
+            while (resultSet.next()) {
+
+                if (resultSet.getString(1).equalsIgnoreCase(this.table) && resultSet.getInt("rowid") == id) {
+//                    System.out.println("Passo" + resultSet.getInt("rowid"));
+                    String error ="Hai provato a creare un " + this.table + " violando il vincolo di foreigkey riferendoti a " + resultSet.getString("parent");
+                    this.getConnection().getConnection().rollback();
+                    s.close();
+                    throw new SQLException(error);
+                }
+            }
             s.close();
+            this.getConnection().getConnection().commit();//eseguo il commit
+
             return id;
         }
 
@@ -310,6 +369,7 @@ public class DAO {
 
 
     }
+
 
 
 

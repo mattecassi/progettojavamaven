@@ -12,6 +12,7 @@ public class APIReturn{
 
     private String status;
     private JSONArray data;
+    private String errorMsg;
 
     /**
      * Questa funzione verrà principalmente usata in APIC dove,
@@ -24,7 +25,13 @@ public class APIReturn{
     public APIReturn(JSONObject ret) throws JSONException {
 
         this.status = ret.getString("stato");
-        this.data = new JSONArray(ret.getString("data"));
+        if (this.status.equalsIgnoreCase("error")){
+            this.errorMsg = (String) new JSONArray(ret.getString("data")).get(0);
+            this.data = null;
+        }else{
+            this.errorMsg = null;
+            this.data = new JSONArray(ret.getString("data"));
+        }
     }
 
 
@@ -62,24 +69,32 @@ public class APIReturn{
 
 
 
-    public APIReturn(String status, JSONArray data) {
+    public APIReturn(String status, JSONArray ret) {
         this.status = status;
-        this.data = data;
+        if (this.status.equalsIgnoreCase("error")){
+            this.errorMsg = ret.getString(0);
+            this.data = null;
+        }else{
+            this.errorMsg = null;
+            this.data = ret;
+        }
     }
 
     public String getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     public JSONArray getData() {
         return data;
     }
 
-    public void setData(JSONArray data) {
-        this.data = data;
+
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 }

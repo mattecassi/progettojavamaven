@@ -31,6 +31,16 @@ public class APIC {
     }
 
 
+    private APIReturn handleReturn() throws Exception{
+        APIReturn ret = new APIReturn(API.API(this.data));
+//        System.out.println(ret.getStatus());
+        if (ret.getStatus().equalsIgnoreCase("error")){
+            throw new Exception( this.table + " " + ret.getErrorMsg());
+        }else {
+            return ret;
+        }
+    }
+
 
 
 
@@ -40,13 +50,13 @@ public class APIC {
      * @param clausole
      * @return
      */
-    public APIReturn select(String[] listColumn, List<Clausola> clausole){
+    public APIReturn select(String[] listColumn, List<Clausola> clausole) throws Exception{
         this.data.put("action",APIC.SELECT);
         JSONObject data = new JSONObject();
         data.put("listColumn", Utility.convertStringArrayIntoJSONArray(listColumn));
         data.put("clausole",Clausola.getJSONArrayFromList(clausole));
         this.data.put("data",data);
-        return new APIReturn(API.API(this.data));
+        return handleReturn();
     }
 
 
@@ -58,14 +68,14 @@ public class APIC {
      * listUpdate : [{campo:valore},{campo:valore}...] dove ci chiede i campi che vuole
      * clausole : [{campo:nomecampo,operazione:op,leftop:valore},..,{}] array di JSON dove sono presenti le clausole
      */
-    public APIReturn update(List<UpdateElem> listUpdate, List<Clausola> clausole){
+    public APIReturn update(List<UpdateElem> listUpdate, List<Clausola> clausole) throws Exception{
 
         this.data.put("action",APIC.UPDATE);
         JSONObject data = new JSONObject();
         data.put("listUpdate",UpdateElem.convertListUpdateElemToJSONArray(listUpdate));
         data.put("clausole",Clausola.getJSONArrayFromList(clausole));
         this.data.put("data",data);
-        return new APIReturn(API.API(this.data));
+        return handleReturn();
     }
 
 
@@ -74,11 +84,11 @@ public class APIC {
      * contenente tutte le coppie chiave:valore
      * che andrò ad inserire
      */
-    public APIReturn insert(JSONObject dati){
+    public APIReturn insert(JSONObject dati) throws Exception{
         this.data.put("action",APIC.INSERT);
         this.data.put("data",dati);
 //        System.out.println(this.data.getJSONObject("data"));
-        return new APIReturn(API.API(this.data));
+        return handleReturn();
 
     }
 
@@ -86,29 +96,16 @@ public class APIC {
      * In questo caso data deve contenere i seguenti campi
      * clausole : [{campo:nomecampo,operazione:op,leftop:valore},..,{}] array di JSON dove sono presenti le clausole
      */
-    public APIReturn delete(List<Clausola> clausole){
+    public APIReturn delete(List<Clausola> clausole) throws Exception{
         this.data.put("action",APIC.DELETE);
         JSONObject data = new JSONObject();
         data.put("clausole",Clausola.getJSONArrayFromList(clausole));
         this.data.put("data",data);
-        return new APIReturn(API.API(this.data));
-
+        return handleReturn();
     }
 
 
 
-    /**
-     * In questo caso data deve contenere i seguenti campi
-     * clausole : [{campo:nomecampo,operazione:op,leftop:valore},..,{}] array di JSON dove sono presenti le clausole
-     */
-    public APIReturn delete(JSONArray clausole){
-        this.data.put("action",APIC.DELETE);
-        JSONObject data = new JSONObject();
-        data.put("clausole",clausole);
-        this.data.put("data",data);
-        return new APIReturn(API.API(this.data));
-
-    }
 
 
 
@@ -166,6 +163,7 @@ public class APIC {
      * In questo caso data deve contenere i seguenti campi
      * listUpdate : [{campo:valore},{campo:valore}...] dove ci chiede i campi che vuole
      * clausole : [{campo:nomecampo,operazione:op,leftop:valore},..,{}] array di JSON dove sono presenti le clausole
+     * @deprecated
      */
     public APIReturn update(JSONArray listUpdate,JSONArray clausole){
 
@@ -180,7 +178,20 @@ public class APIC {
         data.put("clausole",clausole);
         this.data.put("data",data);
         return new APIReturn(API.API(this.data));
-
     }
+
+    /**
+     * In questo caso data deve contenere i seguenti campi
+     * clausole : [{campo:nomecampo,operazione:op,leftop:valore},..,{}] array di JSON dove sono presenti le clausole
+     * @deprecated
+     */
+    public APIReturn delete(JSONArray clausole){
+        this.data.put("action",APIC.DELETE);
+        JSONObject data = new JSONObject();
+        data.put("clausole",clausole);
+        this.data.put("data",data);
+        return new APIReturn(API.API(this.data));
+    }
+
 
 }
