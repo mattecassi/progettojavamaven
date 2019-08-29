@@ -7,7 +7,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Inventario">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Inventario">
    <children>
       <JFXTextField fx:id="tfCantina" editable="false" labelFloat="true" layoutX="360.0" layoutY="100.0" prefWidth="200.0" promptText="Cantina" />
       <JFXTextField fx:id="tfAnnata" editable="false" labelFloat="true" layoutX="40.0" layoutY="240.0" prefWidth="200.0" promptText="Annata" />

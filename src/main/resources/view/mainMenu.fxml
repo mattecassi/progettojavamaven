@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="menuAP" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.MainMenu">
+<Pane fx:id="menuAP" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.MainMenu">
     <children>
         <JFXButton fx:id="btnRicercaView" layoutX="800.0" onAction="#btnPressMainMenu" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Ricerca">
             <font>
