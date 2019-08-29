@@ -1,7 +1,7 @@
 package Client.controller;
 
-import Client.AlertWindow;
 import Client.Vino;
+import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.Event;
@@ -37,7 +37,7 @@ public class Nuovo{
     @FXML
     void inserisciElement(){
         if (tfStato.getText().isEmpty() || tfRegione.getText().isEmpty() || tfUvaggio.getText().isEmpty() || tfAnnata.getText().isEmpty() || tfTipo.getText().isEmpty() || tfQta.getText().isEmpty() || tfFornitore.getText().isEmpty() || tfCantina.getText().isEmpty() || tfNome.getText().isEmpty()){
-            AlertWindow.createErrorWindow("Inserisci tutti i campi");
+            Utility.createErrorWindow("Inserisci tutti i campi");
         } else{
             String nome = tfNome.getText();
             String cantina = tfCantina.getText();

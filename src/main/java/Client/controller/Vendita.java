@@ -1,7 +1,7 @@
 package Client.controller;
 
-import Client.AlertWindow;
 import Client.excel.*;
+import Utils.Utility;
 import javafx.fxml.FXML;
 import javafx.scene.input.DragEvent;
 import javafx.scene.input.TransferMode;
@@ -90,7 +90,7 @@ public class Vendita {
             */
         }
         else {
-            AlertWindow.createErrorWindow("File non corretto");
+            Utility.createErrorWindow("File non corretto");
         }
     }
 

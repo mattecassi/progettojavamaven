@@ -1,5 +1,6 @@
 package Utils;
 
+import javafx.scene.control.Alert;
 import org.json.JSONArray;
 
 import java.time.LocalDate;
@@ -24,8 +25,6 @@ public class Utility {
         return LocalDateTime.from(f.parse(datetime));
     }
 
-
-
     public static JSONArray convertStringArrayIntoJSONArray(String[] arr){
 
         JSONArray ret = new JSONArray();
@@ -38,5 +37,10 @@ public class Utility {
 
     }
 
+    static public void createErrorWindow(String s){
+        Alert error = new Alert(Alert.AlertType.ERROR, s);
+        error.setHeaderText(null);
+        error.showAndWait();
+    }
 
 }
