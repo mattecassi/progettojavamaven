@@ -109,6 +109,7 @@ public class Tutorial {
         ret = a.select(colonne,clausolas);
 
         System.out.println("Lista elem");
+//        ret.toObservableList(Vino.class);
         for (Vino elem: ret.toList(Vino.class)){ //toList(classe.class) mi restituisce un'array list contenente tt gli elementi
             System.out.println(elem.toString());
         }
