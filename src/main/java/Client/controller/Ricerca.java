@@ -115,10 +115,45 @@ public class Ricerca {
         event.consume();
     }
 
-    @FXML
-    void searchElement(Event event){
-        JFXTextField tfAttivo = (JFXTextField)event.getSource();
-        tfAttivo.getText();
-    }
+/*
+    void test(){
+        try{
 
+            APIC a = new APIC("vino");
+            APIReturn ret;
+            String[] strings = {};
+            ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
+            clausolas.add(new Clausola("nome","=", "Bianco Bizzo"));
+            ret=a.select(strings,clausolas);
+            tblviewLista.setItems(ret.toObservableList(Vino.class));
+        }
+        catch (Exception e){
+
+        }
+    }*/
+
+    @FXML
+    void searchElement(Event event) {
+        JFXTextField tfAttivo = (JFXTextField) event.getSource();
+        tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
+        tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
+        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
+        tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
+        tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
+        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("uvaggio"));
+        tblColumnRegione.setCellValueFactory(new PropertyValueFactory<Vino, String>("regione"));
+        tblColumnStato.setCellValueFactory(new PropertyValueFactory<Vino, String>("stato"));
+        tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("fornitore"));
+        try {
+            APIC a = new APIC("vino");
+            APIReturn ret;
+            String[] strings = {};
+            ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
+            clausolas.add(new Clausola("nome", "=", tfAttivo.getText()));
+            ret = a.select(strings, clausolas);
+            tblviewLista.setItems(ret.toObservableList(Vino.class));
+        } catch (Exception e) {
+
+        }
+    }
 }
