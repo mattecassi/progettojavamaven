@@ -29,7 +29,7 @@ public class Operazione extends Model{
     public Operazione(Integer idvino, String data_operazione, Integer qta, Double sconto, Double importo, String descrizione, Integer tipoOperazione) {
         config("operazione");
         this.idvino = idvino;
-        this.data_operazione = data_operazione;
+        this.data_operazione = data_operazione.replace("T"," ");
         this.qta = qta;
         this.sconto = sconto;
         this.importo = importo;
@@ -54,7 +54,7 @@ public class Operazione extends Model{
 
 
     public void setData_operazione(String data_operazione) {
-        this.data_operazione = data_operazione;
+        this.data_operazione = data_operazione.replace("T"," ");
     }
 
 
@@ -103,7 +103,7 @@ public class Operazione extends Model{
     public String toString() {
         return "{" +
                 "idvino:" + idvino +
-                ", data_operazione:'" + data_operazione.replace("T"," ") +"'" +
+                ", data_operazione:'" + data_operazione +"'" +
                 ", qta:" + qta +
                 ", sconto:" + sconto +
                 ", importo:" + importo +

@@ -30,6 +30,7 @@ public abstract class Model {
     public APIReturn insert() throws Exception {
 
 //        System.out.println(this.toString());
+        System.out.println("elemento json:" + new JSONObject(this.toString()));
         APIReturn apiReturn = apic.insert(new JSONObject(this.toString()));
         JSONObject tmp = (JSONObject) apiReturn.getData().get(0);
         this.setID(tmp.getInt("ID"));
@@ -37,6 +38,12 @@ public abstract class Model {
 
     }
 
+
+    /**
+     * Questa funzione si occupa di prendere l'oggetto in questione e modificare i dati sul db
+     * @return API return
+     * @throws Exception in caso di error
+     */
     public APIReturn update() throws Exception{
 
         try {
@@ -64,7 +71,12 @@ public abstract class Model {
     }
 
 
-
+    /**
+     * Funzione che esegue l'eliminazione dell'oggetto in question
+     * L'ID DEVE ESSERE SPECIFICATO
+     * @return
+     * @throws Exception
+     */
     public APIReturn delete() throws Exception{
         try {
             if (this.getID() == null)
@@ -79,6 +91,7 @@ public abstract class Model {
             throw new Exception(e.getMessage());
         }
     }
+
 
 
     public String getTable() {
