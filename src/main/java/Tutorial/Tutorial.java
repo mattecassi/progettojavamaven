@@ -63,8 +63,7 @@ public class Tutorial {
         vino.setPrezzoVendita(20.00);
         vino.setNome("Bianco Bizzo");
         vino.setTipo("Rosso"); //questa è un fk,stai attento che esista in tipo vino
-        vino.setIdCantina(1);
-
+        vino.setIdCantina(37);
         //Metodo non consigliato (con apic)
         ret = a.insert(new JSONObject(vino.toString()));
 
@@ -77,7 +76,7 @@ public class Tutorial {
          * Update
          */
         //caso oggetto
-        vino.setNome("Rosso Cassi");
+        vino.setNome("Rosso di sera, Cassuccio si spera");
         ret = vino.update();
 
         //Caso apic
@@ -91,7 +90,7 @@ public class Tutorial {
          * La delete tramite APIC accetta solo la lista clausole
          * Mentre la versione oggetto elimina quella singola istanza
          */
-        vino.delete();
+  //      vino.delete();
         //APIC
 
         /**
@@ -104,8 +103,9 @@ public class Tutorial {
 
         String[] colonne = {};
         List<Clausola> clausolas = new ArrayList<Clausola>();
-        clausolas.add(new Clausola("ID","<","20"));
+        /*clausolas.add(new Clausola("ID","<","20"));
         clausolas.add(new Clausola("ID","IS NOT","NULL"));
+        */
         ret = a.select(colonne,clausolas);
 
         System.out.println("Lista elem");
@@ -177,11 +177,6 @@ public class Tutorial {
 
 
 
-
-
-
     }
-
-
 
 }

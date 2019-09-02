@@ -2,6 +2,8 @@ package Utils;
 
 import Models.Model;
 import com.google.gson.Gson;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -48,7 +50,7 @@ public class APIReturn{
      */
     public <T extends Model> ArrayList<T> toList(Class<T> typeParameterClass){
 
-        if (getStatus().equalsIgnoreCase("error"))
+        if (getStatus().equalsIgnoreCase("error") )//|| this.getData().isEmpty())
             return null;
 
         ArrayList<T> ret = new ArrayList<T>();
@@ -65,6 +67,18 @@ public class APIReturn{
 
         return ret;
 
+    }
+
+    /**
+     * TODO BIZZUCCIO GUARDA
+     * Funzione che funziona esattamente come toList ma ritorna un'observableList
+     * Questa funzione verrà usata dall'applicazione fx!!
+     * @param typeParameterClass come nel toList
+     * @param <T> come nel toList
+     * @return
+     */
+    public <T extends Model> ObservableList<T> toObservableList(Class<T> typeParameterClass){
+        return FXCollections.observableArrayList(this.toList(typeParameterClass));
     }
 
 
