@@ -16,11 +16,4 @@ public class Logo {
     @FXML
     ImageView logoImg;
 
-
-    //METODI
-    @FXML
-    void loadMenu() throws Exception {
-        Main2 changer = new Main2();
-        changer.changeScene("view/mainMenu.fxml");
-    }
 }

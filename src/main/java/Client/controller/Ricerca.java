@@ -1,7 +1,12 @@
 package Client.controller;
 
+import API.APIC;
 import Client.ListaVini;
-import Client.Vino;
+//import Client.Vino;
+
+import ClientUtils.Clausola;
+import Models.Vino;
+import Utils.APIReturn;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
@@ -19,6 +24,8 @@ import javafx.scene.layout.AnchorPane;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Ricerca {
     private boolean tblLoaded = false;
@@ -69,12 +76,12 @@ public class Ricerca {
     }
 
     @FXML
-    public void loadElement(Event event) throws IOException {
+    public void loadElement(Event event) throws Exception {
         if(!tblLoaded) {
             System.out.println("OK");
             tblLoaded=true;
             Vino bottiglia;
-            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+            /*BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
             ListaVini listaVini = new ListaVini();
             bottiglia = new Vino("Verdicchio","Bianco","Boh","CasaBizzarri","AH","Italia","Marche",10,1998);
             listaVini.addVino(bottiglia);
@@ -83,17 +90,27 @@ public class Ricerca {
             bottiglia = new Vino("Come","Bianco","Boh","CasaBizzarri","AH","Italia","Marche",10,1998);
             listaVini.addVino(bottiglia);
             ObservableList<Vino> list = listaVini.getList();
-            comboBox.setItems(list);
+            comboBox.setItems(list);*/
             tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
-            tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("annata"));
-            tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("cantina"));
+            tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
+            tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
             tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
+            tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
+            tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("uvaggio"));
             tblColumnRegione.setCellValueFactory(new PropertyValueFactory<Vino, String>("regione"));
             tblColumnStato.setCellValueFactory(new PropertyValueFactory<Vino, String>("stato"));
-            tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("uvaggio"));
-            tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
             tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("fornitore"));
-            tblviewLista.setItems(list);
+
+            APIC a = new APIC("vino");
+            APIReturn ret;
+
+            String[] colonne = {};
+            List<Clausola> clausolas = new ArrayList<Clausola>();
+            /*clausolas.add(new Clausola("ID","<","20"));
+            clausolas.add(new Clausola("ID","IS NOT","NULL"));
+           */
+            ret = a.select(colonne,clausolas);
+            tblviewLista.setItems(ret.toObservableList(Vino.class));
         }
         event.consume();
     }
