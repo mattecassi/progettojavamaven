@@ -7,37 +7,37 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane fx:id="apRicerca" onKeyTyped="#searchElement" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Ricerca">
+<AnchorPane fx:id="apRicerca" onKeyTyped="#searchElement" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Ricerca">
     <children>
-        <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="30.0" layoutY="30.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Nome">
+        <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="30.0" layoutY="30.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Nome">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-        <JFXTextField fx:id="tfAnnata" labelFloat="true" layoutX="220.0" layoutY="30.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Annata">
+        <JFXTextField fx:id="tfAnnata" labelFloat="true" layoutX="220.0" layoutY="30.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Annata">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-        <JFXTextField fx:id="tfCantina" labelFloat="true" layoutX="410.0" layoutY="30.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Cantina">
+        <JFXTextField fx:id="tfCantina" labelFloat="true" layoutX="410.0" layoutY="30.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Cantina">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-        <JFXTextField fx:id="tfTipo" labelFloat="true" layoutX="600.0" layoutY="30.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Tipo">
+        <JFXTextField fx:id="tfTipo" labelFloat="true" layoutX="600.0" layoutY="30.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Tipo">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-      <JFXTextField fx:id="tfUvaggio" labelFloat="true" layoutX="30.0" layoutY="100.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Uvaggio">
+      <JFXTextField fx:id="tfUvaggio" labelFloat="true" layoutX="30.0" layoutY="100.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Uvaggio">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-      <JFXTextField fx:id="tfStato" labelFloat="true" layoutX="220.0" layoutY="100.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Stato">
+      <JFXTextField fx:id="tfStato" labelFloat="true" layoutX="220.0" layoutY="100.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Stato">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-      <JFXTextField fx:id="tfQta" labelFloat="true" layoutX="600.0" layoutY="100.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Qta">
+      <JFXTextField fx:id="tfQta" labelFloat="true" layoutX="600.0" layoutY="100.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Qta">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
-      <JFXTextField fx:id="tfRegione" labelFloat="true" layoutX="410.0" layoutY="100.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Regione">
+      <JFXTextField fx:id="tfRegione" labelFloat="true" layoutX="410.0" layoutY="100.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Regione">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor></JFXTextField>
@@ -55,7 +55,7 @@
         </columns>
       </TableView>
       <JFXComboBox fx:id="comboBox" editable="true" layoutX="790.0" layoutY="97.0" prefHeight="32.0" prefWidth="150.0" />
-      <JFXTextField fx:id="tfFornitore" labelFloat="true" layoutX="790.0" layoutY="30.0" onKeyTyped="#searchElement" prefWidth="150.0" promptText="Fornitore">
+      <JFXTextField fx:id="tfFornitore" labelFloat="true" layoutX="790.0" layoutY="30.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Fornitore">
          <cursor>
             <Cursor fx:constant="TEXT" />
          </cursor>

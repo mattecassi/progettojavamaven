@@ -46,9 +46,14 @@ public class Layer {
                     break;
             }
             if(!done){
-                AnchorPane newLoadedAp = (AnchorPane)loader.load();
-                // Set person overview into the center of root layout.
-                Main2.rootLayout.setCenter(newLoadedAp);
+                if(btnPressed.getId().equalsIgnoreCase("btnNuovo")){
+                    BorderPane newLoadedBp = (BorderPane)loader.load();
+                    Main2.rootLayout.setCenter(newLoadedBp);
+                }else {
+                    AnchorPane newLoadedAp = (AnchorPane) loader.load();
+                    Main2.rootLayout.setCenter(newLoadedAp);
+                }// Set person overview into the center of root layout.
+
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.NuovoTipoVino">
+   <children>
+      <JFXButton fx:id="btnAdd" layoutX="449.0" layoutY="307.0" onAction="#insertElement" prefHeight="72.0" prefWidth="97.0" text="Add" />
+      <JFXTextField fx:id="tfTipoVino" labelFloat="true" layoutX="189.0" layoutY="159.0" prefHeight="83.0" prefWidth="222.0" promptText="Tipo Di Vino">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </JFXTextField>
+   </children>
+</AnchorPane>

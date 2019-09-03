@@ -5,6 +5,7 @@ import Client.ListaVini;
 //import Client.Vino;
 
 import ClientUtils.Clausola;
+import Models.Fornitore;
 import Models.Vino;
 import Utils.APIReturn;
 import com.jfoenix.controls.JFXButton;
@@ -28,6 +29,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Ricerca {
+    private String[] values = new String[9];
+    final private String[] campi = {"nome","anno","idCantina","tipo","idFornitore","uvaggio","stato","regione","qta"};
     private boolean tblLoaded = false;
     @FXML
     private JFXTextField tfNome;
@@ -75,6 +78,19 @@ public class Ricerca {
         comboBox.setCellFactory(new PropertyValueFactory<Vino,String>("Nome"));*/
     }
 
+    private void loadTbl(){
+        tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
+        tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
+        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
+        tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
+        tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
+        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
+        tblColumnRegione.setCellValueFactory(new PropertyValueFactory<Vino, String>("costo"));
+        tblColumnStato.setCellValueFactory(new PropertyValueFactory<Vino, String>("prezzoVendita"));
+        //if(new PropertyValueFactory<Vino, String>("idFornitore") == new PropertyValueFactory<Fornitore, String>("idFornitore"))
+        tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("idFornitore"));
+    }
+
     @FXML
     public void loadElement(Event event) throws Exception {
         if(!tblLoaded) {
@@ -91,15 +107,7 @@ public class Ricerca {
             listaVini.addVino(bottiglia);
             ObservableList<Vino> list = listaVini.getList();
             comboBox.setItems(list);*/
-            tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
-            tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
-            tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
-            tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
-            tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
-            tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("uvaggio"));
-            tblColumnRegione.setCellValueFactory(new PropertyValueFactory<Vino, String>("regione"));
-            tblColumnStato.setCellValueFactory(new PropertyValueFactory<Vino, String>("stato"));
-            tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("fornitore"));
+            loadTbl();
 
             APIC a = new APIC("vino");
             APIReturn ret;
@@ -135,21 +143,46 @@ public class Ricerca {
     @FXML
     void searchElement(Event event) {
         JFXTextField tfAttivo = (JFXTextField) event.getSource();
-        tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
-        tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
-        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
-        tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
-        tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
-        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("uvaggio"));
-        tblColumnRegione.setCellValueFactory(new PropertyValueFactory<Vino, String>("regione"));
-        tblColumnStato.setCellValueFactory(new PropertyValueFactory<Vino, String>("stato"));
-        tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("fornitore"));
+        switch (tfAttivo.getId()){
+            case "tfNome":
+                values[0]=tfAttivo.getText();
+                break;
+            case "tfAnnata":
+                values[1]=tfAttivo.getText();
+                break;
+            case "tfCantina":
+                values[2]=tfAttivo.getText();
+                break;
+            case "tfTipo":
+                values[3]=tfAttivo.getText();
+                break;
+            case "tfFornitore":
+                values[4]=tfAttivo.getText();
+                break;
+            case "tfUvaggio":
+                values[5]=tfAttivo.getText();
+                break;
+            case "tfStato":
+                values[6]=tfAttivo.getText();
+                break;
+            case "tfRegione":
+                values[7]=tfAttivo.getText();
+                break;
+            case "tfQta":
+                values[8]=tfAttivo.getText();
+                break;
+        }
         try {
+            loadTbl();
             APIC a = new APIC("vino");
             APIReturn ret;
             String[] strings = {};
             ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
-            clausolas.add(new Clausola("nome", "=", tfAttivo.getText()));
+            for (int i=0;i<9;i++) {
+                if (values[i] != null){
+                clausolas.add(new Clausola(campi[i], "like", "%"+values[i]+"%"));
+                System.out.println(campi[i] + " " + values[i]);}
+            }
             ret = a.select(strings, clausolas);
             tblviewLista.setItems(ret.toObservableList(Vino.class));
         } catch (Exception e) {
