@@ -77,7 +77,6 @@ public class Nuovo{
             ordine.setIdCantina(idCantina);
             ordine.setTipo(tipo);
             ordine.setQta(qta);
-            ordine.setCodice(codice);
             ordine.setPrezzoVendita(prezzoVendita);
             //ordine.setidFornitore(idFornitore);
             try {
