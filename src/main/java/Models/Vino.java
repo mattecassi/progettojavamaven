@@ -12,7 +12,6 @@ public class Vino extends Model {
     private Integer qta; //quantità che possiedo
     private Double costo;//quanto l'ho pagato
     private Double prezzoVendita; //prezzo di vendita dell'oggetto
-    private Integer codice; //serve più per collegarsi al vecchio sw
     private Integer idFornitore;
 
 
@@ -20,9 +19,8 @@ public class Vino extends Model {
         config("vino");
     }
 
-    public Vino(Integer ID, Integer codice,String nome, Integer idCantina, Integer anno, String tipo, Integer qta, Double costo, Double prezzoVendita,Integer idFornitore) {
+    public Vino(Integer ID, String nome, Integer idCantina, Integer anno, String tipo, Integer qta, Double costo, Double prezzoVendita,Integer idFornitore) {
         config("vino");
-        this.codice = codice;
         this.ID = ID;
         this.nome = nome;
         this.idCantina = idCantina;
@@ -68,13 +66,6 @@ public class Vino extends Model {
         this.tipo = tipo;
     }
 
-    public Integer getCodice() {
-        return codice;
-    }
-
-    public void setCodice(Integer codice) {
-        this.codice = codice;
-    }
 
     public Integer getQta() {
         return qta;
@@ -110,7 +101,6 @@ public class Vino extends Model {
                 ", qta:" + qta +
                 ", costo:" + costo +
                 ", prezzoVendita:" + prezzoVendita +
-                ", codice:" + codice +
                 ", idFornitore:" + idFornitore+
                 ", ID:"+ this.getID() +
                 '}';

@@ -2,11 +2,14 @@ package API;
 
 import ClientUtils.Clausola;
 import ClientUtils.UpdateElem;
+import Models.Model;
 import Utils.APIReturn;
 import Utils.Utility;
+import com.google.gson.Gson;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 //API che userà bizzuccio
@@ -103,6 +106,24 @@ public class APIC {
         this.data.put("data",data);
         return handleReturn();
     }
+
+
+
+    /**
+     * Funzione che, passato l'id,ritorni un oggetto T
+     *
+     * @param id
+     */
+    public <T extends Model> T get(Integer id,Class<T> typeParam) throws Exception{
+
+        String[] colonne = {};
+        List<Clausola> l = new ArrayList<>();
+        l.add(new Clausola("ID","=",id.toString()));
+        return new Gson().fromJson(select(colonne,l).getData().get(0).toString(),typeParam);
+
+
+    }
+
 
 
 

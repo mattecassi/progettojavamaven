@@ -7,21 +7,39 @@ import Models.CompitoGiornaliero;
 import Models.CompitoMensile;
 import Models.CompitoSettimanale;
 import Utils.APIReturn;
+import Utils.Utility;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class TutorialCompito {
-    public static void main(String[] args) {
+  /*  public static void main(String[] args) {
         try {
 
-            Compito c = new Compito("Descrizione compito"); //desc obbligatoria
+
+            Date d = new Date();
+            System.out.println(Utility.convertStringSQLiteToLocalDateTime(d.toInstant().toString().substring(0,d.toInstant().toString().length() - 1)));
+
+            Compito c = new Compito("Lavare le tende"); //desc obbligatoria
+            c.delete();
+
             c.insert();
+
             System.out.println(c);
 
             //creazione compito mensile del quale non importa in quale giorno/quale settimana vada eseguito
-            CompitoMensile cm = new CompitoMensile(null, null, c.getID());
+            CompitoMensile cm = new CompitoMensile(1, 1, c.getID());
+            CompitoMensile cmd = new CompitoMensile(1, 3, c.getID());
+
             cm.insert();
+            cmd.insert();
+
             System.out.println(cm);
+
+            cm.setGiornoDaRipetere(2);
+            cm.update();
+
+            System.out.println(cmd);
 
             //creazione compito giornaliero
             CompitoGiornaliero cg = new CompitoGiornaliero(c.getID());
@@ -54,6 +72,6 @@ public class TutorialCompito {
             System.out.println(e.getMessage());
         }
 
-
     }
+*/
 }
