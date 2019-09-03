@@ -30,7 +30,7 @@ public abstract class Model {
     public APIReturn insert() throws Exception {
 
 //        System.out.println(this.toString());
-        System.out.println("elemento json:" + new JSONObject(this.toString()));
+//        System.out.println("elemento json:" + new JSONObject(this.toString()));
         APIReturn apiReturn = apic.insert(new JSONObject(this.toString()));
         JSONObject tmp = (JSONObject) apiReturn.getData().get(0);
         this.setID(tmp.getInt("ID"));

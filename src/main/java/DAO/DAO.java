@@ -52,9 +52,10 @@ public class DAO {
             this.getConnection().getConnection().rollback();
             s.close();
             throw new SQLException("Vincolo di foreign key violato durante l'esecuzione della query");
-        }else{
-            this.getConnection().getConnection().commit();
         }
+
+        this.getConnection().getConnection().commit();
+
 
         s.close();
 
@@ -170,7 +171,7 @@ public class DAO {
 
         sql.append(" " + creaClausola(clausole));
 
-//        System.out.println(sql.toString());
+        System.out.println("riga 174 DAO: " + sql.toString());
         execQueryUID(sql.toString());
 
 
@@ -324,7 +325,7 @@ public class DAO {
             valori = new StringBuffer(valori.substring(0, valori.length() - 1));
             values = new StringBuffer(values.substring(0, values.length() - 1));
             sql.append("("+values.toString()+")" + " VALUES " + "(" + valori + ");");
-            System.out.println(sql.toString());
+//            System.out.println(sql.toString());
 
 
 

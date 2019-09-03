@@ -119,7 +119,11 @@ public class APIC {
         String[] colonne = {};
         List<Clausola> l = new ArrayList<>();
         l.add(new Clausola("ID","=",id.toString()));
-        return new Gson().fromJson(select(colonne,l).getData().get(0).toString(),typeParam);
+        JSONArray ret = select(colonne,l).getData();
+        if (ret.isEmpty())
+            throw new Exception("L'elemento " + typeParam.getCanonicalName() + " con codice identificativo " + id + "non esiste all'interno del nostro db. Assicurarsi di averlo inserito prima di eseguire questa operazione" );
+
+        return new Gson().fromJson(ret.get(0).toString(),typeParam);
 
 
     }

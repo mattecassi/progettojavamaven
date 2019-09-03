@@ -43,4 +43,17 @@ public class Utility {
         error.showAndWait();
     }
 
+    static public void createWarningWindow(String s){
+        Alert error = new Alert(Alert.AlertType.WARNING, s);
+        error.setHeaderText(null);
+        error.showAndWait();
+
+    }
+
+    static public void createSuccessWindow(String s){
+        Alert error = new Alert(Alert.AlertType.INFORMATION, s);
+        error.setHeaderText(null);
+        error.showAndWait();
+    }
+
 }

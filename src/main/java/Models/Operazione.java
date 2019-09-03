@@ -1,5 +1,7 @@
 package Models;
 
+import API.APIC;
+import Utils.APIReturn;
 import Utils.Utility;
 
 import java.time.LocalDateTime;
@@ -38,6 +40,20 @@ public class Operazione extends Model{
     }
 
 
+    @Override
+    public APIReturn insert() throws Exception {
+        APIReturn retOperazione = super.insert();
+        APIC apicVino = new APIC("vino");
+        Vino v = apicVino.get(this.getIdvino(),Vino.class);
+        if (this.getTipoOperazione() == 2){ //2 è l'id dell'operazione vendita
+            v.setQta(v.getQta() - this.getQta());
+        }else if (this.getTipoOperazione() == 1){
+            v.setQta(v.getQta() + this.getQta());
+        }
+        v.update();
+        return retOperazione;
+    }
+
     public Integer getIdvino() {
         return idvino;
     }
@@ -50,13 +66,9 @@ public class Operazione extends Model{
         return data_operazione;
     }
 
-
-
-
     public void setData_operazione(String data_operazione) {
         this.data_operazione = data_operazione.replace("T"," ");
     }
-
 
 
     public Integer getQta() {

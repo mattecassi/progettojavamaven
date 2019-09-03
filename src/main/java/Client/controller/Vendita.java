@@ -1,7 +1,9 @@
 package Client.controller;
 
+import API.APIC;
 import Client.excel.*;
 import Models.Operazione;
+import Models.Vino;
 import Utils.Utility;
 import javafx.fxml.FXML;
 import javafx.scene.input.DragEvent;
@@ -13,6 +15,7 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Vendita {
@@ -47,83 +50,72 @@ public class Vendita {
                 Sheet sheet = readExcel.read();
                 boolean printValue = false;
                 int counterAttributi=0;
-
+                boolean errore = false; //in caso di errore non inserisco le operazioni
 
                 Cell celldata = sheet.getCell("C1");//ottengo la cella
-                System.out.println(celldata.getContents());
+//                System.out.println(celldata.getContents());
+                APIC a = new APIC("vino");
+                ArrayList<Operazione> listOperazioni = new ArrayList<>();
 
-                o = new Operazione();
-                o.setData_operazione(celldata.getContents());
-                o.setTipoOperazione(2); //2 sarà la vendita
 
 
                 for (int j = 0; j < sheet.getRows(); j++) { //scorro le righe
 
 
-                    for (int i = 0; i < sheet.getColumns(); i++) { //scorro le colonne
-                        Cell cell = sheet.getCell(i, j);//ottengo la cella
-
-                        if(printValue) { //questo valore sarà a true se solo se l'ultima cella letta ha come contenuto "Importo"
-                            switch (counterAttributi){
-
-                                case 0: //codice vino
-                                {
-//                                    System.out.println(Integer.valueOf(cell.getContents()));
-                                    o.setIdvino(Integer.valueOf(cell.getContents()));
-
-                                }
-                                    break;
-                                case 1:
-                                    o.setDescrizione(cell.getContents()); //descrizione del vino//
-                                    break;
-                                case 2:
-                                   o.setSconto(Double.valueOf(cell.getContents()));
-                                    break;
-                                case 3:
-                                    o.setQta(Integer.valueOf(cell.getContents()));
-                                    break;
-                                case 4: {
-                                    o.setImporto(Double.valueOf(cell.getContents()));
-
-                                    //IO SUPPONGO CHE, NEL MOMENTO IN CUI IO VADO AD EFFETTURARE L'INSERIMENTO
-                                    //IL VINO ESISTA GIA' NEL DB, NEL CASO GLI DO UN MSG D'ERRORE
-                                    System.out.println("PRE INSERT" + o.toString());
-                                    try {
-//                                        o.insert();
-                                    }catch (Exception e){
-                                        Utility.createErrorWindow("Errore durante l'inserimento di un operazione: " + e.getMessage() + "\n Operazione:" + o.toString());
-                                    }
-
-                                }break;
-                                default:
-                                    // System.out.println(excelFile.toString());
-                                    if(cell.getContents().isEmpty()) {
-                                        //System.out.println(excelFile.toString());
-                                        //System.out.println("Ho finito di leggere");
-                                        printValue = false;
-                                    }
-                                    else {
-                                        counterAttributi=0;
-                                        //System.out.println(excelFile.toString());
-                                        o.setIdvino(Integer.valueOf(cell.getContents()));
-                                        break;
-                                    }
-                            }
-                            counterAttributi++;
+                    if (!printValue) {
+                        Cell cell = sheet.getCell(0, j);//ottengo la cella
+                        if (cell.getContents().equalsIgnoreCase("codice")) {
+                            printValue = true; //da qui in poi leggo
                         }
+                    }else{
+                        if (sheet.getCell(0,j).getContents().isEmpty())
+                            break;
+                        o = new Operazione();
+                        o.setData_operazione(celldata.getContents());
+                        o.setTipoOperazione(2); //2 sarà la vendita
+                        o.setIdvino(Integer.valueOf(sheet.getCell(0, j).getContents()));
+//                        System.out.println("Vendita 80");
+                        try {
+                            Vino v = a.get(o.getIdvino(),Vino.class); //controllo esistenza vino con quell'id
+//                            System.out.println(v);
+                            o.setDescrizione(sheet.getCell(1, j).getContents()); //descrizione del vino//
+                            o.setSconto(Double.valueOf(sheet.getCell(2, j).getContents()));
+                            o.setQta(Integer.valueOf(sheet.getCell(3, j).getContents()));
+                            o.setImporto(Double.valueOf(sheet.getCell(4, j).getContents()));
 
-                        if(cell.getContents().equalsIgnoreCase("importo")) {
-                            printValue = true;
-                            //da qui in poi leggo
+//                            if (v.getQta() - o.getQta() < 0)
+//                                Utility.createWarningWindow("Attento, possiedi " +v.getQta() + "bottiglie di" +
+//                                         " " + v.getNome() +
+//                                        " e ne vuoi vendere " + o.getQta()
+//                                +
+//                                        "Vuoi procedere?");
+
+                            listOperazioni.add(o);
+                        }catch (Exception e){
+                            //add var errore
+                            errore = true;
+                            Utility.createErrorWindow(e.getMessage());
                         }
+                        if (errore)
+                            break;
                     }
                 }
-            /*BufferedReader br = new BufferedReader(new FileReader(file));
 
-            String st;
-            while ((st = br.readLine()) != null)
-                System.out.println(st);
-            */
+                if (!errore) {
+                    //Inserisco tutte le operazioni quando sono sicuro che dovrebbe essere tutto ok
+                    for (Operazione operazione : listOperazioni) {
+                        System.out.println(operazione.toString());
+                        try {
+                            operazione.insert(); //inserimento operazione
+                        } catch (Exception e) {
+                            Utility.createErrorWindow("Errore durante operazione inserimento:\n" + e.getMessage());
+                        }
+                    }
+
+                        Utility.createSuccessWindow("AGGIORNAMENTO AVVENUTO CON SUCCESSO");
+
+                }
+
             }
             else {
                 Utility.createErrorWindow("File non corretto");
