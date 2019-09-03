@@ -1,14 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="Client.controller.NuovoFornitore"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.NuovoFornitore">
+   <children>
+      <JFXButton fx:id="btnAdd" layoutX="378.0" layoutY="231.0" onAction="#insertElement" prefHeight="75.0" prefWidth="104.0" text="ADD" />
+      <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="59.0" layoutY="79.0" promptText="Nome" />
+      <JFXTextField fx:id="tfMail" labelFloat="true" layoutX="362.0" layoutY="79.0" promptText="Mail" />
+      <JFXTextField fx:id="tfQtaMin" labelFloat="true" layoutX="59.0" layoutY="163.0" promptText="Qta min" />
+      <JFXTextField fx:id="tfQtaMax" labelFloat="true" layoutX="362.0" layoutY="163.0" promptText="Qta max" />
+      <JFXTextField fx:id="tfTelefono" labelFloat="true" layoutX="59.0" layoutY="256.0" promptText="Telefono" />
+   </children>
 </AnchorPane>
