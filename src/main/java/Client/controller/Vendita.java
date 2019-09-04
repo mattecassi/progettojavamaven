@@ -52,7 +52,7 @@ public class Vendita {
                 int counterAttributi=0;
                 boolean errore = false; //in caso di errore non inserisco le operazioni
 
-                Cell celldata = sheet.getCell("C1");//ottengo la cella
+                Cell celldata = sheet.getCell("C1");//ottengo la cella contenente la data
 //                System.out.println(celldata.getContents());
                 APIC a = new APIC("vino");
                 ArrayList<Operazione> listOperazioni = new ArrayList<>();
@@ -83,12 +83,11 @@ public class Vendita {
                             o.setQta(Integer.valueOf(sheet.getCell(3, j).getContents()));
                             o.setImporto(Double.valueOf(sheet.getCell(4, j).getContents()));
 
-//                            if (v.getQta() - o.getQta() < 0)
-//                                Utility.createWarningWindow("Attento, possiedi " +v.getQta() + "bottiglie di" +
-//                                         " " + v.getNome() +
-//                                        " e ne vuoi vendere " + o.getQta()
-//                                +
-//                                        "Vuoi procedere?");
+                            if (v.getQta() - o.getQta() < 0)
+                                Utility.createWarningWindow("Attento, possiedi " +v.getQta() + "bottiglie di" +
+                                         " " + v.getNome() +
+                                        " e ne vuoi vendere " + o.getQta()
+                                + "Controlla l'inventario perchè potrebbero esserci degli errori");
 
                             listOperazioni.add(o);
                         }catch (Exception e){

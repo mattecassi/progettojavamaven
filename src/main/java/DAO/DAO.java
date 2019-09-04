@@ -171,7 +171,7 @@ public class DAO {
 
         sql.append(" " + creaClausola(clausole));
 
-        System.out.println("riga 174 DAO: " + sql.toString());
+//        System.out.println("riga 174 DAO: " + sql.toString());
         execQueryUID(sql.toString());
 
 

@@ -70,7 +70,6 @@ public class APIReturn{
     }
 
     /**
-     * TODO BIZZUCCIO GUARDA
      * Funzione che funziona esattamente come toList ma ritorna un'observableList
      * Questa funzione verrà usata dall'applicazione fx!!
      * @param typeParameterClass come nel toList

@@ -36,7 +36,6 @@ public class Tutorial {
      * ES query apic che posso creare con APIC
      * update vino set nome="Cassi Rosso" where costo=15.00 AND nome="Cassi Rosso"
      *
-     * TODO BIZZUCCIO
      * HO aggiornato le classi APIC e Model, nel caso non vada a buon fine l'operazione di insert|update|delete
      * hai un Exception, coglione.
      */

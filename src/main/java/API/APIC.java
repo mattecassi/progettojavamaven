@@ -62,6 +62,17 @@ public class APIC {
         return handleReturn();
     }
 
+    public APIReturn select() throws Exception{
+        String[] listColumn = {};
+        List<Clausola> clausole = new ArrayList<>();
+        this.data.put("action",APIC.SELECT);
+        JSONObject data = new JSONObject();
+        data.put("listColumn", Utility.convertStringArrayIntoJSONArray(listColumn));
+        data.put("clausole",Clausola.getJSONArrayFromList(clausole));
+        this.data.put("data",data);
+        return handleReturn();
+    }
+
 
 
     //todo MODIFICARE UPDATE E DELETE IN MODO CHE NON PRENDANO PIU' DEI JSONArray ma delle liste
