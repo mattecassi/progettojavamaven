@@ -99,11 +99,8 @@ public class Nuovo{
             case "btnFornitore":
                 stage = main.createStage("/view/nuovoFornitore.fxml", "Nuovo Fornitore");
                 break;
-            case "btnRappresentante":
-                stage = main.createStage("/view/nuovoRappresentante.fxml", "Nuovo Rappresentante");
-                break;
-            case "btnEnoteca":
-                stage = main.createStage("/view/nuovoEnoteca.fxml", "Nuova Enoteca");
+            case "btnCantina":
+                stage = main.createStage("/view/nuovoCantina.fxml", "Nuova Cantina");
                 break;
             case "btnTipoVino":
                 stage = main.createStage("/view/nuovoTipoVino.fxml", "Nuovo Tipo Vino");
