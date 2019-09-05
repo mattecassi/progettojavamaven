@@ -180,7 +180,7 @@ public class Ricerca {
             ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
             for (int i=0;i<9;i++) {
                 if (values[i] != null){
-                clausolas.add(new Clausola(campi[i], "like", "%"+values[i]+"%"));
+                    clausolas.add(new Clausola(campi[i], "like", "%"+values[i]+"%"));
                 System.out.println(campi[i] + " " + values[i]);}
             }
             ret = a.select(strings, clausolas);

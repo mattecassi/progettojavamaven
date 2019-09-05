@@ -93,9 +93,7 @@
       <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
             <JFXButton fx:id="btnFornitore" layoutY="236.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Fornitore" />
-            <JFXButton fx:id="btnRappresentante" layoutY="336.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Rappresentante" />
-            <JFXButton fx:id="btnEnoteca" layoutY="436.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Enoteca" />
-            <JFXButton fx:id="btnTipoVino" layoutY="536.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Tipo Vino" />
+            <JFXButton fx:id="btnTipoVino" layoutY="350.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Tipo Vino" />
          </children>
       </AnchorPane>
    </right>

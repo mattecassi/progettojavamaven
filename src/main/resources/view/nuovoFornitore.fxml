@@ -1,17 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.NuovoFornitore">
+<AnchorPane prefHeight="618.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.NuovoFornitore">
    <children>
-      <JFXButton fx:id="btnAdd" layoutX="378.0" layoutY="231.0" onAction="#insertElement" prefHeight="75.0" prefWidth="104.0" text="ADD" />
+      <JFXButton fx:id="btnAdd" layoutX="378.0" layoutY="504.0" onAction="#insertElement" prefHeight="75.0" prefWidth="104.0" text="ADD" />
       <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="59.0" layoutY="79.0" promptText="Nome" />
       <JFXTextField fx:id="tfMail" labelFloat="true" layoutX="362.0" layoutY="79.0" promptText="Mail" />
       <JFXTextField fx:id="tfQtaMin" labelFloat="true" layoutX="59.0" layoutY="163.0" promptText="Qta min" />
       <JFXTextField fx:id="tfQtaMax" labelFloat="true" layoutX="362.0" layoutY="163.0" promptText="Qta max" />
       <JFXTextField fx:id="tfTelefono" labelFloat="true" layoutX="59.0" layoutY="256.0" promptText="Telefono" />
+      <JFXComboBox fx:id="cmbSelect" layoutX="362.0" layoutY="256.0" onHidden="#showTf" onShown="#showElement" prefHeight="25.0" prefWidth="135.0" promptText="Seleziona" />
+      <JFXTextField fx:id="tfCognome" labelFloat="true" layoutX="59.0" layoutY="346.0" promptText="Cognome" visible="false" />
+      <JFXTextField fx:id="tfRegione" labelFloat="true" layoutX="363.0" layoutY="346.0" promptText="Regione" visible="false" />
+      <JFXTextField fx:id="tfStato" labelFloat="true" layoutX="59.0" layoutY="346.0" promptText="Stato" visible="false" />
+      <JFXTextField fx:id="tfCitta" labelFloat="true" layoutX="59.0" layoutY="439.0" promptText="Citta" visible="false" />
+      <JFXTextField fx:id="tfVia" labelFloat="true" layoutX="362.0" layoutY="439.0" promptText="Via" visible="false" />
    </children>
 </AnchorPane>

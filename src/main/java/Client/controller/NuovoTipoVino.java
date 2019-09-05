@@ -3,7 +3,6 @@ package Client.controller;
 import API.APIC;
 import ClientUtils.Clausola;
 import Models.TipoVino;
-import Models.Vino;
 import Utils.APIReturn;
 import Utils.Utility;
 import com.jfoenix.controls.JFXTextField;
@@ -34,17 +33,11 @@ public class NuovoTipoVino {
             try {
                 String[] strings={"tipo"};
                 ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
-                ret = a.select(strings,clausolas);
-                ArrayList<TipoVino> list = ret.toList(TipoVino.class);
-                for(TipoVino str: list){
-                    if(str.getTipo().equalsIgnoreCase(tfTipoVino.getText())){
-                        presente=true;
-                        Utility.createErrorWindow("Gia presente");
-                        break;
-                    }
-                }
-                if(!presente)
+                clausolas.add(new Clausola("tipo", "LIKE", nuovo.getTipo()));
+                if(a.select(strings,clausolas).toList(TipoVino.class).isEmpty())
                     nuovo.insert();
+                else
+                    Utility.createErrorWindow("Presente");
                 tfTipoVino.setText(null);
             }catch (Exception e){
                 Utility.createErrorWindow(e.getMessage());
