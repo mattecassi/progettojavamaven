@@ -17,15 +17,7 @@ public class Main {
 
 
         try {
-//            Operazione o = new Operazione();
-//            o.setTipoOperazione(2);
-//            o.setData_operazione("01/08/2019");
-//            o.setIdvino(1);
-//            o.setDescrizione("Prova data");
-//            o.setImporto(10.0);
-//            o.setQta(1);
-//            o.setQta(1);
-//            o.insert();
+
             APIC a = new APIC("operazione");
             String[] col = {};
             List<Clausola> lc = new ArrayList<>();

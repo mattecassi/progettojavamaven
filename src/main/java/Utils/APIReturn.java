@@ -60,6 +60,7 @@ public class APIReturn{
 
         for (Object ele: this.getData()){
 //            System.out.println(ele.toString());
+
             tmp = g.fromJson(ele.toString(),typeParameterClass);
             ret.add(tmp);
            // System.out.println(tmp);
