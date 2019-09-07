@@ -1,13 +1,16 @@
 package Client.controller;
 
+import API.API;
 import API.APIC;
 import Client.ListaVini;
 //import Client.Vino;
 
+import Client.Main2;
 import ClientUtils.Clausola;
 import Models.Fornitore;
 import Models.Vino;
 import Utils.APIReturn;
+import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
@@ -16,16 +19,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.EventListener;
 import java.util.List;
 
 public class Ricerca {
@@ -57,6 +62,9 @@ public class Ricerca {
     private JFXTextField tfRegione;
 
     @FXML
+    private  JFXTextField tfAggiungiQuantitaVino;
+
+    @FXML
     private TableView tblviewLista;
 
     @FXML
@@ -66,28 +74,23 @@ public class Ricerca {
     private AnchorPane apRicerca;
 
     @FXML
-    private ComboBox comboBox;
-
+    private ContextMenu cMenu;
 
     @FXML
-    public void openComboBox(){
-        /*System.out.println("ok");
-        Vino bottiglia = new Vino("Verdicchio", "Bianco", "Bizzarri", "Boh","Uva", "Italia","Emilia Romagna", 10, 1998);
-        ObservableList<Vino> list = FXCollections.observableArrayList();
-        comboBox.setItems(list);
-        comboBox.setCellFactory(new PropertyValueFactory<Vino,String>("Nome"));*/
-    }
+    private ComboBox<String> cmbVinoNome;
+
 
     private void loadTbl(){
         tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
         tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
-        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
         tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
         tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
-        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
         tblColumnRegione.setCellValueFactory(new PropertyValueFactory<Vino, String>("costo"));
         tblColumnStato.setCellValueFactory(new PropertyValueFactory<Vino, String>("prezzoVendita"));
-        //if(new PropertyValueFactory<Vino, String>("idFornitore") == new PropertyValueFactory<Fornitore, String>("idFornitore"))
+
+
+        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
+        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
         tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("idFornitore"));
     }
 
@@ -96,27 +99,11 @@ public class Ricerca {
         if(!tblLoaded) {
             System.out.println("OK");
             tblLoaded=true;
-            Vino bottiglia;
-            /*BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-            ListaVini listaVini = new ListaVini();
-            bottiglia = new Vino("Verdicchio","Bianco","Boh","CasaBizzarri","AH","Italia","Marche",10,1998);
-            listaVini.addVino(bottiglia);
-            bottiglia = new Vino("Ciao","Bianco","Boh","CasaBizzarri","AH","Italia","Marche",10,1998);
-            listaVini.addVino(bottiglia);
-            bottiglia = new Vino("Come","Bianco","Boh","CasaBizzarri","AH","Italia","Marche",10,1998);
-            listaVini.addVino(bottiglia);
-            ObservableList<Vino> list = listaVini.getList();
-            comboBox.setItems(list);*/
             loadTbl();
-
             APIC a = new APIC("vino");
             APIReturn ret;
-
             String[] colonne = {};
             List<Clausola> clausolas = new ArrayList<Clausola>();
-            /*clausolas.add(new Clausola("ID","<","20"));
-            clausolas.add(new Clausola("ID","IS NOT","NULL"));
-           */
             ret = a.select(colonne,clausolas);
             tblviewLista.setItems(ret.toObservableList(Vino.class));
         }
@@ -187,6 +174,55 @@ public class Ricerca {
             tblviewLista.setItems(ret.toObservableList(Vino.class));
         } catch (Exception e) {
 
+        }
+    }
+
+
+    @FXML
+    private void searchCmb(){
+        APIC a = new APIC("vino");
+        APIReturn ret;
+        String[] strings = {};
+        ArrayList<Clausola> clausolas = new ArrayList<>();
+        try {
+            loadTbl();
+            clausolas.add(new Clausola(campi[0], "like", "%"+cmbVinoNome.getSelectionModel().getSelectedItem()+"%"));
+            strings[0] = "nome";
+            //mbVinoNome.setItems(a.select(strings, clausolas).toObservableList(Vino.class));
+            cmbVinoNome.show();
+            ret = a.select(strings, clausolas);
+            tblviewLista.setItems(ret.toObservableList(Vino.class));
+        } catch (Exception e) {
+
+        }
+
+    }
+
+
+    @FXML
+    private void openContext(Event event){
+        Stage dialog = new Stage();
+        AnchorPane popUpPane;
+        Vino cur = (Vino)tblviewLista.getSelectionModel().getSelectedItem();
+        MenuItem option = (MenuItem)event.getTarget();
+        Main2 main2 = new Main2();
+        try {
+            switch (option.getId()) {
+                case "miInfo":
+                    break;
+                case "miAggiungi":
+                    popUpPane = FXMLLoader.load(getClass().getResource("/view/aggiungiVino.fxml"));
+                    dialog.setScene(new Scene(popUpPane));
+                    dialog.showAndWait();
+                    System.out.println(tfAggiungiQuantitaVino.getText());
+                    break;
+                case "miRimuovi":
+                    break;
+                case "miElimina":
+                    break;
+            }
+        }catch (Exception e){
+           e.printStackTrace();
         }
     }
 }

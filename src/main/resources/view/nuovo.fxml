@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
-<?import javafx.scene.control.ContextMenu?>
-<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.paint.RadialGradient?>
@@ -20,49 +19,24 @@
                         <Font size="21.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="tfTipo" labelFloat="true" layoutX="450.0" layoutY="160.0" promptText="Tipo">
+            <JFXComboBox fx:id="cmbTipo" labelFloat="true" layoutX="450.0" layoutY="159.0" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Tipo" />
+            <JFXComboBox fx:id="cmbCantina" labelFloat="true" layoutX="91.0" layoutY="256.0" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Cantina" />
+                <JFXTextField fx:id="tfAnnata" labelFloat="true" layoutX="450.0" layoutY="256.0" promptText="Annata">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="tfCantina" labelFloat="true" layoutX="90.0" layoutY="253.0" promptText="Cantina">
+                <JFXTextField fx:id="tfCosto" labelFloat="true" layoutX="90.0" layoutY="355.0" promptText="Costo">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="tfAnnata" labelFloat="true" layoutX="450.0" layoutY="253.0" promptText="Annata">
+                <JFXTextField fx:id="tfPrezzoVendita" labelFloat="true" layoutX="450.0" layoutY="355.0" promptText="Prezzo Vendita">
                     <font>
                         <Font size="21.0" />
                     </font>
                 </JFXTextField>
-                <JFXTextField fx:id="tfFornitore" labelFloat="true" layoutX="90.0" layoutY="355.0" promptText="ID Fornitore">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="tfQta" labelFloat="true" layoutX="450.0" layoutY="355.0" promptText="Quantità">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="tfCosto" labelFloat="true" layoutX="90.0" layoutY="458.0" promptText="Costo">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="tfPrezzoVendita" labelFloat="true" layoutX="450.0" layoutY="458.0" promptText="Prezzo Vendita">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                    <contextMenu>
-                        <ContextMenu>
-                            <items>
-                                <MenuItem mnemonicParsing="false" text="Testo" />
-                            </items>
-                        </ContextMenu>
-                    </contextMenu>
-                </JFXTextField>
-                <JFXTextField fx:id="tfCodice" labelFloat="true" layoutX="90.0" layoutY="560.0" promptText="Codice">
+                <JFXTextField fx:id="tfQta" labelFloat="true" layoutX="90.0" layoutY="458.0" promptText="Quantità">
                     <font>
                         <Font size="21.0" />
                     </font>

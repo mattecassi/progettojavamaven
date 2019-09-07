@@ -2,16 +2,22 @@ package Client.controller;
 
 import API.APIC;
 import Client.Main2;
-import Models.Vino;
+import ClientUtils.Clausola;
+import Models.*;
 import Utils.APIReturn;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class Nuovo{
 
@@ -22,70 +28,115 @@ public class Nuovo{
     private JFXButton btnInserisci,btnFornitore,btnRappresentante,btnEnoteca,btnTipoVino;
 
     @FXML
-    private JFXTextField tfTipo;
-
-    @FXML
     private JFXTextField tfAnnata;
 
     @FXML
-    private JFXTextField tfCantina;
+    private JFXComboBox<String> cmbCantina,cmbTipo;
 
     @FXML
     private JFXTextField tfQta;
 
     @FXML
-    private JFXTextField tfFornitore;
+    private JFXTextField tfPrezzoVendita,tfCosto;
 
     @FXML
-    private JFXTextField tfCodice,tfPrezzoVendita,tfCosto;
+    private void loadCmb(Event event){
+
+        String[] strings={"nome"};
+        ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
+
+        //cantina
+
+        APIC aCantina = new APIC("cantina");
+        try {
+            ObservableList<String> nomiCantina = FXCollections.observableArrayList();
+            nomiCantina.add("");
+            ObservableList<Cantina> fornitores = aCantina.select(strings,clausolas).toObservableList(Cantina.class);
+
+            for(Cantina cur: fornitores){
+                nomiCantina.add(cur.getNome());
+            }
+            cmbCantina.setItems(nomiCantina);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //tipo
+        APIC aTipo = new APIC("tipo_vino");
+        try {
+            String[] stringsTipo = {"tipo"};
+            ObservableList<String> nomiTipo = FXCollections.observableArrayList();
+            nomiTipo.add("");
+            ObservableList<TipoVino> tipoVinos = aTipo.select(stringsTipo,clausolas).toObservableList(TipoVino.class);
+
+            for(TipoVino cur: tipoVinos){
+                nomiTipo.add(cur.getTipo());
+            }
+            cmbTipo.setItems(nomiTipo);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     //TODO controllare che qta e annata siano dei numeri
     @FXML
     void inserisciElement(){
-        APIC a = new APIC("vino");
         APIReturn ret;
         //|| tfCodice.getText().isEmpty()
-        if (tfCosto.getText().isEmpty() || tfPrezzoVendita.getText().isEmpty()  || tfAnnata.getText().isEmpty() || tfTipo.getText().isEmpty() || tfQta.getText().isEmpty() || tfFornitore.getText().isEmpty() || tfCantina.getText().isEmpty() || tfNome.getText().isEmpty()){
+        if (tfCosto.getText().isEmpty() || tfPrezzoVendita.getText().isEmpty()  || tfAnnata.getText().isEmpty() || cmbTipo.getSelectionModel().getSelectedItem().isEmpty() || tfQta.getText().isEmpty() || cmbCantina.getSelectionModel().getSelectedItem().isEmpty() || tfNome.getText().isEmpty()){
             Utility.createErrorWindow("Inserisci tutti i campi");
-        } else{
+        } else {
 
-            String nome = tfNome.getText();
-            Integer idCantina = Integer.valueOf(tfCantina.getText());
-            Integer idFornitore = Integer.valueOf(tfFornitore.getText());
-            Integer qta = Integer.valueOf(tfQta.getText());
-            Integer annata = Integer.valueOf(tfAnnata.getText());
-            String tipo = tfTipo.getText();
-            Double costo = Double.valueOf(tfCosto.getText());
-            Double prezzoVendita = Double.valueOf(tfPrezzoVendita.getText());
-            Integer codice = Integer.valueOf(tfCodice.getText());
+            Vino vino = new Vino();
 
-            tfTipo.setText(null);
-            tfCosto.setText(null);
-            tfPrezzoVendita.setText(null);
-            tfCodice.setText(null);
-            tfCantina.setText(null);
-            tfFornitore.setText(null);
-            tfQta.setText(null);
-            tfAnnata.setText(null);
-            tfNome.setText(null);
+            vino.setNome(tfNome.getText());
+            vino.setAnno(Integer.valueOf(tfAnnata.getText()));
+            vino.setCosto(Double.valueOf(tfCosto.getText()));
+            vino.setPrezzoVendita(Double.valueOf(tfPrezzoVendita.getText()));
+            vino.setQta(Integer.valueOf(tfQta.getText()));
 
 
-            Vino ordine = new Vino();
-            ordine.setNome(nome);
-            ordine.setAnno(annata);
-            ordine.setCosto(costo);
-            ordine.setIdCantina(idCantina);
-            ordine.setTipo(tipo);
-            ordine.setQta(qta);
-            ordine.setPrezzoVendita(prezzoVendita);
-            //ordine.setidFornitore(idFornitore);
+            APIC aCantina = new APIC("cantina");
+            String[] stringsCantina = {};
+            ArrayList<Clausola> clausolasCantina = new ArrayList<>();
+            clausolasCantina.add(new Clausola("nome", "=", cmbCantina.getSelectionModel().getSelectedItem()));
             try {
-                ordine.insert();
+                Cantina cantina = aCantina.select(stringsCantina, clausolasCantina).toObservableList(Cantina.class).get(0);
+                vino.setIdCantina(cantina.getID());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
+
+            try {
+                APIC aVino = new APIC("vino");
+                String[] stringsVino = {"nome"};
+                ArrayList<Clausola> clausolasVino = new ArrayList<Clausola>();
+                clausolasVino.add(new Clausola("nome", "LIKE", vino.getNome()));
+                if (aVino.select(stringsVino, clausolasVino).toList(Vino.class).isEmpty()) {
+                    vino.insert();
+                    tfCosto.setText("");
+                    tfPrezzoVendita.setText("");
+                    tfQta.setText("");
+                    tfAnnata.setText("");
+                    tfNome.setText("");
+                    cmbCantina.getSelectionModel().selectFirst();
+                    cmbTipo.getSelectionModel().selectFirst();
+                } else {
+                    Utility.createErrorWindow("Presente");
+                }
+            } catch (Exception e) {
+                Utility.createErrorWindow(e.getMessage());
+            }
+
+
+            try {
+                vino.insert();
                 Utility.createSuccessWindow("Inserimento avvenuto con successo");
-            }catch (Exception e){
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-            System.out.println(ordine.toString());
+            System.out.println(vino.toString());
         }
     }
 

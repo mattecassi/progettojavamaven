@@ -54,7 +54,7 @@
             <TableColumn fx:id="tblColonnaFornitore" editable="false" prefWidth="142.0" text="Fornitore" />
         </columns>
       </TableView>
-      <JFXComboBox fx:id="comboBox" editable="true" layoutX="790.0" layoutY="97.0" prefHeight="32.0" prefWidth="150.0" />
+      <JFXComboBox fx:id="cmbVinoNome" editable="true" focusColor="#405aa8" labelFloat="true" layoutX="790.0" layoutY="97.0" onKeyPressed="#searchCmb" onKeyReleased="#searchCmb" prefHeight="32.0" prefWidth="150.0" promptText="Nome" />
       <JFXTextField fx:id="tfFornitore" labelFloat="true" layoutX="790.0" layoutY="30.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Fornitore">
          <cursor>
             <Cursor fx:constant="TEXT" />
