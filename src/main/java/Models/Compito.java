@@ -84,7 +84,6 @@ public class Compito extends Model {
 
     }
 
-    //todo FUNZIONE CHE MI RESTITUISCE UNA LISTA DI COMPITI DA FARE QUESTA SETTIMANA
 
 
     /**

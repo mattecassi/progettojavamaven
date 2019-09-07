@@ -4,7 +4,9 @@ import API.APIC;
 import Utils.APIReturn;
 import Utils.Utility;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 public class Operazione extends Model{
@@ -28,16 +30,6 @@ public class Operazione extends Model{
         config("operazione");
     }
 
-    public Operazione(Integer idvino, String data_operazione, Integer qta, Double sconto, Double importo, String descrizione, Integer tipoOperazione) {
-        config("operazione");
-        this.idvino = idvino;
-        this.data_operazione = data_operazione.replace("T"," ");
-        this.qta = qta;
-        this.sconto = sconto;
-        this.importo = importo;
-        this.descrizione = descrizione;
-        this.tipoOperazione = tipoOperazione;
-    }
 
 
     @Override
@@ -66,8 +58,8 @@ public class Operazione extends Model{
         return data_operazione;
     }
 
-    public void setData_operazione(String data_operazione) {
-        this.data_operazione = data_operazione.replace("T"," ");
+    public void setData_operazione(LocalDateTime data_operazione) {
+        this.data_operazione = data_operazione.format(DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm:ss"));
     }
 
 

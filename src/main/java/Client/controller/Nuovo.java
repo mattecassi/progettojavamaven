@@ -81,6 +81,7 @@ public class Nuovo{
             //ordine.setidFornitore(idFornitore);
             try {
                 ordine.insert();
+                Utility.createSuccessWindow("Inserimento avvenuto con successo");
             }catch (Exception e){
                 System.out.println(e.getMessage());
             }

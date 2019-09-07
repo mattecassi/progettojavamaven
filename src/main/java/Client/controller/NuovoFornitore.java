@@ -129,6 +129,7 @@ public class NuovoFornitore {
                     tfQtaMin.setText("");
                     tfTelefono.setText("");
                     tfMail.setText("");
+
                 }
                 else{
                     Utility.createErrorWindow("Presente");
@@ -154,6 +155,8 @@ public class NuovoFornitore {
                         tfVia.setText("");
                         try {
                             enoteca.insert();
+                            Utility.createSuccessWindow("Inserimento avvenuto con successo");
+
                         } catch (Exception e) {
                             Utility.createErrorWindow(e.getMessage());
                         }
@@ -169,11 +172,16 @@ public class NuovoFornitore {
 
                         try {
                             rappresentante.insert();
+                            Utility.createSuccessWindow("Inserimento avvenuto con successo");
+
                         } catch (Exception e) {
                             Utility.createErrorWindow(e.getMessage());
                         }
 
                         break;
+                        default:{
+                            Utility.createSuccessWindow("Inserimento avvenuto con successo");
+                        }break;
                 }
             }
         }

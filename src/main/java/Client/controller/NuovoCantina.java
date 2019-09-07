@@ -109,6 +109,7 @@ public class NuovoCantina {
                     tfRegione.setText("");
                     tfVia.setText("");
                     cmbFornitore.getSelectionModel().selectFirst();
+                    Utility.createSuccessWindow("Inserimento avvenuto con successo");
                 }
                 else{
                     Utility.createErrorWindow("Presente");

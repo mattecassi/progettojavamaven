@@ -51,9 +51,8 @@ public class DAO {
         if (beforeViolation < afterViolation){
             this.getConnection().getConnection().rollback();
             s.close();
-            throw new SQLException("Vincolo di foreign key violato durante l'esecuzione della query");
+            throw new SQLException("[Violazione foreign key] Non puoi modificare/eliminare questo elemento finchè sono presenti elementi nel database che lo utilizzano");
         }
-
         this.getConnection().getConnection().commit();
 
 
@@ -217,7 +216,6 @@ public class DAO {
             for (Object elem: listColumn) {
 
                 sql.append(elem + ",");
-                //System.out.println(elem);
             }
 
             sql = Utility.removeLast(sql);
@@ -237,7 +235,6 @@ public class DAO {
 
             JSONObject jsonReturn = null;
             JSONArray jsonReturnArray = new JSONArray();
-//            jsonReturnArray.put()
             while (rs.next()){
                 jsonReturn = new JSONObject();
                 result.append("{");
@@ -247,32 +244,19 @@ public class DAO {
 
                     for (TableInfoRow t : this.getColumnList()) {
 
-//                        result.append("\"" + t.getName() + "\"" + ":" + "\"" + rs.getString(t.getName()) + "\",");
                         jsonReturn.put(t.getName(),rs.getString(t.getName()));
                     }
                 }else {
 
 
                     for (Object elem : listColumn) {
-//                        result.append("\"" + elem + "\"" + ":" + "\"" + rs.getString(new String(elem.toString())) + "\",");
                         jsonReturn.put(elem.toString(),rs.getString(elem.toString()));
                     }
 
                 }
 
-
-//                result = new StringBuffer(result.substring(0,result.length() - 1));
-//                result.append("},");
-
                 jsonReturnArray.put(jsonReturn);
             }
-
-
-//            System.out.println(jsonReturnArray.toString());
-//            if (result.length() > 1)
-//                result = new StringBuffer(result.substring(0,result.length() - 1));
-//
-//            result.append("]");
 
                 s.close();
 

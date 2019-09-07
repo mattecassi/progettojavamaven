@@ -10,6 +10,8 @@ import jxl.write.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,6 +52,19 @@ public class excelWriter {
 
 
     /**
+     * Versione identica all'altra ma che usa le localDate
+     * @param dataInizio
+     * @param dataFine
+     * @throws Exception
+     */
+    public void createExcelStorico(LocalDate dataInizio,LocalDate dataFine) throws Exception{
+
+        String formattedDateInizio = dataInizio.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        String formattedDateFine = dataFine.format(DateTimeFormatter.ofPattern("d/MM/yyyy"));
+        createExcelStorico(formattedDateInizio,formattedDateFine);
+    }
+
+    /**
      * Funzione che si occupa di generare un file excel
      * contenente lo storico compreso tra data inizio e data fine
      *
@@ -57,9 +72,10 @@ public class excelWriter {
      * @param dataFine  20/11/2020
      * @throws Exception
      */
-    public void createExcelStorico(String dataInizio,String dataFine)throws Exception{
+    private void createExcelStorico(String dataInizio,String dataFine)throws Exception{
 
-        //todo scrivere codice per ottenere il periodo che vogliamo analizzare
+
+
         String[] arr ={};
         List<Clausola> l = new ArrayList<>();
         l.add(new Clausola("data_operazione",">=",dataInizio + " 00:00:00"));
@@ -89,7 +105,7 @@ public class excelWriter {
         APIC apic = new APIC("operazione");
         int count = 3;
         for (Operazione operazione: apic.select(arr,l).toList(Operazione.class)){
-//            System.out.println(operazione);
+            System.out.println(operazione);
 //            if (operazione.getQta() != null && operazione.getSconto() != null && operazione.getDescrizione()!= null) {
                 addLabel(0, count, operazione.getIdvino().toString());
                 addLabel(1, count, operazione.getDescrizione());

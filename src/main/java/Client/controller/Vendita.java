@@ -15,6 +15,9 @@ import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,7 +52,6 @@ public class Vendita {
                 readExcel.setInputFile(file.getAbsolutePath());
                 Sheet sheet = readExcel.read();
                 boolean printValue = false;
-                int counterAttributi=0;
                 boolean errore = false; //in caso di errore non inserisco le operazioni
 
                 Cell celldata = sheet.getCell("C1");//ottengo la cella contenente la data
@@ -71,7 +73,15 @@ public class Vendita {
                         if (sheet.getCell(0,j).getContents().isEmpty())
                             break;
                         o = new Operazione();
-                        o.setData_operazione(celldata.getContents());
+                        //gestiona data con conversioni
+                        String data = celldata.getContents();
+                        DateTimeFormatter dtf;
+                        if (data.startsWith("0"))
+                             dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm.ss");
+                        else
+                            dtf = DateTimeFormatter.ofPattern("d/MM/yyyy HH:mm.ss");
+                        LocalDateTime dt = LocalDateTime.parse(data, dtf);
+                        o.setData_operazione(dt);
                         o.setTipoOperazione(2); //2 sarà la vendita
                         o.setIdvino(Integer.valueOf(sheet.getCell(0, j).getContents()));
 //                        System.out.println("Vendita 80");

@@ -39,6 +39,8 @@ public class NuovoTipoVino {
                 else
                     Utility.createErrorWindow("Presente");
                 tfTipoVino.setText(null);
+
+                Utility.createSuccessWindow("Inserimento avvenuto con successo");
             }catch (Exception e){
                 Utility.createErrorWindow(e.getMessage());
             }
