@@ -7,11 +7,14 @@ import Client.ListaVini;
 
 import Client.Main2;
 import ClientUtils.Clausola;
+import Models.Cantina;
 import Models.Fornitore;
+import Models.Rappresentante;
 import Models.Vino;
 import Utils.APIReturn;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.Observable;
@@ -36,12 +39,15 @@ import java.util.List;
 public class Ricerca {
     private String[] values = new String[9];
     final private String[] campi = {"nome","anno","idCantina","tipo","idFornitore","uvaggio","stato","regione","qta"};
-    private boolean tblLoaded = false;
+    private boolean tblLoaded = false, allLoaded = false;
     @FXML
-    private JFXTextField tfNome;
+    private AnchorPane apRicerca;
 
     @FXML
-    private JFXTextField tfAnnata;
+    private Tab tabVino;
+
+    @FXML
+    private JFXTextField tfNome;
 
     @FXML
     private JFXTextField tfCantina;
@@ -53,34 +59,61 @@ public class Ricerca {
     private JFXTextField tfUvaggio;
 
     @FXML
-    private JFXTextField tfStato;
+    private JFXTextField tfFornitore;
 
     @FXML
-    private JFXTextField tfQta;
+    private JFXTextField tfStato;
 
     @FXML
     private JFXTextField tfRegione;
 
     @FXML
-    private  JFXTextField tfAggiungiQuantitaVino;
+    private JFXTextField tfAnnata;
 
     @FXML
-    private TableView tblviewLista;
+    private JFXTextField tfQta;
 
     @FXML
-    private TableColumn<Vino, String> tblColumnNome, tblColumnTipo, tblColumnAnnata, tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione, tblColumnQta, tblColonnaFornitore;
+    private JFXComboBox<String> cmbVinoNome;
 
     @FXML
-    private AnchorPane apRicerca;
+    private TableView tblViewListaVino;
 
     @FXML
-    private ContextMenu cMenu;
+    private TableColumn<Vino,String> tblColumnNome, tblColumnTipo, tblColumnAnnata, tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione, tblColumnQta, tblColonnaFornitore;
 
     @FXML
-    private ComboBox<String> cmbVinoNome;
+    private Tab tabCantina;
+
+    @FXML
+    private TableView tblViewListaCantina;
+
+    @FXML
+    private  TableColumn<Cantina,String> tblColumnCantinaId, tblColumnCantinaNome, tblColumnCantinaStato, tblColumnCantinaRegione, tblColumnCantinaVia, tblColumnCantinaUvaggio, tblColumnCantinaIdRappr;
+
+    @FXML
+    private JFXTextField tfCantinaId;
+
+    @FXML
+    private JFXTextField tfCantinaIdRappr;
+
+    @FXML
+    private JFXTextField tfCantinaUvaggio;
+
+    @FXML
+    private JFXTextField tfCantinaStato;
+
+    @FXML
+    private JFXTextField tfCantinaNome;
+
+    @FXML
+    private JFXTextField tfCantinaVia;
+
+    @FXML
+    private JFXTextField tfCantinaRegione;
 
 
-    private void loadTbl(){
+    private void loadTblVino(){
         tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
         tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
         tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
@@ -94,38 +127,42 @@ public class Ricerca {
         tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("idFornitore"));
     }
 
-    @FXML
-    public void loadElement(Event event) throws Exception {
-        if(!tblLoaded) {
-            System.out.println("OK");
-            tblLoaded=true;
-            loadTbl();
-            APIC a = new APIC("vino");
-            APIReturn ret;
-            String[] colonne = {};
-            List<Clausola> clausolas = new ArrayList<Clausola>();
-            ret = a.select(colonne,clausolas);
-            tblviewLista.setItems(ret.toObservableList(Vino.class));
-        }
-        event.consume();
+    private void loadTblCantina(){
+        tblColumnCantinaId.setCellValueFactory(new PropertyValueFactory<Cantina,String>("ID"));
+        tblColumnCantinaNome.setCellValueFactory(new PropertyValueFactory<Cantina,String>("nome"));
+        tblColumnCantinaRegione.setCellValueFactory(new PropertyValueFactory<Cantina,String>("regione"));
+        tblColumnCantinaStato.setCellValueFactory(new PropertyValueFactory<Cantina,String>("stato"));
+        tblColumnCantinaVia.setCellValueFactory(new PropertyValueFactory<Cantina,String>("via"));
+        tblColumnCantinaUvaggio.setCellValueFactory(new PropertyValueFactory<Cantina,String>("uvaggio"));
+        tblColumnCantinaIdRappr.setCellValueFactory(new PropertyValueFactory<Cantina,String>("idrappresentante"));
     }
 
-/*
-    void test(){
-        try{
+    @FXML
+    private void loadOtherTbl() throws Exception{
+        if(!allLoaded) {
+
+
+            loadTblVino();
 
             APIC a = new APIC("vino");
-            APIReturn ret;
-            String[] strings = {};
-            ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
-            clausolas.add(new Clausola("nome","=", "Bianco Bizzo"));
-            ret=a.select(strings,clausolas);
-            tblviewLista.setItems(ret.toObservableList(Vino.class));
-        }
-        catch (Exception e){
+            String[] colonne = {};
+            List<Clausola> clausolas = new ArrayList<Clausola>();
+            tblViewListaVino.setItems(a.select(colonne,clausolas).toObservableList(Vino.class));
 
+
+
+            loadTblCantina();
+
+            APIC b = new APIC("cantina");
+            tblViewListaCantina.setItems(b.select(colonne,clausolas).toObservableList(Cantina.class));
+
+
+
+
+            allLoaded=true;
         }
-    }*/
+    }
+
 
     @FXML
     void searchElement(Event event) {
@@ -160,7 +197,7 @@ public class Ricerca {
                 break;
         }
         try {
-            loadTbl();
+            loadTblVino();
             APIC a = new APIC("vino");
             APIReturn ret;
             String[] strings = {};
@@ -171,7 +208,7 @@ public class Ricerca {
                 System.out.println(campi[i] + " " + values[i]);}
             }
             ret = a.select(strings, clausolas);
-            tblviewLista.setItems(ret.toObservableList(Vino.class));
+            tblViewListaVino.setItems(ret.toObservableList(Vino.class));
         } catch (Exception e) {
 
         }
@@ -180,18 +217,25 @@ public class Ricerca {
 
     @FXML
     private void searchCmb(){
+        tblLoaded=true;
         APIC a = new APIC("vino");
         APIReturn ret;
         String[] strings = {};
         ArrayList<Clausola> clausolas = new ArrayList<>();
         try {
-            loadTbl();
+            loadTblVino();
             clausolas.add(new Clausola(campi[0], "like", "%"+cmbVinoNome.getSelectionModel().getSelectedItem()+"%"));
-            strings[0] = "nome";
-            //mbVinoNome.setItems(a.select(strings, clausolas).toObservableList(Vino.class));
+            ObservableList<String> nomi = FXCollections.observableArrayList();
+            ObservableList<Vino> vinos = a.select(strings,clausolas).toObservableList(Vino.class);
+
+            for(Vino cur: vinos){
+                nomi.add(cur.getNome());
+            }
+            cmbVinoNome.setItems(nomi);
+            cmbVinoNome.hide();
             cmbVinoNome.show();
-            ret = a.select(strings, clausolas);
-            tblviewLista.setItems(ret.toObservableList(Vino.class));
+
+            tblViewListaVino.setItems(vinos);
         } catch (Exception e) {
 
         }
@@ -203,7 +247,7 @@ public class Ricerca {
     private void openContext(Event event){
         Stage dialog = new Stage();
         AnchorPane popUpPane;
-        Vino cur = (Vino)tblviewLista.getSelectionModel().getSelectedItem();
+        Vino cur = (Vino)tblViewListaVino.getSelectionModel().getSelectedItem();
         MenuItem option = (MenuItem)event.getTarget();
         Main2 main2 = new Main2();
         try {
@@ -214,7 +258,7 @@ public class Ricerca {
                     popUpPane = FXMLLoader.load(getClass().getResource("/view/aggiungiVino.fxml"));
                     dialog.setScene(new Scene(popUpPane));
                     dialog.showAndWait();
-                    System.out.println(tfAggiungiQuantitaVino.getText());
+                    //System.out.println(tfAggiungiQuantitaVino.getText());
                     break;
                 case "miRimuovi":
                     break;

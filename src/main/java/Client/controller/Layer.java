@@ -20,7 +20,7 @@ public class Layer {
     //private Button btnRicerca;
 
     @FXML
-    public void changeScene(Event event) {
+    public void changeScene(Event event) throws Exception{
         try {
             // Load person overview.
             boolean done=false;
