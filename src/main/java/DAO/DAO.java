@@ -186,10 +186,7 @@ public class DAO {
 
         String sql = new String("DELETE FROM " + this.getTable() + " " + creaClausola(clausole));
 //        System.out.println(sql.toString());
-        execQueryUID(sql.toString());
-
-
-
+        execQueryUID(sql);
     }
 
 
@@ -206,8 +203,6 @@ public class DAO {
      * @return stringa formato json array
      */
     public String select(JSONArray listColumn,JSONArray clausole) throws JSONException,SQLException {
-
-
         //creo la prima parte della query (fino a from table)
         StringBuffer sql = new StringBuffer("SELECT ");
         if (listColumn == null || listColumn.isEmpty())
@@ -226,7 +221,8 @@ public class DAO {
 
 
 
-        StringBuffer result = new StringBuffer("[");
+
+//        StringBuffer result = new StringBuffer("[");
         Statement s = null;
         s = this.connection.getConnection().createStatement();
 
@@ -237,7 +233,7 @@ public class DAO {
             JSONArray jsonReturnArray = new JSONArray();
             while (rs.next()){
                 jsonReturn = new JSONObject();
-                result.append("{");
+//                result.append("{");
 
 
                 if (listColumn == null || listColumn.isEmpty()) {

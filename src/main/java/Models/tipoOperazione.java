@@ -17,7 +17,7 @@ public class TipoOperazione extends Model {
     @Override
     public String toString() {
         return "{" +
-                "descrizione:'" + descrizione + '\'' +
+                "descrizione:\"" + descrizione + '"' +
                 ", ID:" + ID +
                 '}';
     }

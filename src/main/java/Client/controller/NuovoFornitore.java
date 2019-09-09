@@ -99,7 +99,7 @@ public class NuovoFornitore {
                 fornitore.setMail(tfMail.getText());
                 fornitore.setQta_max(Integer.valueOf(tfQtaMax.getText()));
                 fornitore.setQta_min((Integer.valueOf(tfQtaMin.getText())));
-                fornitore.setTelefono(tfNome.getText());
+                fornitore.setTelefono(tfTelefono.getText());
             }catch (Exception e){
                 Utility.createErrorWindow("Errore in " + e.getMessage());
             }

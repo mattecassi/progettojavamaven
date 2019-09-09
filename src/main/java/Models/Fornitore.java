@@ -4,6 +4,7 @@ import API.APIC;
 import ClientUtils.Clausola;
 import ClientUtils.UpdateElem;
 import Utils.APIReturn;
+import javafx.collections.ObservableList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -12,6 +13,8 @@ import java.util.List;
 
 public class Fornitore extends Model {
 
+//fornitoriEnoteche
+    //create view fornitoriRappresentanti
 
     private String nome;
     private Integer qta_min;
@@ -35,6 +38,30 @@ public class Fornitore extends Model {
         this.mail = mail;
     }
 
+
+    /**
+     * Funzioni per bizzuccio
+     * @return
+     * @throws Exception
+     */
+    public static ObservableList<Fornitore> getFornitoriRappresentanti(String[] colonne, List<Clausola> clausolas) throws Exception{
+        APIC apic = new APIC("fornitoriRappresentanti");
+        return apic.select(colonne,clausolas).toObservableList(Fornitore.class);
+    }
+
+    public static String getTableFornitoriRappresentanti(){
+        return "fornitoriRappresentanti";
+    }
+
+
+    public static String getTableFornitoriEnoteche(){
+        return "fornitoriEnoteche";
+    }
+
+    public static ObservableList<Fornitore> getFornitoriEnoteca(String[] colonne, List<Clausola> clausolas) throws Exception{
+        APIC apic = new APIC("fornitoriEnoteche");
+        return apic.select(colonne,clausolas).toObservableList(Fornitore.class);
+    }
 
 
 
