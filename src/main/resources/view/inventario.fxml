@@ -7,13 +7,13 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Inventario">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#loadFirst" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Inventario">
    <children>
       <JFXTextField fx:id="tfCantina" editable="false" labelFloat="true" layoutX="360.0" layoutY="100.0" prefWidth="200.0" promptText="Cantina" />
       <JFXTextField fx:id="tfAnnata" editable="false" labelFloat="true" layoutX="40.0" layoutY="240.0" prefWidth="200.0" promptText="Annata" />
       <JFXTextField fx:id="tfTipo" editable="false" labelFloat="true" layoutX="360.0" layoutY="240.0" prefWidth="200.0" promptText="Tipo" />
       <JFXTextField fx:id="tfNome" editable="false" labelFloat="true" layoutX="40.0" layoutY="100.0" prefWidth="200.0" promptText="Nome" />
-      <JFXButton fx:id="btnNext" layoutX="400.0" layoutY="360.0" onAction="#checkInventario" prefHeight="70.0" prefWidth="100.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Next">
+      <JFXButton fx:id="btnNext" layoutX="400.0" layoutY="360.0" onAction="#checkInventario" prefHeight="70.0" prefWidth="100.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Inizia">
          <font>
             <Font name="Calibri" size="25.0" />
          </font>

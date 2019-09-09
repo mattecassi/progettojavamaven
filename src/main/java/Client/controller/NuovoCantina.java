@@ -54,7 +54,7 @@ public class NuovoCantina {
             ObservableList<Rappresentante> rappresentantes = a.select(strings,clausolas).toObservableList(Rappresentante.class);
 
             for(Rappresentante cur: rappresentantes){
-                nomi.add(cur.getNome_rappresentante());
+                nomi.add(cur.getFornitore().getNome());
             }
 
             cmbFornitore.setItems(nomi);
