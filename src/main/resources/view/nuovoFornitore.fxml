@@ -14,7 +14,6 @@
       <JFXTextField fx:id="tfQtaMax" labelFloat="true" layoutX="362.0" layoutY="163.0" promptText="Qta max" />
       <JFXTextField fx:id="tfTelefono" labelFloat="true" layoutX="59.0" layoutY="256.0" promptText="Telefono" />
       <JFXComboBox fx:id="cmbSelect" layoutX="362.0" layoutY="256.0" onHidden="#showTf" onShown="#showElement" prefHeight="25.0" prefWidth="135.0" promptText="Seleziona" />
-      <JFXTextField fx:id="tfCognome" labelFloat="true" layoutX="59.0" layoutY="346.0" promptText="Cognome" visible="false" />
       <JFXTextField fx:id="tfRegione" labelFloat="true" layoutX="363.0" layoutY="346.0" promptText="Regione" visible="false" />
       <JFXTextField fx:id="tfStato" labelFloat="true" layoutX="59.0" layoutY="346.0" promptText="Stato" visible="false" />
       <JFXTextField fx:id="tfCitta" labelFloat="true" layoutX="59.0" layoutY="439.0" promptText="Citta" visible="false" />

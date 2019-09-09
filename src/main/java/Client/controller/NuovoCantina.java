@@ -4,6 +4,7 @@ import API.APIC;
 import ClientUtils.Clausola;
 import Models.Cantina;
 import Models.Fornitore;
+import Models.Model;
 import Models.Rappresentante;
 import Utils.APIReturn;
 import Utils.Utility;

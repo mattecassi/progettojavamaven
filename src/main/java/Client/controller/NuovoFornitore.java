@@ -47,9 +47,6 @@ public class NuovoFornitore {
     private ComboBox<String> cmbSelect;
 
     @FXML
-    private JFXTextField tfCognome;
-
-    @FXML
     private JFXTextField tfStato, tfRegione, tfCitta, tfVia;
 
     @FXML
@@ -63,15 +60,11 @@ public class NuovoFornitore {
 
     @FXML
     private void showTf(Event event){
-        tfCognome.setVisible(false);
         tfStato.setVisible(false);
         tfRegione.setVisible(false);
         tfCitta.setVisible(false);
         tfVia.setVisible(false);
         switch(cmbSelect.getSelectionModel().getSelectedItem()){
-            case "Rappresentante":
-                tfCognome.setVisible(true);
-                break;
             case "Enoteca":
                 tfStato.setVisible(true);
                 tfRegione.setVisible(true);
@@ -92,10 +85,6 @@ public class NuovoFornitore {
             Utility.createErrorWindow("Inserisci tutti i campi");
             }
         if(check){
-            if(opzione.equalsIgnoreCase("Rappresentante") && tfCognome.getText().isEmpty()){
-                check = false;
-                Utility.createErrorWindow("Inserisci tutti i campi");
-            }
             if(opzione.equalsIgnoreCase("Enoteca") && (tfStato.getText().isEmpty() || tfRegione.getText().isEmpty() || tfCitta.getText().isEmpty() || tfVia.getText().isEmpty())){
                 check = false;
                 Utility.createErrorWindow("Inserisci tutti i campi");
@@ -164,11 +153,7 @@ public class NuovoFornitore {
                     case "Rappresentante":
 
                         Rappresentante rappresentante = new Rappresentante();
-                        rappresentante.setCognome(tfCognome.getText());
-                        rappresentante.setNome_rappresentante(fornitore.getNome());
                         rappresentante.setID(fornitore.getID());
-
-                        tfCognome.setText("");
 
                         try {
                             rappresentante.insert();
