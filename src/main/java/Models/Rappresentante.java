@@ -1,13 +1,10 @@
 package Models;
 
+import API.APIC;
 import Utils.APIReturn;
 
 public class Rappresentante extends Model {
 
-
-
-    private String nome_rappresentante;
-    private String cognome;
 
 
     public Rappresentante() {
@@ -20,34 +17,28 @@ public class Rappresentante extends Model {
         return super.insert();
     }
 
-    public Rappresentante(String nome_rappresentante, String cognome) {
-        config("rappresentante");
-        this.nome_rappresentante = nome_rappresentante;
-        this.cognome = cognome;
+
+
+    /**
+     * Funzione che ritorna il fornitore per ottenere le cose di cui ho bisogno
+     * @return
+     * @throws Exception
+     */
+    public Fornitore getFornitore() throws Exception{
+        if (this.ID == null)
+            throw new Exception("ID FORNITORE NON SPECIFICATO");
+        return this.apic.get(this.getID(),Fornitore.class);
     }
 
-    public String getNome_rappresentante() {
-        return nome_rappresentante;
-    }
 
-    public void setNome_rappresentante(String nome_rappresentante) {
-        this.nome_rappresentante = nome_rappresentante;
-    }
 
-    public String getCognome() {
-        return cognome;
-    }
 
-    public void setCognome(String cognome) {
-        this.cognome = cognome;
-    }
+
 
     @Override
     public String toString() {
         return "{" +
-                "nome_rappresentante:'" + nome_rappresentante + '\'' +
-                ", cognome:'" + cognome + '\'' +
-                ", ID:" + ID +
+                " ID:" + ID +
                 '}';
     }
 }

@@ -94,10 +94,10 @@ public class Vino extends Model {
     @Override
     public String toString() {
         return "{" +
-                "nome:'" + nome + '\'' +
+                "nome:\"" + nome + '"' +
                 ", idCantina:" + idCantina +
                 ", anno:" + anno +
-                ", tipo:'" + tipo + '\'' +
+                ", tipo:\"" + tipo + '"' +
                 ", qta:" + qta +
                 ", costo:" + costo +
                 ", prezzoVendita:" + prezzoVendita +

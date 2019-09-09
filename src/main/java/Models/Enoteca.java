@@ -64,10 +64,10 @@ public class Enoteca extends Model {
     @Override
     public String toString() {
         return "{" +
-                "via:'" + via + '\'' +
-                ", citta:'" + citta + '\'' +
-                ", regione:'" + regione + '\'' +
-                ", stato:'" + stato + '\'' +
+                "via:\"" + via + '"' +
+                ", citta:\"" + citta + '"' +
+                ", regione:\"" + regione + '"' +
+                ", stato:\"" + stato + '"' +
                 ", ID:" + ID +
                 '}';
     }

@@ -23,9 +23,9 @@ public class Users extends Model {
     @Override
     public String toString() {
         return "{" +
-                "nome:'" + nome + '\'' +
-                ", cognome:'" + cognome + '\'' +
-                ", email:'" + email + '\'' +
+                "nome:\"" + nome + '"' +
+                ", cognome:\"" + cognome + '"' +
+                ", email:\"" + email + '"' +
                 ", ID:" + ID +
                 '}';
     }

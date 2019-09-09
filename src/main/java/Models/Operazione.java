@@ -107,11 +107,11 @@ public class Operazione extends Model{
     public String toString() {
         return "{" +
                 "idvino:" + idvino +
-                ", data_operazione:'" + data_operazione +"'" +
+                ", data_operazione:\"" + data_operazione +"\"" +
                 ", qta:" + qta +
                 ", sconto:" + sconto +
                 ", importo:" + importo +
-                ", descrizione:'" + descrizione + '\'' +
+                ", descrizione:\"" + descrizione + '"' +
                 ", tipoOperazione:" + tipoOperazione +
                 ", ID:" + ID +
                 '}';

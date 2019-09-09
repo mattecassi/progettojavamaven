@@ -82,11 +82,11 @@ public class Fornitore extends Model {
     public String toString() {
         return "{" +
                 "ID:" + ID +
-                ", nome:'" + nome + '\'' +
+                ", nome:\"" + nome + '"' +
                 ", qta_min:" + qta_min +
                 ", qta_max:" + qta_max +
                 ", telefono:'" + telefono + '\'' +
-                ", mail:'" + mail + '\'' +
+                ", mail:\"" + mail + '"' +
                 '}';
     }
 

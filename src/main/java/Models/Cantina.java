@@ -76,11 +76,11 @@ public class Cantina extends Model{
     @Override
     public String toString() {
         return "{" +
-                "nome:'" + nome + '\'' +
-                ", regione:'" + regione + '\'' +
-                ", stato:'" + stato + '\'' +
-                ", via:'" + via + '\'' +
-                ", uvaggio:'" + uvaggio + '\'' +
+                "nome:\"" + nome + '"' +
+                ", regione:\"" + regione + '"' +
+                ", stato:\"" + stato + '"' +
+                ", via:\"" + via + '"' +
+                ", uvaggio:\"" + uvaggio + '"' +
                 ", idrappresentante:" + idrappresentante +
                 '}';
     }

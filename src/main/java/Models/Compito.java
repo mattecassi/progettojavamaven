@@ -153,8 +153,8 @@ public class Compito extends Model {
     @Override
     public String toString() {
         return "{" +
-                " descrizione:'" + descrizione + '\'' +
-                ", dataCompitoOff:'" + dataCompitoOff + '\'' +
+                " descrizione:\"" + descrizione + '"' +
+                ", dataCompitoOff:\"" + dataCompitoOff + '"' +
                 ", dow:" + dow +
                 ", ID:" + ID +
                 '}';

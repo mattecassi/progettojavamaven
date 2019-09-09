@@ -20,7 +20,6 @@ public class CompitoSvolto extends Model {
                 "idCompito:" + idCompito +
                 ", dataRisoluzione:" + dataRisoluzione +
                 ", idUser:" + idUser +
-//                ", dataRisoluzioneObj:" + dataRisoluzioneObj +
                 ", ID:" + ID +
                 '}';
     }

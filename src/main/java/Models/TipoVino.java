@@ -32,7 +32,7 @@ public class TipoVino extends Model {
     @Override
     public String toString() {
         return "{" +
-                "tipo:'" + tipo + '\'' +
+                "tipo:\"" + tipo + '"' +
                 '}';
     }
 }
