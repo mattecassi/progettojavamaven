@@ -14,7 +14,7 @@ CREATE TABLE "users" (
 );
 CREATE TABLE "fornitore" (
                            "ID"	INTEGER PRIMARY KEY AUTOINCREMENT,
-                           "nome"	TEXT NOT NULL,
+                           "nome"	TEXT NOT NULL UNIQUE ,
                            "qta_min"	INTEGER DEFAULT 0 CHECK(qta_min>=0),
                            "qta_max"	INTEGER CHECK(qta_max>0),
                            "telefono"	TEXT,
@@ -38,7 +38,7 @@ CREATE TABLE "rappresentante" (
 );
 CREATE TABLE "cantina" (
                          "ID"	INTEGER PRIMARY KEY AUTOINCREMENT,
-                         "nome"	TEXT,
+                         "nome"	TEXT not null unique ,
                          "regione"	TEXT,
                          "stato"	TEXT,
                          "via"	TEXT,
@@ -66,7 +66,7 @@ CREATE TABLE "compitoSvolto" (
 
 CREATE TABLE "vino" (
                       "ID"	INTEGER PRIMARY KEY AUTOINCREMENT UNIQUE,
-                      "nome"	TEXT NOT NULL,
+                      "nome"	TEXT NOT NULL unique ,
                       "idCantina"	INTEGER ,
                       "anno"	INTEGER NOT NULL,
                       "tipo"	TEXT,
