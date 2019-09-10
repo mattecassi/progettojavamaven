@@ -113,6 +113,11 @@ public class Ricerca {
     private JFXTextField tfCantinaRegione;
 
 
+    public Ricerca(){
+
+    }
+
+
     private void loadTblVino(){
         tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
         tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
@@ -138,7 +143,7 @@ public class Ricerca {
     }
 
     @FXML
-    private void loadOtherTbl() throws Exception{
+    public void loadOtherTbl() throws Exception{
         if(!allLoaded) {
 
 

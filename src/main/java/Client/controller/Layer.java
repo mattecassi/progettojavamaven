@@ -52,6 +52,12 @@ public class Layer {
                 }else {
                     AnchorPane newLoadedAp = (AnchorPane) loader.load();
                     Main2.rootLayout.setCenter(newLoadedAp);
+
+                    //Eseguo questo passaggio per eseguire il loading della tabella
+                    //ogni volta che apro quella pagina
+                    if (loader.getController() instanceof Ricerca) {
+                        ((Ricerca) loader.getController()).loadOtherTbl();
+                    }
                 }// Set person overview into the center of root layout.
 
             }
