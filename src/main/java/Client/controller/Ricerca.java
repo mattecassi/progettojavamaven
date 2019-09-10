@@ -28,12 +28,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.EventListener;
 import java.util.List;
 
 public class Ricerca {
@@ -80,7 +75,10 @@ public class Ricerca {
     private TableView tblViewListaVino;
 
     @FXML
-    private TableColumn<Vino,String> tblColumnNome, tblColumnTipo, tblColumnAnnata, tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione, tblColumnQta, tblColonnaFornitore;
+    private TableColumn<Vino,String> tblColumnNome, tblColumnTipo,  tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione,  tblColonnaFornitore;
+
+    @FXML
+    private TableColumn<Vino,Integer> tblColumnAnnata, tblColumnQta;
 
     @FXML
     private Tab tabCantina;
@@ -90,6 +88,18 @@ public class Ricerca {
 
     @FXML
     private  TableColumn<Cantina,String> tblColumnCantinaId, tblColumnCantinaNome, tblColumnCantinaStato, tblColumnCantinaRegione, tblColumnCantinaVia, tblColumnCantinaUvaggio, tblColumnCantinaIdRappr;
+
+    @FXML
+    private  TableView tblViewListaRappresentate;
+
+    @FXML
+    private  TableColumn<Fornitore,String> tblColumnRappresentanteMail, tblColumnRappresentanteNome;
+
+    @FXML
+    private  TableColumn<Fornitore,Integer> tblColumnRappresentanteMin, tblColumnRappresentanteMax, tblColumnRappresentanteTelefono;
+
+    @FXML
+    private TableColumn<Rappresentante,Integer> tblColumnRappresentanteID;
 
     @FXML
     private JFXTextField tfCantinaId;
@@ -112,42 +122,47 @@ public class Ricerca {
     @FXML
     private JFXTextField tfCantinaRegione;
 
-
     public Ricerca(){
 
     }
 
 
     private void loadTblVino(){
-        tblColumnNome.setCellValueFactory(new PropertyValueFactory<Vino, String>("nome"));
-        tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<Vino, String>("anno"));
-        tblColumnTipo.setCellValueFactory(new PropertyValueFactory<Vino, String>("tipo"));
-        tblColumnQta.setCellValueFactory(new PropertyValueFactory<Vino, String>("qta"));
-        tblColumnRegione.setCellValueFactory(new PropertyValueFactory<Vino, String>("costo"));
-        tblColumnStato.setCellValueFactory(new PropertyValueFactory<Vino, String>("prezzoVendita"));
+        tblColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<>("anno"));
+        tblColumnTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+        tblColumnQta.setCellValueFactory(new PropertyValueFactory<>("qta"));
+        tblColumnRegione.setCellValueFactory(new PropertyValueFactory<>("costo"));
+        tblColumnStato.setCellValueFactory(new PropertyValueFactory<>("prezzoVendita"));
 
 
-        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
-        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<Vino, String>("idCantina"));
-        tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<Vino, String>("idFornitore"));
+        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<>("idCantina"));
+        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<>("idCantina"));
+        tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<>("idFornitore"));
     }
 
     private void loadTblCantina(){
-        tblColumnCantinaId.setCellValueFactory(new PropertyValueFactory<Cantina,String>("ID"));
-        tblColumnCantinaNome.setCellValueFactory(new PropertyValueFactory<Cantina,String>("nome"));
-        tblColumnCantinaRegione.setCellValueFactory(new PropertyValueFactory<Cantina,String>("regione"));
-        tblColumnCantinaStato.setCellValueFactory(new PropertyValueFactory<Cantina,String>("stato"));
-        tblColumnCantinaVia.setCellValueFactory(new PropertyValueFactory<Cantina,String>("via"));
-        tblColumnCantinaUvaggio.setCellValueFactory(new PropertyValueFactory<Cantina,String>("uvaggio"));
-        tblColumnCantinaIdRappr.setCellValueFactory(new PropertyValueFactory<Cantina,String>("idrappresentante"));
+        tblColumnCantinaId.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        tblColumnCantinaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        tblColumnCantinaRegione.setCellValueFactory(new PropertyValueFactory<>("regione"));
+        tblColumnCantinaStato.setCellValueFactory(new PropertyValueFactory<>("stato"));
+        tblColumnCantinaVia.setCellValueFactory(new PropertyValueFactory<>("via"));
+        tblColumnCantinaUvaggio.setCellValueFactory(new PropertyValueFactory<>("uvaggio"));
+        tblColumnCantinaIdRappr.setCellValueFactory(new PropertyValueFactory<>("idrappresentante"));
     }
+
+//    private void loadTblRappresentante(){
+//        tblColumnRappresentanteID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+//        tblColumnRappresentanteMin.setCellValueFactory();
+//        tblColumnRappresentanteMax.setCellValueFactory();
+//        tblColumnRappresentanteTelefono.setCellValueFactory();
+//        tblColumnRappresentanteMail.setCellValueFactory();
+//        tblColumnRappresentanteNome.setCellValueFactory();
+//    }
 
     @FXML
     public void loadOtherTbl() throws Exception{
         if(!allLoaded) {
-
-
-            loadTblVino();
 
             APIC a = new APIC("vino");
             String[] colonne = {};
@@ -155,14 +170,18 @@ public class Ricerca {
             tblViewListaVino.setItems(a.select(colonne,clausolas).toObservableList(Vino.class));
 
 
-
-            loadTblCantina();
-
             APIC b = new APIC("cantina");
             tblViewListaCantina.setItems(b.select(colonne,clausolas).toObservableList(Cantina.class));
 
+            APIC c = new APIC("rappresentante");
+            tblViewListaRappresentate.setItems(c.select(colonne,clausolas).toObservableList(Rappresentante.class));
 
 
+            loadTblVino();
+
+            loadTblCantina();
+
+            //loadTblRappresentante();
 
             allLoaded=true;
         }

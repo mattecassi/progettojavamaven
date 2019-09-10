@@ -40,26 +40,14 @@ public class NuovoCantina {
     private JFXTextField tfVia;
 
     @FXML
-    private JFXComboBox<String> cmbFornitore;
+    private JFXComboBox<String> cmbRappresentante;
 
     @FXML
-    private void loadCmbFornitore(){
-        APIC a = new APIC("rappresentante");
-        APIReturn ret;
-        String[] strings={"nome_rappresentante"};
-        ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
+    private void loadCmbRappresentante(){
         try {
-            ObservableList<String> nomi = FXCollections.observableArrayList();
-            nomi.add("");
-            ObservableList<Rappresentante> rappresentantes = a.select(strings,clausolas).toObservableList(Rappresentante.class);
-
-            for(Rappresentante cur: rappresentantes){
-                nomi.add(cur.getFornitore().getNome());
-            }
-
-            cmbFornitore.setItems(nomi);
-        } catch (Exception e) {
-            e.printStackTrace();
+            cmbRappresentante.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","", Fornitore.class));
+        }catch (Exception e){
+            e.getMessage();
         }
     }
 
@@ -77,13 +65,14 @@ public class NuovoCantina {
             cantina.setRegione(tfRegione.getText());
             cantina.setVia(tfVia.getText());
 
-            String nomeFornitore = cmbFornitore.getSelectionModel().getSelectedItem();
+            String nomeFornitore = cmbRappresentante.getSelectionModel().getSelectedItem();
 
             if(nomeFornitore!=""){
-                APIC a = new APIC("rappresentante");
+                APIC a = new APIC("fornitore");
                 String[] strings = {};
                 ArrayList<Clausola> clausolas = new ArrayList<>();
-                clausolas.add(new Clausola("nome_rappresentante","=",nomeFornitore));
+//                Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","Fornitore",Fornitore.class);
+                clausolas.add(new Clausola("nome","=",nomeFornitore));
                 try {
                     Rappresentante rappresentante = a.select(strings,clausolas).toObservableList(Rappresentante.class).get(0);
                     System.out.println(rappresentante.toString());
@@ -91,7 +80,7 @@ public class NuovoCantina {
                     cantina.getIdrappresentante();
 
                 } catch (Exception e) {
-                    e.printStackTrace();
+                    e.getMessage();
                 }
             }
 
@@ -109,7 +98,7 @@ public class NuovoCantina {
                     tfStato.setText("");
                     tfRegione.setText("");
                     tfVia.setText("");
-                    cmbFornitore.getSelectionModel().selectFirst();
+                    cmbRappresentante.getSelectionModel().selectFirst();
                     Utility.createSuccessWindow("Inserimento avvenuto con successo");
                 }
                 else{

@@ -1,7 +1,6 @@
 package Models;
 
 import Utils.APIReturn;
-
 public class Vino extends Model {
 
     //Inserire tutti i campi
@@ -86,6 +85,14 @@ public class Vino extends Model {
     public Double getPrezzoVendita() {
         return prezzoVendita;
     }
+
+    /*public Integer getIdFornitore() {
+        return idFornitore;
+    }
+
+    public void setIdFornitore(Integer idFornitore) {
+        this.idFornitore = idFornitore;
+    }*/
 
     public void setPrezzoVendita(Double prezzoVendita) {
         this.prezzoVendita = prezzoVendita;

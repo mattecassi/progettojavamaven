@@ -34,7 +34,7 @@ public class Nuovo{
     private JFXTextField tfAnnata;
 
     @FXML
-    private JFXComboBox<String> cmbCantina,cmbTipo;
+    private JFXComboBox<String> cmbCantina,cmbTipo, cmbFornitore;
 
     @FXML
     private JFXTextField tfQta;
@@ -49,6 +49,7 @@ public class Nuovo{
             ArrayList<Clausola> clausolas = new ArrayList<>();
             cmbTipo.setItems(Utility.loadDataForCmb("tipo_vino","tipo","",TipoVino.class));
             cmbCantina.setItems(Utility.loadDataForCmb("cantina","nome","",Cantina.class));
+            cmbFornitore.setItems(Utility.loadDataForCmb("fornitore","nome","",Cantina.class));
         }catch (Exception e){
             e.getMessage();
         }
@@ -65,14 +66,17 @@ public class Nuovo{
 
             Vino vino = new Vino();
 
+            //TODO CONTROLLO NUMERI
+
             vino.setID(Integer.valueOf(tfID.getText()));
             vino.setNome(tfNome.getText());
             vino.setAnno(Integer.valueOf(tfAnnata.getText()));
             vino.setCosto(Double.valueOf(tfCosto.getText()));
             vino.setPrezzoVendita(Double.valueOf(tfPrezzoVendita.getText()));
             vino.setQta(Integer.valueOf(tfQta.getText()));
+            vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
 
-
+            //IN BASE AL NOME SELEZIONATO, FACCIO IL SELECT DI TALE CANTINA E NE PRENDO L'ID
             APIC aCantina = new APIC("cantina");
             String[] stringsCantina = {};
             ArrayList<Clausola> clausolasCantina = new ArrayList<>();
@@ -84,7 +88,19 @@ public class Nuovo{
                 Utility.createErrorWindow(e.getMessage());
                 e.printStackTrace();
             }
-            vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
+//
+//            APIC aFornitore = new APIC("fornitore");
+//            String[] stringsFornitore = {};
+//            ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
+//            clausolasCantina.add(new Clausola("nome", "=", cmbFornitore.getSelectionModel().getSelectedItem()));
+//            try {
+//                Fornitore fornitore = aFornitore.select(stringsFornitore, clausolasFornitore).toObservableList(Fornitore.class).get(0);
+//                vino.setIdFornitore(fornitore.getID());
+//            } catch (Exception e) {
+//                Utility.createErrorWindow(e.getMessage());
+//                e.printStackTrace();
+//            }
+
 
             try {
                 APIC aVino = new APIC("vino");
@@ -93,6 +109,7 @@ public class Nuovo{
                 clausolasVino.add(new Clausola("nome", "LIKE", vino.getNome()));
                 if (aVino.select(stringsVino, clausolasVino).toList(Vino.class).isEmpty()) {
                     vino.insert();
+                    Utility.createSuccessWindow("Inserimento avvenuto con successo");
                     tfCosto.setText("");
                     tfPrezzoVendita.setText("");
                     tfQta.setText("");
@@ -101,21 +118,14 @@ public class Nuovo{
                     tfID.setText("");
                     cmbCantina.getSelectionModel().selectFirst();
                     cmbTipo.getSelectionModel().selectFirst();
+                    cmbFornitore.getSelectionModel().selectFirst();
+                    System.out.println(vino.toString());
                 } else {
                     Utility.createErrorWindow("Presente");
                 }
             } catch (Exception e) {
                 Utility.createErrorWindow(e.getMessage());
             }
-
-
-            try {
-                vino.insert();
-                Utility.createSuccessWindow("Inserimento avvenuto con successo");
-            } catch (Exception e) {
-                Utility.createErrorWindow(e.getMessage());
-            }
-
         }
     }
 

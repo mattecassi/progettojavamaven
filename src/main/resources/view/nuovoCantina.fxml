@@ -13,6 +13,6 @@
       <JFXTextField fx:id="tfStato" labelFloat="true" layoutX="62.0" layoutY="146.0" promptText="Stato" />
       <JFXTextField fx:id="tfRegione" labelFloat="true" layoutX="397.0" layoutY="146.0" promptText="Regione" />
       <JFXTextField fx:id="tfVia" labelFloat="true" layoutX="62.0" layoutY="229.0" promptText="Via" />
-      <JFXComboBox fx:id="cmbFornitore" layoutX="398.0" layoutY="229.0" onShown="#loadCmbFornitore" prefHeight="25.0" prefWidth="135.0" />
+      <JFXComboBox fx:id="cmbRappresentante" layoutX="398.0" layoutY="229.0" onShown="#loadCmbRappresentante" prefHeight="25.0" prefWidth="135.0" promptText="Rappresentante" />
    </children>
 </AnchorPane>

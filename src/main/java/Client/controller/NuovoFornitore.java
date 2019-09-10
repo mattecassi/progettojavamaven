@@ -59,22 +59,24 @@ public class NuovoFornitore {
     }
 
     @FXML
-    private void showTf(Event event){
+    private void showTf(Event event) {
         tfStato.setVisible(false);
         tfRegione.setVisible(false);
         tfCitta.setVisible(false);
         tfVia.setVisible(false);
-        switch(cmbSelect.getSelectionModel().getSelectedItem()){
-            case "Enoteca":
-                tfStato.setVisible(true);
-                tfRegione.setVisible(true);
-                tfCitta.setVisible(true);
-                tfVia.setVisible(true);
-                break;
-            default:
-                break;
+        if (cmbSelect.getSelectionModel().getSelectedItem() != null)   {
+            switch (cmbSelect.getSelectionModel().getSelectedItem()) {
+                case "Enoteca":
+                    tfStato.setVisible(true);
+                    tfRegione.setVisible(true);
+                    tfCitta.setVisible(true);
+                    tfVia.setVisible(true);
+                    break;
+                default:
+                    break;
+            }
+            opzione = cmbSelect.getSelectionModel().getSelectedItem();
         }
-        opzione = cmbSelect.getSelectionModel().getSelectedItem();
     }
 
     @FXML
