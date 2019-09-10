@@ -60,6 +60,11 @@
                         <Font name="System Bold Italic" size="31.0" />
                     </font>
                 </Text>
+            <JFXTextField fx:id="tfID" labelFloat="true" layoutX="453.0" layoutY="458.0" promptText="ID">
+               <font>
+                  <Font size="21.0" />
+               </font>
+            </JFXTextField>
             </children>
         </AnchorPane>
     </center>

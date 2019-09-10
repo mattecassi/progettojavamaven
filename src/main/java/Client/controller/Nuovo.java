@@ -22,6 +22,9 @@ import java.util.ArrayList;
 public class Nuovo{
 
     @FXML
+    private  JFXTextField tfID;
+
+    @FXML
     private JFXTextField tfNome;
 
     @FXML
@@ -41,40 +44,13 @@ public class Nuovo{
 
     @FXML
     private void loadCmb(Event event){
-
-        String[] strings={"nome"};
-        ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
-
-        //cantina
-
-        APIC aCantina = new APIC("cantina");
-        try {
-            ObservableList<String> nomiCantina = FXCollections.observableArrayList();
-            nomiCantina.add("");
-            ObservableList<Cantina> fornitores = aCantina.select(strings,clausolas).toObservableList(Cantina.class);
-
-            for(Cantina cur: fornitores){
-                nomiCantina.add(cur.getNome());
-            }
-            cmbCantina.setItems(nomiCantina);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        //tipo
-        APIC aTipo = new APIC("tipo_vino");
-        try {
-            String[] stringsTipo = {"tipo"};
-            ObservableList<String> nomiTipo = FXCollections.observableArrayList();
-            nomiTipo.add("");
-            ObservableList<TipoVino> tipoVinos = aTipo.select(stringsTipo,clausolas).toObservableList(TipoVino.class);
-
-            for(TipoVino cur: tipoVinos){
-                nomiTipo.add(cur.getTipo());
-            }
-            cmbTipo.setItems(nomiTipo);
-        } catch (Exception e) {
-            e.printStackTrace();
+        try{
+            String[] strings = {};
+            ArrayList<Clausola> clausolas = new ArrayList<>();
+            cmbTipo.setItems(Utility.loadDataForCmb("tipo_vino","tipo","",TipoVino.class));
+            cmbCantina.setItems(Utility.loadDataForCmb("cantina","nome","",Cantina.class));
+        }catch (Exception e){
+            e.getMessage();
         }
     }
 
@@ -83,12 +59,13 @@ public class Nuovo{
     void inserisciElement(){
         APIReturn ret;
         //|| tfCodice.getText().isEmpty()
-        if (tfCosto.getText().isEmpty() || tfPrezzoVendita.getText().isEmpty()  || tfAnnata.getText().isEmpty() || cmbTipo.getSelectionModel().getSelectedItem().isEmpty() || tfQta.getText().isEmpty() || cmbCantina.getSelectionModel().getSelectedItem().isEmpty() || tfNome.getText().isEmpty()){
+        if (tfID.getText().isEmpty() || tfCosto.getText().isEmpty() || tfPrezzoVendita.getText().isEmpty()  || tfAnnata.getText().isEmpty() || cmbTipo.getSelectionModel().getSelectedItem().isEmpty() || tfQta.getText().isEmpty() || cmbCantina.getSelectionModel().getSelectedItem().isEmpty() || tfNome.getText().isEmpty()){
             Utility.createErrorWindow("Inserisci tutti i campi");
         } else {
 
             Vino vino = new Vino();
 
+            vino.setID(Integer.valueOf(tfID.getText()));
             vino.setNome(tfNome.getText());
             vino.setAnno(Integer.valueOf(tfAnnata.getText()));
             vino.setCosto(Double.valueOf(tfCosto.getText()));
@@ -104,6 +81,7 @@ public class Nuovo{
                 Cantina cantina = aCantina.select(stringsCantina, clausolasCantina).toObservableList(Cantina.class).get(0);
                 vino.setIdCantina(cantina.getID());
             } catch (Exception e) {
+                Utility.createErrorWindow(e.getMessage());
                 e.printStackTrace();
             }
             vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
@@ -120,6 +98,7 @@ public class Nuovo{
                     tfQta.setText("");
                     tfAnnata.setText("");
                     tfNome.setText("");
+                    tfID.setText("");
                     cmbCantina.getSelectionModel().selectFirst();
                     cmbTipo.getSelectionModel().selectFirst();
                 } else {
@@ -134,7 +113,7 @@ public class Nuovo{
                 vino.insert();
                 Utility.createSuccessWindow("Inserimento avvenuto con successo");
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Utility.createErrorWindow(e.getMessage());
             }
 
         }

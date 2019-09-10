@@ -89,7 +89,7 @@ public class Utility {
         List<Clausola> l = new ArrayList<>();
         l.add(new Clausola(field," LIKE ", "%" + value + "%"));
         for (T f : ap.select(arrClausole,l).toObservableList(typeParameter)){
-            System.out.println(f);
+            //System.out.println(f);
             jsonObject = new JSONObject(f.toString());
             nomi.add(jsonObject.getString(field));
 
