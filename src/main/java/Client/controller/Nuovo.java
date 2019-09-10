@@ -66,15 +66,19 @@ public class Nuovo{
 
             Vino vino = new Vino();
 
-            //TODO CONTROLLO NUMERI
-
-            vino.setID(Integer.valueOf(tfID.getText()));
-            vino.setNome(tfNome.getText());
-            vino.setAnno(Integer.valueOf(tfAnnata.getText()));
-            vino.setCosto(Double.valueOf(tfCosto.getText()));
-            vino.setPrezzoVendita(Double.valueOf(tfPrezzoVendita.getText()));
-            vino.setQta(Integer.valueOf(tfQta.getText()));
-            vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
+            //todo aggiunto controllo numeri e controllo stringhe
+            try {
+                vino.setID(Integer.valueOf(tfID.getText()));
+                vino.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
+                vino.setAnno(Integer.valueOf(tfAnnata.getText()));
+                vino.setCosto(Double.valueOf(tfCosto.getText()));
+                vino.setPrezzoVendita(Double.valueOf(tfPrezzoVendita.getText()));
+                vino.setQta(Integer.valueOf(tfQta.getText()));
+                vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
+            }catch (NumberFormatException nfe){
+                Utility.createErrorWindow("I campi Annata,costo,qta,prezzzo vendita, codice DEVONO ESSERE DEI NUMERI");
+                return;
+            }
 
             //IN BASE AL NOME SELEZIONATO, FACCIO IL SELECT DI TALE CANTINA E NE PRENDO L'ID
             APIC aCantina = new APIC("cantina");

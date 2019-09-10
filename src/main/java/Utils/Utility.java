@@ -99,4 +99,11 @@ public class Utility {
 
     }
 
+    public static String replaceAllDeniedChar(String s){
+
+        String first =  s.replace('"',' ');
+        return first.replace('\\',' ');
+    }
+
+
 }

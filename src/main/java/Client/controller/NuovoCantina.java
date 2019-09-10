@@ -58,12 +58,11 @@ public class NuovoCantina {
             Utility.createErrorWindow("Inserisci tutti i campi obbligatori");
         }else{
             Cantina cantina = new Cantina();
-
-            cantina.setNome(tfNome.getText());
-            cantina.setUvaggio(tfUvaggio.getText());
-            cantina.setStato(tfStato.getText());
-            cantina.setRegione(tfRegione.getText());
-            cantina.setVia(tfVia.getText());
+            cantina.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
+            cantina.setUvaggio(Utility.replaceAllDeniedChar(tfUvaggio.getText()));
+            cantina.setStato(Utility.replaceAllDeniedChar(tfStato.getText()));
+            cantina.setRegione(Utility.replaceAllDeniedChar(tfRegione.getText()));
+            cantina.setVia(Utility.replaceAllDeniedChar(tfVia.getText()));
 
             String nomeFornitore = cmbRappresentante.getSelectionModel().getSelectedItem();
 

@@ -97,13 +97,17 @@ public class NuovoFornitore {
             //Button btnPressed = (Button)event.getSource();
             Fornitore fornitore = new Fornitore();
             try {
-                fornitore.setNome(tfNome.getText());
-                fornitore.setMail(tfMail.getText());
+                fornitore.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
+                fornitore.setMail(Utility.replaceAllDeniedChar(tfMail.getText()));
                 fornitore.setQta_max(Integer.valueOf(tfQtaMax.getText()));
                 fornitore.setQta_min((Integer.valueOf(tfQtaMin.getText())));
-                fornitore.setTelefono(tfTelefono.getText());
+                fornitore.setTelefono(Utility.replaceAllDeniedChar(tfTelefono.getText()));
+            }catch (NumberFormatException nfe){
+                Utility.createErrorWindow("I qta max e qta min devono ESSERE DEI NUMERI");
+                return;
             }catch (Exception e){
                 Utility.createErrorWindow("Errore in " + e.getMessage());
+                return;
             }
 
             try {
@@ -134,10 +138,10 @@ public class NuovoFornitore {
                     case "Enoteca":
 
                         Enoteca enoteca = new Enoteca();
-                        enoteca.setCitta(tfCitta.getText());
-                        enoteca.setStato(tfStato.getText());
-                        enoteca.setRegione(tfRegione.getText());
-                        enoteca.setVia(tfVia.getText());
+                        enoteca.setCitta(Utility.replaceAllDeniedChar(tfCitta.getText()));
+                        enoteca.setStato(Utility.replaceAllDeniedChar(tfStato.getText()));
+                        enoteca.setRegione(Utility.replaceAllDeniedChar(tfRegione.getText()));
+                        enoteca.setVia(Utility.replaceAllDeniedChar(tfVia.getText()));
                         enoteca.setID(fornitore.getID());
 
                         tfStato.setText("");

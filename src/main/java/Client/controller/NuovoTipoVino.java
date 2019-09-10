@@ -28,7 +28,7 @@ public class NuovoTipoVino {
             Utility.createErrorWindow("Inserisci tutti i campi");
         } else{
             TipoVino nuovo = new TipoVino();
-            nuovo.setTipo(tfTipoVino.getText());
+            nuovo.setTipo(Utility.replaceAllDeniedChar(tfTipoVino.getText()));
             //ordine.setidFornitore(idFornitore);
             try {
                 String[] strings={"tipo"};
