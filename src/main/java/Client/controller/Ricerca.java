@@ -18,6 +18,8 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
 import javafx.beans.Observable;
+import javafx.beans.value.ObservableSetValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -28,6 +30,8 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.util.Callback;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -75,7 +79,7 @@ public class Ricerca {
     private TableView tblViewListaVino;
 
     @FXML
-    private TableColumn<Vino,String> tblColumnNome, tblColumnTipo,  tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione,  tblColonnaFornitore;
+    private TableColumn<WrapperVino,String> tblColumnNome, tblColumnTipo,  tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione,  tblColonnaFornitore;
 
     @FXML
     private TableColumn<Vino,Integer> tblColumnAnnata, tblColumnQta;
@@ -151,22 +155,34 @@ public class Ricerca {
         tblColumnCantinaIdRappr.setCellValueFactory(new PropertyValueFactory<>("idrappresentante"));
     }
 
-//    private void loadTblRappresentante(){
-//        tblColumnRappresentanteID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-//        tblColumnRappresentanteMin.setCellValueFactory();
-//        tblColumnRappresentanteMax.setCellValueFactory();
+    private void loadTblRappresentante(){
+        tblColumnRappresentanteID.setCellValueFactory(new PropertyValueFactory<>("ID"));
+        //tblColumnRappresentanteMin.setCellValueFactory(new Cal);
+//       tblColumnRappresentanteMax.setCellValueFactory();
 //        tblColumnRappresentanteTelefono.setCellValueFactory();
 //        tblColumnRappresentanteMail.setCellValueFactory();
 //        tblColumnRappresentanteNome.setCellValueFactory();
-//    }
+    }
 
     @FXML
-    public void loadOtherTbl() throws Exception{
+    public void loadAllTbl() throws Exception{
         if(!allLoaded) {
+
+
 
             APIC a = new APIC("vino");
             String[] colonne = {};
             List<Clausola> clausolas = new ArrayList<Clausola>();
+
+            ObservableList<WrapperVino> wrapperVinos = FXCollections.observableArrayList();
+            for(Vino vino: a.select(colonne,clausolas).toObservableList(Vino.class)){
+                wrapperVinos.add(new WrapperVino(vino));
+            }
+
+            for(WrapperVino cur: wrapperVinos){
+                System.out.println(cur.vino.getNome() +" "+cur.cantina.getNome());
+            }
+
             tblViewListaVino.setItems(a.select(colonne,clausolas).toObservableList(Vino.class));
 
 

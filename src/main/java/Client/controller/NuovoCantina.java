@@ -45,7 +45,15 @@ public class NuovoCantina {
     @FXML
     private void loadCmbRappresentante(){
         try {
-            cmbRappresentante.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","", Fornitore.class));
+            System.out.println("ok");
+            String[] strings = {""};
+            ArrayList<Clausola> clausolas = new ArrayList<>();
+            ObservableList<String> nomi = FXCollections.observableArrayList();
+            for(Fornitore cur: Fornitore.getFornitoriRappresentanti(strings,clausolas)){
+                System.out.println(cur.toString());
+                nomi.add(cur.getNome());
+            }
+            cmbRappresentante.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","",Fornitore.class));
         }catch (Exception e){
             e.getMessage();
         }

@@ -2,12 +2,14 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" onMouseEntered="#loadFirst" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Inventario">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Inventario">
    <children>
       <JFXTextField fx:id="tfCantina" editable="false" labelFloat="true" layoutX="360.0" layoutY="100.0" prefWidth="200.0" promptText="Cantina" />
       <JFXTextField fx:id="tfAnnata" editable="false" labelFloat="true" layoutX="40.0" layoutY="240.0" prefWidth="200.0" promptText="Annata" />
@@ -28,5 +30,18 @@
          </ripplerFill>
       </JFXButton>
       <JFXTextField fx:id="tfQta" labelFloat="true" layoutX="40.0" layoutY="383.0" prefWidth="200.0" promptText="Quantità" />
+      <TableView fx:id="tblErrore" prefHeight="500.0" prefWidth="600.0" visible="false">
+         <columns>
+            <TableColumn fx:id="tblColumnNome" prefWidth="132.0" text="Nome" />
+            <TableColumn fx:id="tblColumnAnnata" minWidth="1.0" prefWidth="18.0" text="Annata" />
+            <TableColumn fx:id="tblColumnTipo" prefWidth="75.0" text="Tipo" />
+            <TableColumn fx:id="tblColumnCantina" prefWidth="75.0" text="Cantina" />
+            <TableColumn fx:id="tblColumnQtaIns" prefWidth="75.0" text="QtaInserita" />
+            <TableColumn fx:id="tblColumnQtaDb" prefWidth="75.0" text="Qta In Db" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
    </children>
 </Pane>

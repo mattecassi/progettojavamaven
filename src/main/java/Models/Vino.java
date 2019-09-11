@@ -86,13 +86,13 @@ public class Vino extends Model {
         return prezzoVendita;
     }
 
-    /*public Integer getIdFornitore() {
+    public Integer getIdFornitore() {
         return idFornitore;
     }
 
     public void setIdFornitore(Integer idFornitore) {
         this.idFornitore = idFornitore;
-    }*/
+    }
 
     public void setPrezzoVendita(Double prezzoVendita) {
         this.prezzoVendita = prezzoVendita;
