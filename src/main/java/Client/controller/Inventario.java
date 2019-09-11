@@ -62,6 +62,9 @@ public class Inventario{
     @FXML
     private TableColumn<Vino,Integer> tblColumnAnnata, tblColumnCantina, tblColumnQtaIns, tblColumnQtaDb;
 
+    @FXML
+    private JFXButton btnUpdate;
+
     public Inventario(){
     }
 
@@ -134,6 +137,8 @@ public class Inventario{
                             tfNome.setVisible(false);
                             btnNext.setVisible(false);
 
+
+                            btnUpdate.setVisible(true);
                             tblErrore.setVisible(true);
 
                             tblColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -144,6 +149,29 @@ public class Inventario{
                             tblColumnQtaIns.setCellValueFactory(new PropertyValueFactory<>("idFornitore"));
 
                             tblErrore.setItems(errors);
+
+                            btnUpdate.setOnAction(event1 -> {
+                                APIC update = new APIC("vino");
+                                for(Vino cur: errors){
+                                    try {
+                                        ArrayList<Clausola> clausolasUpdate = new ArrayList<>();
+                                        clausolasUpdate.add(new Clausola("nome","like",cur.getNome()));
+                                        Vino vinoToUpdate=update.select(strings,clausolasUpdate).toList(Vino.class).get(0);
+                                        //System.out.println(vinoToUpdate.toString());
+                                        vinoToUpdate.setQta(cur.getIdFornitore());
+                                        vinoToUpdate.update();
+                                        cur.setQta(cur.getIdFornitore());
+                                    } catch (Exception e) {
+                                        Utility.createErrorWindow(e.getMessage());
+                                    }
+                                }
+                                Utility.createSuccessWindow("Database aggiornato con successo");
+
+                                tblErrore.setItems(errors);
+                                tblErrore.refresh();
+                            });
+
+
                         }
                     }catch (Exception e){
                         Utility.createErrorWindow(e.getMessage());
