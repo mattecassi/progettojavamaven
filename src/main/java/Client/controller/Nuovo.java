@@ -71,8 +71,8 @@ public class Nuovo{
                 vino.setID(Integer.valueOf(tfID.getText()));
                 vino.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
                 vino.setAnno(Integer.valueOf(tfAnnata.getText()));
-                vino.setCosto(Double.valueOf(tfCosto.getText()));
-                vino.setPrezzoVendita(Double.valueOf(tfPrezzoVendita.getText()));
+                vino.setCosto(Double.valueOf(tfCosto.getText().replace(",",".")));
+                vino.setPrezzoVendita(Double.valueOf(tfPrezzoVendita.getText().replace(",",".")));
                 vino.setQta(Integer.valueOf(tfQta.getText()));
                 vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
             }catch (NumberFormatException nfe){
