@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -56,6 +57,9 @@ public class Inventario{
     //Tabella per errori
     @FXML
     private TableView tblErrore;
+
+    @FXML
+    private Label lblTesto;
 
     @FXML
     private TableColumn<Vino,String> tblColumnNome, tblColumnTipo;
@@ -140,6 +144,7 @@ public class Inventario{
 
                             btnUpdate.setVisible(true);
                             tblErrore.setVisible(true);
+                            lblTesto.setVisible(true);
 
                             tblColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
                             tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<>("anno"));

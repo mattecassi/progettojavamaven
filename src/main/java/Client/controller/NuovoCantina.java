@@ -43,18 +43,10 @@ public class NuovoCantina {
     private JFXComboBox<String> cmbRappresentante;
 
     @FXML
-    private void loadCmbRappresentante(){
+    private void loadCmbRappresentante() {
         try {
-            System.out.println("ok");
-            String[] strings = {""};
-            ArrayList<Clausola> clausolas = new ArrayList<>();
-            ObservableList<String> nomi = FXCollections.observableArrayList();
-            for(Fornitore cur: Fornitore.getFornitoriRappresentanti(strings,clausolas)){
-                System.out.println(cur.toString());
-                nomi.add(cur.getNome());
-            }
-            cmbRappresentante.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","",Fornitore.class));
-        }catch (Exception e){
+            cmbRappresentante.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", "", Fornitore.class));
+        } catch (Exception e) {
             e.getMessage();
         }
     }
@@ -62,9 +54,9 @@ public class NuovoCantina {
     @FXML
     void insertElement(Event event) {
 
-        if(tfNome.getText().isEmpty() || tfUvaggio.getText().isEmpty() || tfStato.getText().isEmpty() || tfRegione.getText().isEmpty() || tfVia.getText().isEmpty()){
+        if (tfNome.getText().isEmpty() || tfUvaggio.getText().isEmpty() || tfStato.getText().isEmpty() || tfRegione.getText().isEmpty() || tfVia.getText().isEmpty()) {
             Utility.createErrorWindow("Inserisci tutti i campi obbligatori");
-        }else{
+        } else {
             Cantina cantina = new Cantina();
             cantina.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
             cantina.setUvaggio(Utility.replaceAllDeniedChar(tfUvaggio.getText()));
@@ -74,14 +66,14 @@ public class NuovoCantina {
 
             String nomeFornitore = cmbRappresentante.getSelectionModel().getSelectedItem();
 
-            if(nomeFornitore!=""){
-                APIC a = new APIC("fornitore");
-                String[] strings = {};
-                ArrayList<Clausola> clausolas = new ArrayList<>();
-//                Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","Fornitore",Fornitore.class);
-                clausolas.add(new Clausola("nome","=",nomeFornitore));
+            if (nomeFornitore != "") {
                 try {
-                    Rappresentante rappresentante = a.select(strings,clausolas).toObservableList(Rappresentante.class).get(0);
+                    APIC a = new APIC("fornitore");
+                    String[] strings = {};
+                    ArrayList<Clausola> clausolas = new ArrayList<>();
+                    clausolas.add(new Clausola("nome", "=", nomeFornitore));
+
+                    Rappresentante rappresentante = a.select(strings, clausolas).toObservableList(Rappresentante.class).get(0);
                     System.out.println(rappresentante.toString());
                     cantina.setIdrappresentante(rappresentante.getID());
                     cantina.getIdrappresentante();
@@ -95,10 +87,10 @@ public class NuovoCantina {
                 boolean presente = false;
                 APIC a = new APIC("cantina");
                 APIReturn ret;
-                String[] strings={"nome"};
+                String[] strings = {"nome"};
                 ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
                 clausolas.add(new Clausola("nome", "LIKE", cantina.getNome()));
-                if(a.select(strings,clausolas).toList(Cantina.class).isEmpty()) {
+                if (a.select(strings, clausolas).toList(Cantina.class).isEmpty()) {
                     cantina.insert();
                     tfNome.setText("");
                     tfUvaggio.setText("");
@@ -107,12 +99,11 @@ public class NuovoCantina {
                     tfVia.setText("");
                     cmbRappresentante.getSelectionModel().selectFirst();
                     Utility.createSuccessWindow("Inserimento avvenuto con successo");
-                }
-                else{
+                } else {
                     Utility.createErrorWindow("Presente");
                 }
-            }catch (Exception e){
-                Utility.createErrorWindow(cantina.getIdrappresentante()+" "+e.getMessage());
+            } catch (Exception e) {
+                Utility.createErrorWindow(cantina.getIdrappresentante() + " " + e.getMessage());
             }
 
         }

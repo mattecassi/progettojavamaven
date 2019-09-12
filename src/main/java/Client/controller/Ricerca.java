@@ -4,10 +4,7 @@ import API.APIC;
 //import Client.Vino;
 
 import ClientUtils.Clausola;
-import Models.Cantina;
-import Models.Fornitore;
-import Models.Rappresentante;
-import Models.Vino;
+import Models.*;
 import Utils.APIReturn;
 import Utils.Utility;
 import com.jfoenix.controls.JFXComboBox;
@@ -101,6 +98,12 @@ public class Ricerca {
     private TableColumn<Rappresentante, Integer> tblColumnRappresentanteID;
 
     @FXML
+    private TableView tblViewListaTipo;
+
+    @FXML
+    private  TableColumn<TipoVino,String> tblColumnTipoNome;
+
+    @FXML
     private JFXTextField tfCantinaId;
 
     @FXML
@@ -149,11 +152,15 @@ public class Ricerca {
 
     private void loadTblRappresentante() {
         tblColumnRappresentanteID.setCellValueFactory(new PropertyValueFactory<>("ID"));
-        //tblColumnRappresentanteMin.setCellValueFactory(new Cal);
-//       tblColumnRappresentanteMax.setCellValueFactory();
-//        tblColumnRappresentanteTelefono.setCellValueFactory();
-//        tblColumnRappresentanteMail.setCellValueFactory();
-//        tblColumnRappresentanteNome.setCellValueFactory();
+        tblColumnRappresentanteMin.setCellValueFactory(new PropertyValueFactory<>("qta_min"));
+        tblColumnRappresentanteMax.setCellValueFactory(new PropertyValueFactory<>("qta_max"));
+        tblColumnRappresentanteTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
+        tblColumnRappresentanteMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
+        tblColumnRappresentanteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
+    }
+
+    private void loadTblTipo(){
+        tblColumnTipoNome.setCellValueFactory(new PropertyValueFactory<>("tipo"));
     }
 
     @FXML
@@ -166,7 +173,7 @@ public class Ricerca {
             List<Clausola> clausolas = new ArrayList<Clausola>();
 
             ObservableList<WrapperVino> wrapperVinos = FXCollections.observableArrayList();
-            for (Vino vino : a.select(colonne, clausolas).toObservableList(Vino.class)) {
+            for (Vino vino : a.select().toObservableList(Vino.class)) {
                 wrapperVinos.add(new WrapperVino(vino));
             }
 
@@ -179,15 +186,18 @@ public class Ricerca {
 
 
             APIC b = new APIC("cantina");
-            tblViewListaCantina.setItems(b.select(colonne, clausolas).toObservableList(Cantina.class));
+            tblViewListaCantina.setItems(b.select().toObservableList(Cantina.class));
 
-            APIC c = new APIC("rappresentante");
-            tblViewListaRappresentate.setItems(c.select(colonne, clausolas).toObservableList(Rappresentante.class));
+            tblViewListaRappresentate.setItems(Fornitore.getFornitoriRappresentanti(colonne,clausolas));
+
+            APIC c = new APIC("tipo_vino");
+            tblViewListaTipo.setItems(c.select().toObservableList(TipoVino.class));
 
 
             loadTblCantina();
+            loadTblTipo();
+            loadTblRappresentante();
 
-            //loadTblRappresentante();
 
             allLoaded = true;
         }

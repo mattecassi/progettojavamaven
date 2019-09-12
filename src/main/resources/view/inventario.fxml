@@ -2,6 +2,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
@@ -30,7 +31,7 @@
          </ripplerFill>
       </JFXButton>
       <JFXTextField fx:id="tfQta" labelFloat="true" layoutX="40.0" layoutY="383.0" prefWidth="200.0" promptText="Quantità" />
-      <TableView fx:id="tblErrore" prefHeight="471.0" prefWidth="600.0" visible="false">
+      <TableView fx:id="tblErrore" layoutY="77.0" prefHeight="394.0" prefWidth="600.0" visible="false">
          <columns>
             <TableColumn fx:id="tblColumnNome" prefWidth="132.0" text="Nome" />
             <TableColumn fx:id="tblColumnAnnata" minWidth="1.0" prefWidth="18.0" text="Annata" />
@@ -44,5 +45,10 @@
          </columnResizePolicy>
       </TableView>
       <JFXButton fx:id="btnUpdate" layoutY="474.0" prefHeight="25.0" prefWidth="600.0" text="Aggiorna quantita in magazzino" visible="false" />
+      <Label fx:id="lblTesto" layoutX="200.0" layoutY="36.0" text="Vini Sbagliati" visible="false">
+         <font>
+            <Font size="35.0" />
+         </font>
+      </Label>
    </children>
 </Pane>
