@@ -16,4 +16,7 @@ public class Logo {
     @FXML
     ImageView logoImg;
 
+    public  Logo(){
+    }
+
 }

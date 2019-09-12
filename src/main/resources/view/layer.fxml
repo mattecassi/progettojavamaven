@@ -11,11 +11,11 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.66" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Layer">
+<BorderPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Layer">
    <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane maxHeight="1.7976931348623157E308" minWidth="-Infinity" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-             <JFXButton fx:id="btnRicerca" layoutY="-13.0" onAction="#changeScene" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Ricerca">
+             <JFXButton fx:id="btnRicerca" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeScene" prefHeight="155.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Ricerca" AnchorPane.rightAnchor="0.0">
                  <font>
                      <Font name="Calibri" size="25.0" />
                  </font>
@@ -29,7 +29,7 @@
                      </RadialGradient>
                  </ripplerFill>
              </JFXButton>
-            <JFXButton fx:id="btnAggiorna" layoutY="147.0" onAction="#changeScene" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Aggiorna">
+            <JFXButton fx:id="btnAggiorna" layoutY="155.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeScene" prefHeight="155.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Aggiorna" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="Calibri" size="25.0" />
                </font>
@@ -43,7 +43,7 @@
                   </RadialGradient>
                </ripplerFill>
             </JFXButton>
-            <JFXButton fx:id="btnNuovo" layoutY="307.0" onAction="#changeScene" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Nuovo">
+            <JFXButton fx:id="btnNuovo" layoutY="310.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeScene" prefHeight="155.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Nuovo" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="Calibri" size="25.0" />
                </font>
@@ -57,7 +57,7 @@
                   </RadialGradient>
                </ripplerFill>
             </JFXButton>
-            <JFXButton fx:id="btnInventario" layoutY="467.0" onAction="#changeScene" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Inventario">
+            <JFXButton fx:id="btnInventario" layoutY="465.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeScene" prefHeight="155.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="Inventario" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="Calibri" size="25.0" />
                </font>
@@ -71,7 +71,7 @@
                   </RadialGradient>
                </ripplerFill>
             </JFXButton>
-            <JFXButton fx:id="btnCheckList" layoutY="627.0" onAction="#changeScene" prefHeight="160.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="CheckList">
+            <JFXButton fx:id="btnCheckList" layoutY="619.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onAction="#changeScene" prefHeight="155.0" prefWidth="200.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff;" text="CheckList" translateY="1.0" AnchorPane.rightAnchor="0.0">
                <font>
                   <Font name="Calibri" size="25.0" />
                </font>

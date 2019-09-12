@@ -49,7 +49,7 @@ public class Nuovo{
             ArrayList<Clausola> clausolas = new ArrayList<>();
             cmbTipo.setItems(Utility.loadDataForCmb("tipo_vino","tipo","",TipoVino.class));
             cmbCantina.setItems(Utility.loadDataForCmb("cantina","nome","",Cantina.class));
-            cmbFornitore.setItems(Utility.loadDataForCmb("fornitore","nome","",Cantina.class));
+            cmbFornitore.setItems(Utility.loadDataForCmb("fornitore","nome","",Fornitore.class));
         }catch (Exception e){
             e.getMessage();
         }
@@ -92,18 +92,18 @@ public class Nuovo{
                 Utility.createErrorWindow(e.getMessage());
                 e.printStackTrace();
             }
-//
-//            APIC aFornitore = new APIC("fornitore");
-//            String[] stringsFornitore = {};
-//            ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
-//            clausolasCantina.add(new Clausola("nome", "=", cmbFornitore.getSelectionModel().getSelectedItem()));
-//            try {
-//                Fornitore fornitore = aFornitore.select(stringsFornitore, clausolasFornitore).toObservableList(Fornitore.class).get(0);
-//                vino.setIdFornitore(fornitore.getID());
-//            } catch (Exception e) {
-//                Utility.createErrorWindow(e.getMessage());
-//                e.printStackTrace();
-//            }
+
+            APIC aFornitore = new APIC("fornitore");
+            String[] stringsFornitore = {};
+            ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
+            clausolasFornitore.add(new Clausola("nome", "=", cmbFornitore.getSelectionModel().getSelectedItem()));
+            try {
+                Fornitore fornitore = aFornitore.select(stringsFornitore, clausolasFornitore).toObservableList(Fornitore.class).get(0);
+                vino.setIdFornitore(fornitore.getID());
+            } catch (Exception e) {
+                Utility.createErrorWindow(e.getMessage());
+                e.printStackTrace();
+            }
 
 
             try {
@@ -120,9 +120,9 @@ public class Nuovo{
                     tfAnnata.setText("");
                     tfNome.setText("");
                     tfID.setText("");
-                    cmbCantina.getSelectionModel().selectFirst();
-                    cmbTipo.getSelectionModel().selectFirst();
-                    cmbFornitore.getSelectionModel().selectFirst();
+                    cmbCantina.getSelectionModel().clearSelection();
+                    cmbTipo.getSelectionModel().clearSelection();
+                    cmbFornitore.getSelectionModel().clearSelection();
                     System.out.println(vino.toString());
                 } else {
                     Utility.createErrorWindow("Presente");

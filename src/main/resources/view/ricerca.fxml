@@ -63,7 +63,7 @@
                            </cursor>
                         </JFXTextField>
                         <JFXComboBox fx:id="cmbVinoNome" editable="true" focusColor="#405aa8" labelFloat="true" layoutX="779.0" layoutY="76.0" onKeyPressed="#searchCmb" onKeyReleased="#searchCmb" prefHeight="32.0" prefWidth="150.0" promptText="Nome" />
-                        <TableView fx:id="tblViewListaVino" editable="true" fixedCellSize="0.0" layoutY="131.0" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
+                        <TableView fx:id="tblViewListaVino" editable="true" fixedCellSize="0.0" layoutY="131.0" onContextMenuRequested="#openContext" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
                           <columns>
                             <TableColumn fx:id="tblColumnNome" editable="false" prefWidth="111.1" text="Nome" />
                             <TableColumn fx:id="tblColumnTipo" editable="false" prefWidth="111.1" text="Tipo" />

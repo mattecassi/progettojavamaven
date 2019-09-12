@@ -82,7 +82,7 @@ public class Utility {
         JSONObject jsonObject;
 
         ObservableList<String> nomi = FXCollections.observableArrayList();
-        nomi.add("");
+        //HO SCOPERTO CHE NON SERVE PIU IL CAMPO VUOTO, BASTA FARE nomeComboBox.getSelectionModel().clearSelection();
 
         APIC ap = new APIC(table);
         String[] arrClausole = {field};

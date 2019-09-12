@@ -1,11 +1,8 @@
 package Client.controller;
 
-import API.API;
 import API.APIC;
-import Client.ListaVini;
 //import Client.Vino;
 
-import Client.Main2;
 import ClientUtils.Clausola;
 import Models.Cantina;
 import Models.Fornitore;
@@ -13,13 +10,8 @@ import Models.Rappresentante;
 import Models.Vino;
 import Utils.APIReturn;
 import Utils.Utility;
-import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
-import com.jfoenix.controls.JFXListView;
 import com.jfoenix.controls.JFXTextField;
-import javafx.beans.Observable;
-import javafx.beans.value.ObservableSetValue;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -29,15 +21,18 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-import javafx.util.Callback;
 
+import javax.sound.sampled.Line;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Ricerca {
+
+
     private String[] values = new String[9];
-    final private String[] campi = {"nome","anno","idCantina","tipo","idFornitore","uvaggio","stato","regione","qta"};
+    final private String[] campi = {"nome", "anno", "idCantina", "tipo", "idFornitore", "uvaggio", "stato", "regione", "qta"};
     private boolean tblLoaded = false, allLoaded = false;
     @FXML
     private AnchorPane apRicerca;
@@ -79,10 +74,10 @@ public class Ricerca {
     private TableView tblViewListaVino;
 
     @FXML
-    private TableColumn<WrapperVino,String> tblColumnNome, tblColumnTipo,  tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione,  tblColonnaFornitore;
+    private TableColumn<WrapperVino, String> tblColumnNome, tblColumnTipo, tblColumnCantina, tblColumnUvaggio, tblColumnStato, tblColumnRegione, tblColonnaFornitore;
 
     @FXML
-    private TableColumn<Vino,Integer> tblColumnAnnata, tblColumnQta;
+    private TableColumn<WrapperVino, Integer> tblColumnAnnata, tblColumnQta;
 
     @FXML
     private Tab tabCantina;
@@ -91,19 +86,19 @@ public class Ricerca {
     private TableView tblViewListaCantina;
 
     @FXML
-    private  TableColumn<Cantina,String> tblColumnCantinaId, tblColumnCantinaNome, tblColumnCantinaStato, tblColumnCantinaRegione, tblColumnCantinaVia, tblColumnCantinaUvaggio, tblColumnCantinaIdRappr;
+    private TableColumn<Cantina, String> tblColumnCantinaId, tblColumnCantinaNome, tblColumnCantinaStato, tblColumnCantinaRegione, tblColumnCantinaVia, tblColumnCantinaUvaggio, tblColumnCantinaIdRappr;
 
     @FXML
-    private  TableView tblViewListaRappresentate;
+    private TableView tblViewListaRappresentate;
 
     @FXML
-    private  TableColumn<Fornitore,String> tblColumnRappresentanteMail, tblColumnRappresentanteNome;
+    private TableColumn<Fornitore, String> tblColumnRappresentanteMail, tblColumnRappresentanteNome;
 
     @FXML
-    private  TableColumn<Fornitore,Integer> tblColumnRappresentanteMin, tblColumnRappresentanteMax, tblColumnRappresentanteTelefono;
+    private TableColumn<Fornitore, Integer> tblColumnRappresentanteMin, tblColumnRappresentanteMax, tblColumnRappresentanteTelefono;
 
     @FXML
-    private TableColumn<Rappresentante,Integer> tblColumnRappresentanteID;
+    private TableColumn<Rappresentante, Integer> tblColumnRappresentanteID;
 
     @FXML
     private JFXTextField tfCantinaId;
@@ -126,26 +121,23 @@ public class Ricerca {
     @FXML
     private JFXTextField tfCantinaRegione;
 
-    public Ricerca(){
-
+    public Ricerca() {
     }
 
 
-    private void loadTblVino(){
-        tblColumnNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-        tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<>("anno"));
+    private void loadTblVino() {
+        tblColumnNome.setCellValueFactory(new PropertyValueFactory<>("vinoNome"));
+        tblColumnAnnata.setCellValueFactory(new PropertyValueFactory<>("annata"));
         tblColumnTipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
         tblColumnQta.setCellValueFactory(new PropertyValueFactory<>("qta"));
-        tblColumnRegione.setCellValueFactory(new PropertyValueFactory<>("costo"));
-        tblColumnStato.setCellValueFactory(new PropertyValueFactory<>("prezzoVendita"));
-
-
-        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<>("idCantina"));
-        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<>("idCantina"));
-        tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<>("idFornitore"));
+        tblColumnRegione.setCellValueFactory(new PropertyValueFactory<>("regione"));
+        tblColumnStato.setCellValueFactory(new PropertyValueFactory<>("stato"));
+        tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<>("uvaggio"));
+        tblColumnCantina.setCellValueFactory(new PropertyValueFactory<>("cantinaNome"));
+        tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<>("fornitoreNome"));
     }
 
-    private void loadTblCantina(){
+    private void loadTblCantina() {
         tblColumnCantinaId.setCellValueFactory(new PropertyValueFactory<>("ID"));
         tblColumnCantinaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tblColumnCantinaRegione.setCellValueFactory(new PropertyValueFactory<>("regione"));
@@ -155,7 +147,7 @@ public class Ricerca {
         tblColumnCantinaIdRappr.setCellValueFactory(new PropertyValueFactory<>("idrappresentante"));
     }
 
-    private void loadTblRappresentante(){
+    private void loadTblRappresentante() {
         tblColumnRappresentanteID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         //tblColumnRappresentanteMin.setCellValueFactory(new Cal);
 //       tblColumnRappresentanteMax.setCellValueFactory();
@@ -165,9 +157,8 @@ public class Ricerca {
     }
 
     @FXML
-    public void loadAllTbl() throws Exception{
-        if(!allLoaded) {
-
+    public void loadAllTbl() throws Exception {
+        if (!allLoaded) {
 
 
             APIC a = new APIC("vino");
@@ -175,31 +166,30 @@ public class Ricerca {
             List<Clausola> clausolas = new ArrayList<Clausola>();
 
             ObservableList<WrapperVino> wrapperVinos = FXCollections.observableArrayList();
-            for(Vino vino: a.select(colonne,clausolas).toObservableList(Vino.class)){
+            for (Vino vino : a.select(colonne, clausolas).toObservableList(Vino.class)) {
                 wrapperVinos.add(new WrapperVino(vino));
             }
 
-            for(WrapperVino cur: wrapperVinos){
-                System.out.println(cur.vino.getNome() +" "+cur.cantina.getNome());
+            for (WrapperVino cur : wrapperVinos) {
+                System.out.println(cur.vino.getNome() + " " + cur.cantina.getNome());
             }
 
-            tblViewListaVino.setItems(a.select(colonne,clausolas).toObservableList(Vino.class));
+            loadTblVino();
+            tblViewListaVino.setItems(wrapperVinos);
 
 
             APIC b = new APIC("cantina");
-            tblViewListaCantina.setItems(b.select(colonne,clausolas).toObservableList(Cantina.class));
+            tblViewListaCantina.setItems(b.select(colonne, clausolas).toObservableList(Cantina.class));
 
             APIC c = new APIC("rappresentante");
-            tblViewListaRappresentate.setItems(c.select(colonne,clausolas).toObservableList(Rappresentante.class));
+            tblViewListaRappresentate.setItems(c.select(colonne, clausolas).toObservableList(Rappresentante.class));
 
-
-            loadTblVino();
 
             loadTblCantina();
 
             //loadTblRappresentante();
 
-            allLoaded=true;
+            allLoaded = true;
         }
     }
 
@@ -207,48 +197,70 @@ public class Ricerca {
     @FXML
     void searchElement(Event event) {
         JFXTextField tfAttivo = (JFXTextField) event.getSource();
-        switch (tfAttivo.getId()){
+        switch (tfAttivo.getId()) {
             case "tfNome":
-                values[0]=tfAttivo.getText();
+                values[0] = tfAttivo.getText();
                 break;
             case "tfAnnata":
-                values[1]=tfAttivo.getText();
+                values[1] = tfAttivo.getText();
                 break;
             case "tfCantina":
-                values[2]=tfAttivo.getText();
+                values[2] = tfAttivo.getText();
                 break;
             case "tfTipo":
-                values[3]=tfAttivo.getText();
+                values[3] = tfAttivo.getText();
                 break;
             case "tfFornitore":
-                values[4]=tfAttivo.getText();
+                values[4] = tfAttivo.getText();
                 break;
             case "tfUvaggio":
-                values[5]=tfAttivo.getText();
+                values[5] = tfAttivo.getText();
                 break;
             case "tfStato":
-                values[6]=tfAttivo.getText();
+                values[6] = tfAttivo.getText();
                 break;
             case "tfRegione":
-                values[7]=tfAttivo.getText();
+                values[7] = tfAttivo.getText();
                 break;
             case "tfQta":
-                values[8]=tfAttivo.getText();
+                values[8] = tfAttivo.getText();
                 break;
         }
         try {
-            loadTblVino();
-            APIC a = new APIC("vino");
+            APIC aVino = new APIC("vino");
+            APIC aCantina = new APIC("cantina");
+            APIC aFornitore = new APIC("fornitore");
             APIReturn ret;
             String[] strings = {};
             ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
-            for (int i=0;i<9;i++) {
-                if (values[i] != null){
-                    clausolas.add(new Clausola(campi[i], "like", "%"+values[i]+"%"));
-                System.out.println(campi[i] + " " + values[i]);}
+            for (int i = 0; i < 9; i++) {
+                if (values[i] != null) {
+                    switch (i) {
+                        case 2:
+                            clausolas.add(new Clausola("nome", "like", "%" + values[i] + "%"));
+                            ret = aCantina.select(strings, clausolas);
+                            clausolas.remove(clausolas.size() - 1);
+                            break;
+                        case 4:
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            break;
+                        default:
+                            clausolas.add(new Clausola(campi[i], "like", "%" + values[i] + "%"));
+                            break;
+                    }
+                    System.out.println(campi[i] + " " + values[i]);
+                }
             }
-            ret = a.select(strings, clausolas);
-            tblViewListaVino.setItems(ret.toObservableList(Vino.class));
+            ret = aVino.select(strings, clausolas);
+            ObservableList<WrapperVino> wrapperVinos = FXCollections.observableArrayList();
+            for (Vino cur : ret.toList(Vino.class)) {
+                System.out.println(cur.toString());
+                wrapperVinos.add(new WrapperVino(cur));
+            }
+            tblViewListaVino.setItems(wrapperVinos);
         } catch (Exception e) {
 
         }
@@ -256,57 +268,46 @@ public class Ricerca {
 
 
     @FXML
-    private void searchCmb(){
-        tblLoaded=true;
+    private void searchCmb() {
+        tblLoaded = true;
         APIC a = new APIC("vino");
         APIReturn ret;
         String[] strings = {};
         ArrayList<Clausola> clausolas = new ArrayList<>();
         try {
             loadTblVino();
-            clausolas.add(new Clausola(campi[0], "like", "%"+cmbVinoNome.getSelectionModel().getSelectedItem()+"%"));
+            clausolas.add(new Clausola(campi[0], "like", "%" + cmbVinoNome.getSelectionModel().getSelectedItem() + "%"));
             ObservableList<String> nomi = FXCollections.observableArrayList();
-            ObservableList<Vino> vinos = a.select(strings,clausolas).toObservableList(Vino.class);
+            ObservableList<Vino> vinos = a.select(strings, clausolas).toObservableList(Vino.class);
 
-            for(Vino cur: vinos){
+            for (Vino cur : vinos) {
                 nomi.add(cur.getNome());
             }
             cmbVinoNome.setItems(nomi);
             cmbVinoNome.hide();
             cmbVinoNome.show();
 
-            tblViewListaVino.setItems(vinos);
+            //tblViewListaVino.setItems(vinos);
         } catch (Exception e) {
 
         }
 
     }
 
-
+    //Questi due metodi servono per passare il selected item allo stage che mostra tutte le info relative al vino
+    //Il primo crea il nuovo stage, il secondo si occupa di fornire il vino selezionato
     @FXML
-    private void openContext(Event event){
-        Stage dialog = new Stage();
-        AnchorPane popUpPane;
-        Vino cur = (Vino)tblViewListaVino.getSelectionModel().getSelectedItem();
-        MenuItem option = (MenuItem)event.getTarget();
-        Main2 main2 = new Main2();
+    private void openContext(Event event) {
         try {
-            switch (option.getId()) {
-                case "miInfo":
-                    break;
-                case "miAggiungi":
-                    popUpPane = FXMLLoader.load(getClass().getResource("/view/aggiungiVino.fxml"));
-                    dialog.setScene(new Scene(popUpPane));
-                    dialog.showAndWait();
-                    //System.out.println(tfAggiungiQuantitaVino.getText());
-                    break;
-                case "miRimuovi":
-                    break;
-                case "miElimina":
-                    break;
-            }
+            InfoVino infoVino = new InfoVino(this);
+            infoVino.showStage();
         }catch (Exception e){
-           e.printStackTrace();
+            Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
+    }
+
+    public WrapperVino getWrapperVino() {
+        WrapperVino cur = (WrapperVino) tblViewListaVino.getSelectionModel().getSelectedItem();
+        return cur;
     }
 }
