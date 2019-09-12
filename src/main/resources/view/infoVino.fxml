@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
+
+<BorderPane prefHeight="514.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <Pane prefHeight="492.0" prefWidth="798.0" BorderPane.alignment="CENTER">
+         <children>
+            <JFXTextField fx:id="tfVinoNome" labelFloat="true" layoutX="29.0" layoutY="37.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Nome Vino" />
+            <JFXTextField fx:id="tfVinoID" editable="false" labelFloat="true" layoutX="188.0" layoutY="37.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="ID Vino" />
+            <JFXComboBox fx:id="cmbTipo" labelFloat="true" layoutX="28.0" layoutY="84.0" onAction="#valueModified" prefHeight="25.0" prefWidth="136.0" promptText="Tipo" />
+            <JFXTextField fx:id="tfVinoAnnata" labelFloat="true" layoutX="188.0" layoutY="84.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Annata" />
+            <JFXTextField fx:id="tfVinoCosto" labelFloat="true" layoutX="29.0" layoutY="134.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Costo" />
+            <JFXTextField fx:id="tfVinoVendita" labelFloat="true" layoutX="188.0" layoutY="135.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Prezzo Vendita" />
+            <JFXTextField fx:id="tfVinoQta" labelFloat="true" layoutX="29.0" layoutY="188.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Quantità" />
+            <JFXTextField fx:id="tfCantinaNome" editable="false" labelFloat="true" layoutX="29.0" layoutY="274.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Nome Cantina" />
+            <JFXTextField fx:id="tfCantinaID" editable="false" labelFloat="true" layoutX="188.0" layoutY="274.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="ID Cantina" />
+            <JFXTextField fx:id="tfCantinaStato" editable="false" labelFloat="true" layoutX="29.0" layoutY="328.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Stato" />
+            <JFXTextField fx:id="tfCantinaRegione" editable="false" labelFloat="true" layoutX="188.0" layoutY="328.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Regione" />
+            <JFXTextField fx:id="tfCantinaVia" editable="false" labelFloat="true" layoutX="29.0" layoutY="388.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Via" />
+            <JFXTextField fx:id="tfCantinaUvaggio" editable="false" labelFloat="true" layoutX="188.0" layoutY="388.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Uvaggio" />
+            <JFXTextField fx:id="tfCantinaIDRappre" editable="false" labelFloat="true" layoutX="29.0" layoutY="444.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="ID Rappresentante" />
+            <JFXTextField fx:id="tfFornitoreNome" editable="false" labelFloat="true" layoutX="426.0" layoutY="37.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Nome Fornitore" />
+            <JFXTextField fx:id="tfFornitoreID" editable="false" labelFloat="true" layoutX="594.0" layoutY="37.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="ID Fornitore" />
+            <JFXTextField fx:id="tfFornitoreTelefono" editable="false" labelFloat="true" layoutX="426.0" layoutY="84.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Telefono" />
+            <JFXTextField fx:id="tfFornitoreMail" editable="false" labelFloat="true" layoutX="594.0" layoutY="84.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Mail" />
+            <JFXTextField fx:id="tfFornitoreQtaMin" editable="false" labelFloat="true" layoutX="426.0" layoutY="135.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Qta Min" />
+            <JFXTextField fx:id="tfFornitoreQtaMax" editable="false" labelFloat="true" layoutX="594.0" layoutY="135.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Qta Max" />
+            <JFXButton fx:id="btnTogli1" layoutX="207.0" layoutY="187.0" onAction="#btnPress" prefHeight="28.0" prefWidth="31.0" text="-1" />
+            <JFXButton fx:id="btnAggiungi1" layoutX="265.0" layoutY="187.0" onAction="#btnPress" prefHeight="28.0" prefWidth="31.0" text="+1" />
+            <JFXButton fx:id="btnElimina" layoutX="434.0" layoutY="444.0" onAction="#btnPress" prefHeight="25.0" prefWidth="135.0" text="Elimina Vino" />
+            <JFXButton fx:id="btnSalva" layoutX="594.0" layoutY="444.0" onAction="#btnPress" prefHeight="25.0" prefWidth="135.0" text="Salva Modifiche" />
+         </children>
+      </Pane>
+   </left>
+</BorderPane>
