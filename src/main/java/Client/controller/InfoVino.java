@@ -285,46 +285,6 @@ public class InfoVino {
                 case "tfVinoQta":
                     vino.setQta(Integer.valueOf(tfVinoQta.getText()));
                     break;
-//            case "tfCantinaNome":
-//                cantina.setNome(tfCantinaNome.getText());
-//                break;
-//            case "tfCantinaID":
-//                cantina.setID(Integer.valueOf(tfCantinaID.getText()));
-//                break;
-//            case "tfCantinaStato":
-//                cantina.setStato(tfCantinaStato.getText());
-//                break;
-//            case "tfCantinaRegione":
-//                cantina.setRegione(tfCantinaRegione.getText());
-//                break;
-//            case "tfCantinaVia":
-//                cantina.setVia(tfCantinaVia.getText());
-//                break;
-//            case "tfCantinaUvaggio":
-//                cantina.setUvaggio(tfCantinaUvaggio.getText());
-//                break;
-//            case "tfCantinaIDRappre":
-//                cantina.setIdrappresentante(Integer.valueOf(tfCantinaIDRappre.getText()));
-//                modified=true;
-//                break;
-//            case "tfFornitoreNome":
-//                fornitore.setNome(tfFornitoreNome.getText());
-//                break;
-//            case "tfFornitoreID":
-//                fornitore.setID(Integer.valueOf(tfFornitoreID.getText()));
-//                break;
-//            case "tfFornitoreTelefono":
-//                fornitore.setTelefono(tfFornitoreTelefono.getText());
-//                break;
-//            case "tfFornitoreMail":
-//                fornitore.setMail(tfFornitoreMail.getText());
-//                break;
-//            case "tfFornitoreQtaMin":
-//                fornitore.setQta_min(Integer.valueOf(tfFornitoreQtaMin.getText()));
-//                break;
-//            case "tfFornitoreQtaMax":
-//                fornitore.setQta_max(Integer.valueOf(tfFornitoreQtaMax.getText()));
-//                break;
 
             }
         } catch (Exception e1) {

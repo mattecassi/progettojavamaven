@@ -86,6 +86,9 @@ public class Ricerca {
     private TableColumn<Cantina, String> tblColumnCantinaId, tblColumnCantinaNome, tblColumnCantinaStato, tblColumnCantinaRegione, tblColumnCantinaVia, tblColumnCantinaUvaggio, tblColumnCantinaIdRappr;
 
     @FXML
+    private JFXComboBox<String > cmbCantinaNome, cmbCantinaStato, cmbCantinaRegione, cmbCantinaUvaggio, cmbCantinaVia;
+
+    @FXML
     private TableView tblViewListaRappresentate;
 
     @FXML
@@ -96,6 +99,12 @@ public class Ricerca {
 
     @FXML
     private TableColumn<Rappresentante, Integer> tblColumnRappresentanteID;
+
+    @FXML
+    private JFXComboBox<String> cmbRappresentanteNome,cmbRappresentanteMail, cmbRappresentanteTelefono;
+
+    @FXML
+    private JFXComboBox<Integer>  cmbRappresentanteQtaMin, cmbRappresentanteQtaMax;
 
     @FXML
     private TableView tblViewListaTipo;
@@ -123,6 +132,8 @@ public class Ricerca {
 
     @FXML
     private JFXTextField tfCantinaRegione;
+
+
 
     public Ricerca() {
     }
@@ -167,7 +178,7 @@ public class Ricerca {
     public void loadAllTbl() throws Exception {
         if (!allLoaded) {
 
-
+            //VINO
             APIC a = new APIC("vino");
             String[] colonne = {};
             List<Clausola> clausolas = new ArrayList<Clausola>();
@@ -176,27 +187,40 @@ public class Ricerca {
             for (Vino vino : a.select().toObservableList(Vino.class)) {
                 wrapperVinos.add(new WrapperVino(vino));
             }
-
-            for (WrapperVino cur : wrapperVinos) {
-                System.out.println(cur.vino.getNome() + " " + cur.cantina.getNome());
-            }
-
-            loadTblVino();
             tblViewListaVino.setItems(wrapperVinos);
+            loadTblVino();
 
-
+            //CANTINA
             APIC b = new APIC("cantina");
             tblViewListaCantina.setItems(b.select().toObservableList(Cantina.class));
+            loadTblCantina();
+            cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina","nome","",Cantina.class));
+            cmbCantinaRegione.setItems(Utility.loadDataForCmb("cantina","regione","",Cantina.class));
+            cmbCantinaStato.setItems(Utility.loadDataForCmb("cantina","stato","",Cantina.class));
+            cmbCantinaUvaggio.setItems(Utility.loadDataForCmb("cantina","uvaggio","",Cantina.class));
+            cmbCantinaVia.setItems(Utility.loadDataForCmb("cantina","via","",Cantina.class));
 
+
+            //RAPPRESENTANTE
             tblViewListaRappresentate.setItems(Fornitore.getFornitoriRappresentanti(colonne,clausolas));
+            loadTblRappresentante();
+            cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","",Fornitore.class));
+            cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"mail","",Fornitore.class));
+            cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"telefono","",Fornitore.class));
+//            cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"qta_max","",Fornitore.class));
+//            cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"qta_min","",Fornitore.class));
 
+
+            //TIPO
             APIC c = new APIC("tipo_vino");
             tblViewListaTipo.setItems(c.select().toObservableList(TipoVino.class));
-
-
-            loadTblCantina();
             loadTblTipo();
-            loadTblRappresentante();
+
+
+
+
+
+
 
 
             allLoaded = true;
@@ -304,10 +328,18 @@ public class Ricerca {
 
     }
 
+    @FXML
+    private void cmbSearchRappresentante(){
+
+    }
+
+
+
+
     //Questi due metodi servono per passare il selected item allo stage che mostra tutte le info relative al vino
     //Il primo crea il nuovo stage, il secondo si occupa di fornire il vino selezionato
     @FXML
-    private void openContext(Event event) {
+    private void openContextVino(Event event) {
         try {
             InfoVino infoVino = new InfoVino(this);
             infoVino.showStage();
@@ -319,5 +351,21 @@ public class Ricerca {
     public WrapperVino getWrapperVino() {
         WrapperVino cur = (WrapperVino) tblViewListaVino.getSelectionModel().getSelectedItem();
         return cur;
+    }
+
+    @FXML
+    private void openContextCantina(Event event) {
+        try {
+            InfoCantina infoCantina = new InfoCantina(this);
+            infoCantina.showStage();
+        }catch (Exception e){
+            Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
+        }
+    }
+
+    public WrapperCantina getWrapperCantina() {
+       Cantina cantina = (Cantina)tblViewListaCantina.getSelectionModel().getSelectedItem();
+       WrapperCantina cur = new WrapperCantina(cantina);
+       return cur;
     }
 }

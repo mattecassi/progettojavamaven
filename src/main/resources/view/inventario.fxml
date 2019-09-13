@@ -45,7 +45,7 @@
          </columnResizePolicy>
       </TableView>
       <JFXButton fx:id="btnUpdate" layoutY="474.0" prefHeight="25.0" prefWidth="600.0" text="Aggiorna quantita in magazzino" visible="false" />
-      <Label fx:id="lblTesto" layoutX="200.0" layoutY="36.0" text="Vini Sbagliati" visible="false">
+      <Label fx:id="lblTesto" layoutX="200.0" layoutY="14.0" text="Vini Sbagliati" visible="false">
          <font>
             <Font size="35.0" />
          </font>

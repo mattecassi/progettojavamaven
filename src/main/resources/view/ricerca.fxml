@@ -63,7 +63,7 @@
                            </cursor>
                         </JFXTextField>
                         <JFXComboBox fx:id="cmbVinoNome" editable="true" focusColor="#405aa8" labelFloat="true" layoutX="779.0" layoutY="76.0" onKeyPressed="#searchCmb" onKeyReleased="#searchCmb" prefHeight="32.0" prefWidth="150.0" promptText="Nome" />
-                        <TableView fx:id="tblViewListaVino" editable="true" fixedCellSize="0.0" layoutY="131.0" onContextMenuRequested="#openContext" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
+                        <TableView fx:id="tblViewListaVino" editable="true" fixedCellSize="0.0" layoutX="-7.0" layoutY="131.0" onContextMenuRequested="#openContextVino" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
                           <columns>
                             <TableColumn fx:id="tblColumnNome" editable="false" prefWidth="111.1" text="Nome" />
                             <TableColumn fx:id="tblColumnTipo" editable="false" prefWidth="111.1" text="Tipo" />
@@ -87,13 +87,13 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tblViewListaCantina" editable="true" fixedCellSize="0.0" layoutY="131.0" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
+                        <TableView fx:id="tblViewListaCantina" editable="true" fixedCellSize="0.0" layoutY="131.0" onContextMenuRequested="#openContextCantina" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
                            <columns>
                               <TableColumn fx:id="tblColumnCantinaId" editable="false" prefWidth="111.1" text="ID" />
                               <TableColumn fx:id="tblColumnCantinaNome" editable="false" prefWidth="111.1" text="Nome" />
                               <TableColumn fx:id="tblColumnCantinaStato" editable="false" prefWidth="111.1" text="Stato" />
-                              <TableColumn fx:id="tblColumnCantinaRegione" editable="false" prefWidth="111.1" text="Regione" />
-                              <TableColumn fx:id="tblColumnCantinaVia" editable="false" prefWidth="111.1" text="Via" />
+                              <TableColumn fx:id="tblColumnCantinaRegione" editable="false" prefWidth="142.0" text="Regione" />
+                              <TableColumn fx:id="tblColumnCantinaVia" editable="false" prefWidth="143.0" text="Via" />
                               <TableColumn fx:id="tblColumnCantinaUvaggio" editable="false" prefWidth="111.1" text="Uvaggio" />
                               <TableColumn fx:id="tblColumnCantinaIdRappr" editable="false" prefWidth="111.1" text="ID Rappresentante" />
                            </columns>
@@ -101,41 +101,11 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <JFXTextField fx:id="tfCantinaId" labelFloat="true" layoutX="46.0" layoutY="27.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="ID">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </JFXTextField>
-                        <JFXTextField fx:id="tfCantinaIdRappr" labelFloat="true" layoutX="417.0" layoutY="80.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Fornitore">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </JFXTextField>
-                        <JFXTextField fx:id="tfCantinaUvaggio" labelFloat="true" layoutX="234.0" layoutY="80.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Uvaggio">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </JFXTextField>
-                        <JFXTextField fx:id="tfCantinaStato" labelFloat="true" layoutX="417.0" layoutY="28.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Stato">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </JFXTextField>
-                        <JFXTextField fx:id="tfCantinaNome" labelFloat="true" layoutX="234.0" layoutY="28.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Nome">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </JFXTextField>
-                        <JFXTextField fx:id="tfCantinaVia" labelFloat="true" layoutX="46.0" layoutY="80.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Via">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </JFXTextField>
-                        <JFXTextField fx:id="tfCantinaRegione" labelFloat="true" layoutX="599.0" layoutY="28.0" onKeyPressed="#searchElement" onKeyReleased="#searchElement" prefWidth="150.0" promptText="Regione">
-                           <cursor>
-                              <Cursor fx:constant="TEXT" />
-                           </cursor>
-                        </JFXTextField>
+                        <JFXComboBox fx:id="cmbCantinaNome" labelFloat="true" layoutX="40.0" layoutY="28.0" prefWidth="150.0" promptText="Nome" />
+                        <JFXComboBox fx:id="cmbCantinaStato" labelFloat="true" layoutX="247.0" layoutY="28.0" prefWidth="150.0" promptText="Stato" />
+                        <JFXComboBox fx:id="cmbCantinaRegione" labelFloat="true" layoutX="453.0" layoutY="28.0" prefWidth="150.0" promptText="Regione" />
+                        <JFXComboBox fx:id="cmbCantinaVia" labelFloat="true" layoutX="40.0" layoutY="81.0" prefWidth="150.0" promptText="Via" />
+                        <JFXComboBox fx:id="cmbCantinaUvaggio" labelFloat="true" layoutX="247.0" layoutY="81.0" prefWidth="150.0" promptText="Uvaggio" />
                      </children>
                   </AnchorPane>
                </content>
@@ -157,6 +127,11 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
+                        <JFXComboBox fx:id="cmbRappresentanteNome" labelFloat="true" layoutX="52.0" layoutY="55.0" onKeyReleased="#cmbSearchRappresentante" onKeyTyped="#cmbSearchRappresentante" prefWidth="150.0" promptText="Nome" />
+                        <JFXComboBox fx:id="cmbRappresentanteQtaMin" labelFloat="true" layoutX="224.0" layoutY="55.0" onKeyReleased="#cmbSearchRappresentante" onKeyTyped="#cmbSearchRappresentante" prefWidth="150.0" promptText="Qta Min" />
+                        <JFXComboBox fx:id="cmbRappresentanteQtaMax" labelFloat="true" layoutX="401.0" layoutY="55.0" onKeyReleased="#cmbSearchRappresentante" onKeyTyped="#cmbSearchRappresentante" prefWidth="150.0" promptText="Qta Max" />
+                        <JFXComboBox fx:id="cmbRappresentanteMail" labelFloat="true" layoutX="578.0" layoutY="55.0" onKeyReleased="#cmbSearchRappresentante" onKeyTyped="#cmbSearchRappresentante" prefWidth="150.0" promptText="Mail" />
+                        <JFXComboBox fx:id="cmbRappresentanteTelefono" labelFloat="true" layoutX="767.0" layoutY="55.0" onAction="#cmbSearchRappresentante" onKeyReleased="#cmbSearchRappresentante" onKeyTyped="#cmbSearchRappresentante" prefWidth="150.0" promptText="Telefono" />
                      </children></AnchorPane>
                </content>
             </Tab>
