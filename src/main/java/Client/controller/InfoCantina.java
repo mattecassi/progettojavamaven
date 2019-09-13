@@ -111,6 +111,7 @@ public class InfoCantina {
         tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
         tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
        // cmbRappresentanteID.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"ID","", Fornitore.class));
+            //
 
         thisStage.setOnCloseRequest((WindowEvent event1) -> {
             closeProcedure();
