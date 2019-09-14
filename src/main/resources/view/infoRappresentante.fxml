@@ -4,8 +4,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane prefHeight="427.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+<AnchorPane prefHeight="427.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <JFXTextField fx:id="tfID" editable="false" labelFloat="true" layoutX="46.0" layoutY="58.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="ID" />
       <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="233.0" layoutY="58.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Nome" />

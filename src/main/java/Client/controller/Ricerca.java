@@ -191,8 +191,8 @@ public class Ricerca {
             cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", "", Fornitore.class));
             cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", "", Fornitore.class));
             cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", "", Fornitore.class));
-//            cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"qta_max","",Fornitore.class));
-//            cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"qta_min","",Fornitore.class));
+            cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_max", null, Fornitore.class));
+            cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_min", null, Fornitore.class));
 
 
             //TIPO
@@ -280,35 +280,65 @@ public class Ricerca {
 
 
     @FXML
-    private void searchCmb() {
-        tblLoaded = true;
-        APIC a = new APIC("vino");
-        APIReturn ret;
-        String[] strings = {};
-        ArrayList<Clausola> clausolas = new ArrayList<>();
-        try {
-            loadTblVino();
-            clausolas.add(new Clausola(campi[0], "like", "%" + cmbVinoNome.getSelectionModel().getSelectedItem() + "%"));
-            ObservableList<String> nomi = FXCollections.observableArrayList();
-            ObservableList<Vino> vinos = a.select(strings, clausolas).toObservableList(Vino.class);
-
-            for (Vino cur : vinos) {
-                nomi.add(cur.getNome());
-            }
-            cmbVinoNome.setItems(nomi);
-            cmbVinoNome.hide();
-            cmbVinoNome.show();
-
-            //tblViewListaVino.setItems(vinos);
-        } catch (Exception e) {
-
-        }
+    private void searchVino(Event event) {
 
     }
 
     @FXML
-    private void cmbSearchRappresentante() {
+    private void searchRappresentante(Event event) {
+        APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
+        String[] strings = {};
+        ArrayList<Clausola> clausolas = new ArrayList<>();
+        JFXComboBox cur = (JFXComboBox) event.getSource();
+        if (cmbRappresentanteNome.getSelectionModel().getSelectedItem() != ""  && cmbRappresentanteNome.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("nome", "like", "%" + cmbRappresentanteNome.getSelectionModel().getSelectedItem() + "%"));
+        }
+        if (!String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem()).equals("")  && cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("qta_max", "=", String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem())));
+        }
+        if (!String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem()).equals("") && cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("qta_min", "=", String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem())));
+        }
+        if (cmbRappresentanteMail.getSelectionModel().getSelectedItem() != ""  && cmbRappresentanteMail.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("mail", "like", "%" + cmbRappresentanteMail.getSelectionModel().getSelectedItem() + "%"));
+        }
+        if (cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() != ""  && cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("telefono", "like", "%" + cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() + "%"));
+        }
+        try {
+            tblViewListaRappresentate.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
+    @FXML
+    private void searchCantina(Event event) {
+        APIC a = new APIC("cantina");
+        String[] strings = {};
+        ArrayList<Clausola> clausolas = new ArrayList<>();
+        JFXComboBox cur = (JFXComboBox) event.getSource();
+        System.out.println(cmbCantinaVia.getSelectionModel().getSelectedItem());
+        if (cmbCantinaNome.getSelectionModel().getSelectedItem() != "" && cmbCantinaNome.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("nome", "like", "%" + cmbCantinaNome.getSelectionModel().getSelectedItem() + "%"));
+        }
+        if (cmbCantinaVia.getSelectionModel().getSelectedItem() != ""   && cmbCantinaVia.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("via", "like", "%" + cmbCantinaVia.getSelectionModel().getSelectedItem() + "%"));
+        }
+        if (cmbCantinaUvaggio.getSelectionModel().getSelectedItem() != "" && cmbCantinaUvaggio.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("uvaggio", "like", "%" + cmbCantinaUvaggio.getSelectionModel().getSelectedItem() + "%"));
+        }
+        if (cmbCantinaStato.getSelectionModel().getSelectedItem() != "" && cmbCantinaStato.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("stato", "like", "%" + cmbCantinaStato.getSelectionModel().getSelectedItem() + "%"));
+        }
+        if (cmbCantinaRegione.getSelectionModel().getSelectedItem() != "" && cmbCantinaRegione.getSelectionModel().getSelectedItem() != null) {
+            clausolas.add(new Clausola("regione", "like", "%" + cmbCantinaRegione.getSelectionModel().getSelectedItem() + "%"));
+        }
+        try {
+            tblViewListaCantina.setItems(a.select(strings, clausolas).toObservableList(Cantina.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -364,24 +394,24 @@ public class Ricerca {
 
     //TIPO VINO
 
-    private TipoVino getTipoVino(){
+    private TipoVino getTipoVino() {
         return (TipoVino) tblViewListaTipo.getSelectionModel().getSelectedItem();
     }
 
     @FXML
-    private void openContextTipo(Event event){
-        try{
+    private void openContextTipo(Event event) {
+        try {
             TipoVino tipoVino = getTipoVino();
             tfTipoNome.setText(tipoVino.getTipo());
             tfTipoID.setText(String.valueOf(tipoVino.getID()));
-        }catch (Exception e){
+        } catch (Exception e) {
         }
     }
 
     @FXML
     private void btnPress(Event event) {
         Button btnPressed = (Button) event.getSource();
-        TipoVino tipoVino = new TipoVino(Integer.valueOf(tfTipoID.getText()),tfTipoNome.getText());
+        TipoVino tipoVino = new TipoVino(Integer.valueOf(tfTipoID.getText()), tfTipoNome.getText());
         System.out.println(tipoVino.toString());
         try {
 
@@ -397,7 +427,7 @@ public class Ricerca {
                         if (result.get() == ButtonType.OK) {
                             try {
                                 ArrayList<Clausola> clausolas = new ArrayList<>();
-                                clausolas.add(new Clausola("tipo","like",tipoVino.getTipo()));
+                                clausolas.add(new Clausola("tipo", "like", tipoVino.getTipo()));
                                 eliminaVini(clausolas);
                                 tipoVino.delete();
                                 System.out.println("Salvo");
@@ -418,10 +448,10 @@ public class Ricerca {
     }
 
     @FXML
-    public void eliminaVini(ArrayList<Clausola> clausolas) throws Exception{
+    public void eliminaVini(ArrayList<Clausola> clausolas) throws Exception {
         APIC a = new APIC("vino");
         String[] strings = {};
-        for(Vino cur: a.select(strings,clausolas).toList(Vino.class)){
+        for (Vino cur : a.select(strings, clausolas).toList(Vino.class)) {
             cur.delete();
         }
     }

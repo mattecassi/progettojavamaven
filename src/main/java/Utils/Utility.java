@@ -15,7 +15,9 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Utility {
 
@@ -82,8 +84,7 @@ public class Utility {
         JSONObject jsonObject;
 
         ObservableList<String> nomi = FXCollections.observableArrayList();
-        //HO SCOPERTO CHE NON SERVE PIU IL CAMPO VUOTO, BASTA FARE nomeComboBox.getSelectionModel().clearSelection();
-
+        HashSet<String> hashSet = new HashSet<>();//HO SCOPERTO CHE NON SERVE PIU IL CAMPO VUOTO, BASTA FARE nomeComboBox.getSelectionModel().clearSelection();
         APIC ap = new APIC(table);
         String[] arrClausole = {field};
         List<Clausola> l = new ArrayList<>();
@@ -91,9 +92,10 @@ public class Utility {
         for (T f : ap.select(arrClausole,l).toObservableList(typeParameter)){
             //System.out.println(f);
             jsonObject = new JSONObject(f.toString());
-            nomi.add(jsonObject.getString(field));
+            hashSet.add((String) jsonObject.get(field));
 
         }
+        nomi.addAll(hashSet);
         return nomi;
 
     }
@@ -102,7 +104,7 @@ public class Utility {
 
         JSONObject jsonObject;
         ObservableList<Integer> nume = FXCollections.observableArrayList();
-
+        HashSet<Integer> hashSet = new HashSet<>();
         APIC ap = new APIC(table);
         String[] arrClausole = {field};
         List<Clausola> l = new ArrayList<>();
@@ -112,8 +114,9 @@ public class Utility {
         for (T f : ap.select(arrClausole,l).toObservableList(typeParameter)){
             //System.out.println(f);
             jsonObject = new JSONObject(f.toString());
-            nume.add((Integer) jsonObject.get(field));
+            hashSet.add((Integer) jsonObject.get(field));
         }
+        nume.addAll(hashSet);
         return nume;
 
     }
@@ -123,6 +126,7 @@ public class Utility {
         JSONObject jsonObject;
         ObservableList<Double> nume = FXCollections.observableArrayList();
         APIC ap = new APIC(table);
+        HashSet<Double> hashSet = new HashSet<>();
         String[] arrClausole = {field};
         List<Clausola> l = new ArrayList<>();
         if (value != null)
@@ -132,6 +136,7 @@ public class Utility {
             jsonObject = new JSONObject(f.toString());
             nume.add((Double) jsonObject.get(field));
         }
+        nume.addAll(hashSet);
         return nume;
 
     }

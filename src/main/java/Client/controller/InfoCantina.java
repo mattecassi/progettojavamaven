@@ -17,6 +17,7 @@ import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -110,8 +111,11 @@ public class InfoCantina {
         tfRappresentanteTelefono.setText(rappresentante.getTelefono());
         tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
         tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
-       // cmbRappresentanteID.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"ID","", Fornitore.class));
-            //
+        cmbRappresentanteID.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(),"ID",null, Fornitore.class));
+        for(Integer integer: Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(),"ID",null, Fornitore.class)){
+            System.out.println(integer);
+        }
+        cmbRappresentanteID.getSelectionModel().select(rappresentante.getID());
 
         thisStage.setOnCloseRequest((WindowEvent event1) -> {
             closeProcedure();
@@ -200,7 +204,8 @@ public class InfoCantina {
         if(cmbRappresentanteID.getSelectionModel().getSelectedItem()!=rappresentante.getID()){
             try {
                 modified = true;
-                rappresentante.setID(cmbRappresentanteID.getSelectionModel().getSelectedIndex());
+                cmbRappresentanteID.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(),"ID",null, Fornitore.class));
+                rappresentante.setID(cmbRappresentanteID.getSelectionModel().getSelectedItem());
                 APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
                 String[] strings = {};
                 ArrayList<Clausola> clausolas = new ArrayList<>();
@@ -211,6 +216,7 @@ public class InfoCantina {
                 tfRappresentanteTelefono.setText(rappresentante.getTelefono());
                 tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
                 tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
+                cantina.setIdrappresentante(rappresentante.getID());
             }catch (Exception e){
                 Utility.createErrorWindow(e.getMessage());
             }
