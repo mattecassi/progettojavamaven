@@ -89,9 +89,9 @@ public class Vendita {
                             Vino v = a.get(o.getIdvino(),Vino.class); //controllo esistenza vino con quell'id
 //                            System.out.println(v);
                             o.setDescrizione(sheet.getCell(1, j).getContents()); //descrizione del vino//
-                            o.setSconto(Double.valueOf(sheet.getCell(2, j).getContents()));
+                            o.setSconto(Double.valueOf(sheet.getCell(2, j).getContents().replace(",",".")));
                             o.setQta(Integer.valueOf(sheet.getCell(3, j).getContents()));
-                            o.setImporto(Double.valueOf(sheet.getCell(4, j).getContents()));
+                            o.setImporto(Double.valueOf(sheet.getCell(4, j).getContents().replace(",",".")));
 
                             if (v.getQta() - o.getQta() < 0)
                                 Utility.createWarningWindow("Attento, possiedi " +v.getQta() + "bottiglie di" +

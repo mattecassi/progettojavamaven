@@ -96,8 +96,43 @@ public class Utility {
         }
         return nomi;
 
+    }
+
+    public static <T extends Model> ObservableList<Integer> loadDataForCmb(String table, String field,Integer value, Class<T> typeParameter) throws Exception {
+
+        JSONObject jsonObject;
+        ObservableList<Integer> nume = FXCollections.observableArrayList();
+
+        APIC ap = new APIC(table);
+        String[] arrClausole = {field};
+        List<Clausola> l = new ArrayList<>();
+        l.add(new Clausola(field,"=", value.toString() ));
+        for (T f : ap.select(arrClausole,l).toObservableList(typeParameter)){
+            //System.out.println(f);
+            jsonObject = new JSONObject(f.toString());
+            nume.add((Integer) jsonObject.get(field));
+        }
+        return nume;
 
     }
+
+    public static <T extends Model> ObservableList<Double> loadDataForCmb(String table, String field,Double value, Class<T> typeParameter) throws Exception {
+
+        JSONObject jsonObject;
+        ObservableList<Double> nume = FXCollections.observableArrayList();
+        APIC ap = new APIC(table);
+        String[] arrClausole = {field};
+        List<Clausola> l = new ArrayList<>();
+        l.add(new Clausola(field,"=", value.toString() ));
+        for (T f : ap.select(arrClausole,l).toObservableList(typeParameter)){
+            //System.out.println(f);
+            jsonObject = new JSONObject(f.toString());
+            nume.add((Double) jsonObject.get(field));
+        }
+        return nume;
+
+    }
+
 
     public static String replaceAllDeniedChar(String s){
 
