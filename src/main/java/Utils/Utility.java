@@ -106,7 +106,9 @@ public class Utility {
         APIC ap = new APIC(table);
         String[] arrClausole = {field};
         List<Clausola> l = new ArrayList<>();
-        l.add(new Clausola(field,"=", value.toString() ));
+        if (value != null)
+            l.add(new Clausola(field,"=", value.toString() ));
+
         for (T f : ap.select(arrClausole,l).toObservableList(typeParameter)){
             //System.out.println(f);
             jsonObject = new JSONObject(f.toString());
@@ -123,7 +125,8 @@ public class Utility {
         APIC ap = new APIC(table);
         String[] arrClausole = {field};
         List<Clausola> l = new ArrayList<>();
-        l.add(new Clausola(field,"=", value.toString() ));
+        if (value != null)
+            l.add(new Clausola(field,"=", value.toString() ));
         for (T f : ap.select(arrClausole,l).toObservableList(typeParameter)){
             //System.out.println(f);
             jsonObject = new JSONObject(f.toString());
