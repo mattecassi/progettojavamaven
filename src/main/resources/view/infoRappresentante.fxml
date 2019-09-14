@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="427.0" prefWidth="414.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" >
+   <children>
+      <JFXTextField fx:id="tfID" editable="false" labelFloat="true" layoutX="46.0" layoutY="58.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="ID" />
+      <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="233.0" layoutY="58.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Nome" />
+      <JFXTextField fx:id="tfQtaMin" labelFloat="true" layoutX="46.0" layoutY="128.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Qta Min" />
+      <JFXTextField fx:id="tfQtaMax" labelFloat="true" layoutX="233.0" layoutY="128.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Qta Max" />
+      <JFXTextField fx:id="tfMail" labelFloat="true" layoutX="46.0" layoutY="188.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Mail" />
+      <JFXTextField fx:id="tfTelefono" labelFloat="true" layoutX="233.0" layoutY="188.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Telefono" />
+      <JFXButton fx:id="btnElimina" layoutX="61.0" layoutY="285.0" onAction="#btnPress" prefHeight="62.0" prefWidth="106.0" text="Elimina" />
+      <JFXButton fx:id="btnSalva" layoutX="248.0" layoutY="285.0" onAction="#btnPress" prefHeight="62.0" prefWidth="106.0" text="Salva" />
+   </children>
+</AnchorPane>

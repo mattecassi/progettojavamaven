@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
@@ -8,6 +9,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane fx:id="apRicerca" onKeyTyped="#searchElement" onMouseMoved="#loadAllTbl" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Ricerca">
     <children>
@@ -63,12 +65,12 @@
                            </cursor>
                         </JFXTextField>
                         <JFXComboBox fx:id="cmbVinoNome" editable="true" focusColor="#405aa8" labelFloat="true" layoutX="779.0" layoutY="76.0" onKeyPressed="#searchCmb" onKeyReleased="#searchCmb" prefHeight="32.0" prefWidth="150.0" promptText="Nome" />
-                        <TableView fx:id="tblViewListaVino" editable="true" fixedCellSize="0.0" layoutX="-7.0" layoutY="131.0" onContextMenuRequested="#openContextVino" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
+                        <TableView fx:id="tblViewListaVino" editable="true" fixedCellSize="0.0" layoutY="135.0" onContextMenuRequested="#openContextVino" prefHeight="636.0" prefWidth="1000.0" styleClass="re" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="135.0">
                           <columns>
                             <TableColumn fx:id="tblColumnNome" editable="false" prefWidth="111.1" text="Nome" />
                             <TableColumn fx:id="tblColumnTipo" editable="false" prefWidth="111.1" text="Tipo" />
-                              <TableColumn fx:id="tblColumnAnnata" editable="false" prefWidth="111.1" text="Annata" />
-                              <TableColumn fx:id="tblColumnCantina" editable="false" prefWidth="111.1" text="Cantina" />
+                              <TableColumn fx:id="tblColumnAnnata" editable="false" prefWidth="135.0" text="Annata" />
+                              <TableColumn fx:id="tblColumnCantina" editable="false" prefWidth="87.0" text="Cantina" />
                               <TableColumn fx:id="tblColumnUvaggio" editable="false" prefWidth="111.1" text="Uvaggio" />
                               <TableColumn fx:id="tblColumnStato" editable="false" prefWidth="111.1" text="Stato" />
                               <TableColumn fx:id="tblColumnRegione" editable="false" prefWidth="111.1" text="Regione" />
@@ -87,7 +89,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tblViewListaCantina" editable="true" fixedCellSize="0.0" layoutY="131.0" onContextMenuRequested="#openContextCantina" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
+                        <TableView fx:id="tblViewListaCantina" editable="true" fixedCellSize="0.0" layoutY="131.0" onContextMenuRequested="#openContextCantina" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
                            <columns>
                               <TableColumn fx:id="tblColumnCantinaId" editable="false" prefWidth="111.1" text="ID" />
                               <TableColumn fx:id="tblColumnCantinaNome" editable="false" prefWidth="111.1" text="Nome" />
@@ -114,7 +116,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tblViewListaRappresentate" editable="true" fixedCellSize="0.0" layoutY="131.0" onKeyTyped="#searchElement" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
+                        <TableView fx:id="tblViewListaRappresentate" editable="true" fixedCellSize="0.0" layoutY="131.0" onContextMenuRequested="#openContextRappresentante" prefHeight="640.0" prefWidth="1000.0" styleClass="re">
                            <columns>
                               <TableColumn fx:id="tblColumnRappresentanteID" editable="false" prefWidth="111.1" text="ID" />
                               <TableColumn fx:id="tblColumnRappresentanteNome" editable="false" prefWidth="111.1" text="Nome" />
@@ -139,7 +141,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <TableView fx:id="tblViewListaTipo" prefHeight="771.0" prefWidth="396.0">
+                        <TableView fx:id="tblViewListaTipo" onContextMenuRequested="#openContextTipo" onMouseClicked="#openContextTipo" prefHeight="771.0" prefWidth="396.0">
                           <columns>
                             <TableColumn fx:id="tblColumnTipoNome" prefWidth="75.0" text="Tipo di Vino" />
                           </columns>
@@ -147,6 +149,17 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
+                        <JFXButton fx:id="btnTipoElimina" layoutX="722.0" layoutY="581.0" onAction="#btnPress" prefHeight="127.0" prefWidth="164.0" text="Elimina" wrapText="true" AnchorPane.bottomAnchor="63.0" AnchorPane.rightAnchor="114.0" AnchorPane.topAnchor="581.0" />
+                        <JFXTextField fx:id="tfTipoNome" editable="false" labelFloat="true" layoutX="685.0" layoutY="344.0" prefHeight="72.0" prefWidth="201.0" promptText="Tipo Di Vino">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </JFXTextField>
+                        <JFXTextField fx:id="tfTipoID" editable="false" labelFloat="true" layoutX="462.0" layoutY="343.0" prefHeight="73.0" prefWidth="201.0" promptText="ID">
+                           <font>
+                              <Font size="25.0" />
+                           </font>
+                        </JFXTextField>
                      </children></AnchorPane>
             </content>
           </Tab>

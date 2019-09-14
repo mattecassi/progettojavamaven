@@ -13,7 +13,7 @@
       <JFXTextField fx:id="tfCantinaRegione" labelFloat="true" layoutX="233.0" layoutY="100.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" prefWidth="135.0" promptText="Regione" />
       <JFXTextField fx:id="tfCantinaVia" labelFloat="true" layoutX="40.0" layoutY="175.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" prefWidth="135.0" promptText="Via" />
       <JFXTextField fx:id="tfCantinaUvaggio" labelFloat="true" layoutX="233.0" layoutY="175.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" prefWidth="135.0" promptText="Uvaggio" />
-      <JFXComboBox fx:id="cmbRappresentanteID" labelFloat="true" layoutX="40.0" layoutY="264.0" prefHeight="25.0" prefWidth="135.0" promptText="ID Rappresentante" />
+      <JFXComboBox fx:id="cmbRappresentanteID" labelFloat="true" layoutX="40.0" layoutY="264.0" onAction="#changeRappresentante" prefHeight="25.0" prefWidth="135.0" promptText="ID Rappresentante" />
       <JFXTextField fx:id="tfRappresentanteNome" editable="false" labelFloat="true" layoutX="233.0" layoutY="264.0" prefWidth="135.0" promptText="Nome" />
       <JFXTextField fx:id="tfRappresentanteQtaMin" editable="false" labelFloat="true" layoutX="40.0" layoutY="338.0" prefWidth="135.0" text="Qta Min" />
       <JFXTextField fx:id="tfRappresentanteQtaMax" editable="false" labelFloat="true" layoutX="233.0" layoutY="338.0" prefWidth="135.0" text="Qta Max" />

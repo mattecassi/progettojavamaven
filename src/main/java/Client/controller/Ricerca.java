@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javax.sound.sampled.Line;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Ricerca {
 
@@ -86,7 +87,7 @@ public class Ricerca {
     private TableColumn<Cantina, String> tblColumnCantinaId, tblColumnCantinaNome, tblColumnCantinaStato, tblColumnCantinaRegione, tblColumnCantinaVia, tblColumnCantinaUvaggio, tblColumnCantinaIdRappr;
 
     @FXML
-    private JFXComboBox<String > cmbCantinaNome, cmbCantinaStato, cmbCantinaRegione, cmbCantinaUvaggio, cmbCantinaVia;
+    private JFXComboBox<String> cmbCantinaNome, cmbCantinaStato, cmbCantinaRegione, cmbCantinaUvaggio, cmbCantinaVia;
 
     @FXML
     private TableView tblViewListaRappresentate;
@@ -101,39 +102,22 @@ public class Ricerca {
     private TableColumn<Rappresentante, Integer> tblColumnRappresentanteID;
 
     @FXML
-    private JFXComboBox<String> cmbRappresentanteNome,cmbRappresentanteMail, cmbRappresentanteTelefono;
+    private JFXComboBox<String> cmbRappresentanteNome, cmbRappresentanteMail, cmbRappresentanteTelefono;
 
     @FXML
-    private JFXComboBox<Integer>  cmbRappresentanteQtaMin, cmbRappresentanteQtaMax;
+    private JFXComboBox<Integer> cmbRappresentanteQtaMin, cmbRappresentanteQtaMax;
 
     @FXML
     private TableView tblViewListaTipo;
 
     @FXML
-    private  TableColumn<TipoVino,String> tblColumnTipoNome;
+    private TableColumn<TipoVino, String> tblColumnTipoNome;
 
     @FXML
-    private JFXTextField tfCantinaId;
+    private JFXTextField tfTipoNome, tfTipoID;
 
     @FXML
-    private JFXTextField tfCantinaIdRappr;
-
-    @FXML
-    private JFXTextField tfCantinaUvaggio;
-
-    @FXML
-    private JFXTextField tfCantinaStato;
-
-    @FXML
-    private JFXTextField tfCantinaNome;
-
-    @FXML
-    private JFXTextField tfCantinaVia;
-
-    @FXML
-    private JFXTextField tfCantinaRegione;
-
-
+    private Button btnSalva, btnElimina;
 
     public Ricerca() {
     }
@@ -170,7 +154,7 @@ public class Ricerca {
         tblColumnRappresentanteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     }
 
-    private void loadTblTipo(){
+    private void loadTblTipo() {
         tblColumnTipoNome.setCellValueFactory(new PropertyValueFactory<>("tipo"));
     }
 
@@ -194,19 +178,19 @@ public class Ricerca {
             APIC b = new APIC("cantina");
             tblViewListaCantina.setItems(b.select().toObservableList(Cantina.class));
             loadTblCantina();
-            cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina","nome","",Cantina.class));
-            cmbCantinaRegione.setItems(Utility.loadDataForCmb("cantina","regione","",Cantina.class));
-            cmbCantinaStato.setItems(Utility.loadDataForCmb("cantina","stato","",Cantina.class));
-            cmbCantinaUvaggio.setItems(Utility.loadDataForCmb("cantina","uvaggio","",Cantina.class));
-            cmbCantinaVia.setItems(Utility.loadDataForCmb("cantina","via","",Cantina.class));
+            cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina", "nome", "", Cantina.class));
+            cmbCantinaRegione.setItems(Utility.loadDataForCmb("cantina", "regione", "", Cantina.class));
+            cmbCantinaStato.setItems(Utility.loadDataForCmb("cantina", "stato", "", Cantina.class));
+            cmbCantinaUvaggio.setItems(Utility.loadDataForCmb("cantina", "uvaggio", "", Cantina.class));
+            cmbCantinaVia.setItems(Utility.loadDataForCmb("cantina", "via", "", Cantina.class));
 
 
             //RAPPRESENTANTE
-            tblViewListaRappresentate.setItems(Fornitore.getFornitoriRappresentanti(colonne,clausolas));
+            tblViewListaRappresentate.setItems(Fornitore.getFornitoriRappresentanti(colonne, clausolas));
             loadTblRappresentante();
-            cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","",Fornitore.class));
-            cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"mail","",Fornitore.class));
-            cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"telefono","",Fornitore.class));
+            cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", "", Fornitore.class));
+            cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", "", Fornitore.class));
+            cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", "", Fornitore.class));
 //            cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"qta_max","",Fornitore.class));
 //            cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"qta_min","",Fornitore.class));
 
@@ -215,12 +199,6 @@ public class Ricerca {
             APIC c = new APIC("tipo_vino");
             tblViewListaTipo.setItems(c.select().toObservableList(TipoVino.class));
             loadTblTipo();
-
-
-
-
-
-
 
 
             allLoaded = true;
@@ -329,21 +307,20 @@ public class Ricerca {
     }
 
     @FXML
-    private void cmbSearchRappresentante(){
+    private void cmbSearchRappresentante() {
 
     }
 
 
-
-
     //Questi due metodi servono per passare il selected item allo stage che mostra tutte le info relative al vino
     //Il primo crea il nuovo stage, il secondo si occupa di fornire il vino selezionato
+
     @FXML
     private void openContextVino(Event event) {
         try {
             InfoVino infoVino = new InfoVino(this);
             infoVino.showStage();
-        }catch (Exception e){
+        } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
     }
@@ -353,19 +330,99 @@ public class Ricerca {
         return cur;
     }
 
+    //RAPPRESENTANTE
+    @FXML
+    private void openContextRappresentante(Event event) {
+        try {
+            InfoRappresentante infoRappresentante = new InfoRappresentante(this);
+            infoRappresentante.showStage();
+        } catch (Exception e) {
+            Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
+        }
+    }
+
+    public Fornitore getRappresentante() {
+        Fornitore cur = (Fornitore) tblViewListaRappresentate.getSelectionModel().getSelectedItem();
+        return cur;
+    }
+
     @FXML
     private void openContextCantina(Event event) {
         try {
             InfoCantina infoCantina = new InfoCantina(this);
             infoCantina.showStage();
-        }catch (Exception e){
+        } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
     }
 
     public WrapperCantina getWrapperCantina() {
-       Cantina cantina = (Cantina)tblViewListaCantina.getSelectionModel().getSelectedItem();
-       WrapperCantina cur = new WrapperCantina(cantina);
-       return cur;
+        Cantina cantina = (Cantina) tblViewListaCantina.getSelectionModel().getSelectedItem();
+        WrapperCantina cur = new WrapperCantina(cantina);
+        return cur;
+    }
+
+    //TIPO VINO
+
+    private TipoVino getTipoVino(){
+        return (TipoVino) tblViewListaTipo.getSelectionModel().getSelectedItem();
+    }
+
+    @FXML
+    private void openContextTipo(Event event){
+        try{
+            TipoVino tipoVino = getTipoVino();
+            tfTipoNome.setText(tipoVino.getTipo());
+            tfTipoID.setText(String.valueOf(tipoVino.getID()));
+        }catch (Exception e){
+        }
+    }
+
+    @FXML
+    private void btnPress(Event event) {
+        Button btnPressed = (Button) event.getSource();
+        TipoVino tipoVino = new TipoVino(Integer.valueOf(tfTipoID.getText()),tfTipoNome.getText());
+        System.out.println(tipoVino.toString());
+        try {
+
+            switch (btnPressed.getId()) {
+                case "btnTipoElimina":
+                    try {
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Conferma Eliminazione");
+                        alert.setHeaderText("Stai eliminando il tipo \"" + tipoVino.getTipo() + "\", eliminerai ogni vino ad esso associato!");
+                        alert.setContentText("Vuoi davvero eliminare?");
+
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get() == ButtonType.OK) {
+                            try {
+                                ArrayList<Clausola> clausolas = new ArrayList<>();
+                                clausolas.add(new Clausola("tipo","like",tipoVino.getTipo()));
+                                eliminaVini(clausolas);
+                                tipoVino.delete();
+                                System.out.println("Salvo");
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            System.out.println("Non salvo");
+                        }
+                    } catch (Exception e) {
+                        Utility.createErrorWindow(e.getMessage());
+                    }
+                    break;
+            }
+        } catch (Exception exceptionVino) {
+            Utility.createErrorWindow("Seleziona un tipo di vino valido");
+        }
+    }
+
+    @FXML
+    public void eliminaVini(ArrayList<Clausola> clausolas) throws Exception{
+        APIC a = new APIC("vino");
+        String[] strings = {};
+        for(Vino cur: a.select(strings,clausolas).toList(Vino.class)){
+            cur.delete();
+        }
     }
 }

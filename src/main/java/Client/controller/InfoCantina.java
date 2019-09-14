@@ -156,11 +156,11 @@ public class InfoCantina {
                     e.printStackTrace();
                 }
                 System.out.println("Salvo");
-                try {
-                    this.ricerca.loadAllTbl();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+//                try {
+//                    this.ricerca.loadAllTbl();
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
             } else {
                 System.out.println("Non salvo");
             }
@@ -196,18 +196,42 @@ public class InfoCantina {
     }
 
     @FXML
+    private void changeRappresentante(){
+        if(cmbRappresentanteID.getSelectionModel().getSelectedItem()!=rappresentante.getID()){
+            try {
+                modified = true;
+                rappresentante.setID(cmbRappresentanteID.getSelectionModel().getSelectedIndex());
+                APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
+                String[] strings = {};
+                ArrayList<Clausola> clausolas = new ArrayList<>();
+                clausolas.add(new Clausola("id", "=", rappresentante.getID().toString()));
+                rappresentante = a.select(strings, clausolas).toList(Fornitore.class).get(0);
+                tfRappresentanteMail.setText(rappresentante.getMail());
+                tfRappresentanteNome.setText(rappresentante.getNome());
+                tfRappresentanteTelefono.setText(rappresentante.getTelefono());
+                tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
+                tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
+            }catch (Exception e){
+                Utility.createErrorWindow(e.getMessage());
+            }
+        }
+    }
+
+    @FXML
     private void btnPress(Event event){
         Button btnPressed = (Button)event.getSource();
         switch (btnPressed.getId()){
             case "btnElimina":
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Conferma Eliminazione");
-                alert.setHeaderText(null);
+                alert.setHeaderText("Stai eliminando la cantina \""+cantina.getNome() +"\", cosi fancendo eliminerai anche tutti i vini ad essa associati!");
                 alert.setContentText("Vuoi davvero eliminare la cantina?");
-
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     try {
+                        ArrayList<Clausola> clausolas = new ArrayList<>();
+                        clausolas.add(new Clausola("idCantina","=", cantina.getID().toString()));
+                        ricerca.eliminaVini(clausolas);
                         cantina.delete();
                     } catch (Exception e) {
                         e.printStackTrace();
