@@ -98,7 +98,7 @@ public class Utility {
 
     }
 
-    public static <T extends Model> ObservableList<Integer> loadDataForCmb(String table, String field,Integer value, Class<T> typeParameter) throws Exception {
+    public static <T extends Model> ObservableList<Integer> loadDataForCmbInteger(String table, String field,Integer value, Class<T> typeParameter) throws Exception {
 
         JSONObject jsonObject;
         ObservableList<Integer> nume = FXCollections.observableArrayList();
@@ -118,7 +118,7 @@ public class Utility {
 
     }
 
-    public static <T extends Model> ObservableList<Double> loadDataForCmb(String table, String field,Double value, Class<T> typeParameter) throws Exception {
+    public static <T extends Model> ObservableList<Double> loadDataForCmbDouble(String table, String field,Double value, Class<T> typeParameter) throws Exception {
 
         JSONObject jsonObject;
         ObservableList<Double> nume = FXCollections.observableArrayList();
