@@ -1,17 +1,14 @@
-package Client.controller;
+package Models;
 
 import API.APIC;
 import ClientUtils.Clausola;
-import Models.Cantina;
-import Models.Fornitore;
-import Models.Rappresentante;
 
 import java.util.ArrayList;
 
-public class WrapperCantina {
+public class WrapperCantina extends  Model{
 
-    Cantina cantina;
-    Fornitore rappresentante;
+    public Cantina cantina;
+    public Fornitore rappresentante;
 
     public WrapperCantina(Cantina cantina) {
         this.cantina = cantina;

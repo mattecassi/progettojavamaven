@@ -16,8 +16,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-
-import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -51,10 +49,10 @@ public class InfoCantina {
     private JFXTextField tfCantinaUvaggio;
 
     @FXML
-    private JFXComboBox<Integer> cmbRappresentanteID;
+    private JFXComboBox<String> cmbRappresentanteNome;
 
     @FXML
-    private JFXTextField tfRappresentanteNome;
+    private JFXTextField tfRappresentanteID;
 
     @FXML
     private JFXTextField tfRappresentanteQtaMin;
@@ -107,15 +105,12 @@ public class InfoCantina {
 
         rappresentante=cur.rappresentante;
         tfRappresentanteMail.setText(rappresentante.getMail());
-        tfRappresentanteNome.setText(rappresentante.getNome());
+        tfRappresentanteID.setText(String.valueOf(rappresentante.getID()));
         tfRappresentanteTelefono.setText(rappresentante.getTelefono());
         tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
         tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
-        cmbRappresentanteID.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(),"ID",null, Fornitore.class));
-        for(Integer integer: Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(),"ID",null, Fornitore.class)){
-            System.out.println(integer);
-        }
-        cmbRappresentanteID.getSelectionModel().select(rappresentante.getID());
+        cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","", Fornitore.class));
+        cmbRappresentanteNome.getSelectionModel().select(rappresentante.getNome());
 
         thisStage.setOnCloseRequest((WindowEvent event1) -> {
             closeProcedure();
@@ -201,18 +196,17 @@ public class InfoCantina {
 
     @FXML
     private void changeRappresentante(){
-        if(cmbRappresentanteID.getSelectionModel().getSelectedItem()!=rappresentante.getID()){
+        if(cmbRappresentanteNome.getSelectionModel().getSelectedItem()!=rappresentante.getNome()){
             try {
                 modified = true;
-                cmbRappresentanteID.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(),"ID",null, Fornitore.class));
-                rappresentante.setID(cmbRappresentanteID.getSelectionModel().getSelectedItem());
+                rappresentante.setNome(cmbRappresentanteNome.getSelectionModel().getSelectedItem());
                 APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
                 String[] strings = {};
                 ArrayList<Clausola> clausolas = new ArrayList<>();
-                clausolas.add(new Clausola("id", "=", rappresentante.getID().toString()));
+                clausolas.add(new Clausola("nome", "like", rappresentante.getNome()));
                 rappresentante = a.select(strings, clausolas).toList(Fornitore.class).get(0);
                 tfRappresentanteMail.setText(rappresentante.getMail());
-                tfRappresentanteNome.setText(rappresentante.getNome());
+                tfRappresentanteID.setText(String.valueOf(rappresentante.getID()));
                 tfRappresentanteTelefono.setText(rappresentante.getTelefono());
                 tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
                 tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));

@@ -2,25 +2,21 @@ package Client.controller;
 
 import API.APIC;
 import ClientUtils.Clausola;
-import Models.Cantina;
-import Models.Fornitore;
-import Models.TipoVino;
-import Models.Vino;
+import Models.*;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
-import javax.rmi.CORBA.Util;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -56,7 +52,7 @@ public class InfoVino {
     private JFXTextField tfVinoQta;
 
     @FXML
-    private JFXTextField tfCantinaNome;
+    private ComboBox<String> cmbCantinaNome;
 
     @FXML
     private JFXTextField tfCantinaID;
@@ -77,7 +73,7 @@ public class InfoVino {
     private JFXTextField tfCantinaIDRappre;
 
     @FXML
-    private JFXTextField tfFornitoreNome;
+    private ComboBox<String> cmbFornitoreNome;
 
     @FXML
     private JFXTextField tfFornitoreID;
@@ -127,19 +123,22 @@ public class InfoVino {
             cantina = cur.cantina;
             tfCantinaID.setText(String.valueOf(cantina.getID()));
             tfCantinaIDRappre.setText(String.valueOf(cantina.getIdrappresentante()));
-            tfCantinaNome.setText(cantina.getNome());
             tfCantinaStato.setText(cantina.getStato());
             tfCantinaRegione.setText(cantina.getRegione());
             tfCantinaVia.setText(cantina.getVia());
             tfCantinaUvaggio.setText(cantina.getUvaggio());
+            cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina","nome","", Cantina.class));
+            cmbCantinaNome.getSelectionModel().select(cantina.getNome());
+
 
             fornitore=cur.fornitore;
             tfFornitoreID.setText(String.valueOf(fornitore.getID()));
-            tfFornitoreNome.setText(fornitore.getNome());
             tfFornitoreMail.setText(fornitore.getMail());
             tfFornitoreQtaMax.setText(String.valueOf(fornitore.getQta_max()));
             tfFornitoreQtaMin.setText(String.valueOf(fornitore.getQta_min()));
             tfFornitoreTelefono.setText(String.valueOf(fornitore.getTelefono()));
+            cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore","nome","", Fornitore.class));
+            cmbFornitoreNome.getSelectionModel().select(fornitore.getNome());
 
 
             thisStage.setOnCloseRequest((WindowEvent event1) -> {
@@ -291,5 +290,50 @@ public class InfoVino {
         }
     }
 
+    @FXML
+    private void changeCantina(Event event) {
+        if (cmbCantinaNome.getSelectionModel().getSelectedItem() != cantina.getNome()) {
+            try {
+                modified = true;
+                cantina.setNome(cmbCantinaNome.getSelectionModel().getSelectedItem());
+                APIC a = new APIC("cantina");
+                String[] strings = {};
+                ArrayList<Clausola> clausolas = new ArrayList<>();
+                clausolas.add(new Clausola("nome", "like", cantina.getNome()));
+                cantina = a.select(strings, clausolas).toList(Cantina.class).get(0);
+                tfCantinaID.setText(String.valueOf(cantina.getID()));
+                tfCantinaStato.setText(cantina.getStato());
+                tfCantinaRegione.setText(String.valueOf(cantina.getRegione()));
+                tfCantinaUvaggio.setText(String.valueOf(cantina.getUvaggio()));
+                tfCantinaVia.setText(String.valueOf(cantina.getVia()));
+                vino.setIdCantina(cantina.getID());
+            } catch (Exception e) {
+                Utility.createErrorWindow(e.getMessage());
+            }
+        }
+    }
 
+    @FXML
+    private void changeFornitore(Event event){
+        if (cmbFornitoreNome.getSelectionModel().getSelectedItem() != fornitore.getNome()) {
+            try {
+                modified = true;
+                fornitore.setNome(cmbFornitoreNome.getSelectionModel().getSelectedItem());
+                APIC a = new APIC("fornitore");
+                String[] strings = {};
+                ArrayList<Clausola> clausolas = new ArrayList<>();
+                clausolas.add(new Clausola("nome", "like", fornitore.getNome()));
+                fornitore = a.select(strings, clausolas).toList(Fornitore.class).get(0);
+                tfCantinaID.setText(String.valueOf(fornitore.getID()));
+                tfFornitoreID.setText(String.valueOf(fornitore.getID()));
+                tfFornitoreMail.setText((fornitore.getMail()));
+                tfFornitoreTelefono.setText((fornitore.getTelefono()));
+                tfFornitoreQtaMax.setText(String.valueOf(fornitore.getQta_max()));
+                tfFornitoreQtaMin.setText(String.valueOf(fornitore.getQta_min()));
+                vino.setIdFornitore(fornitore.getID());
+            } catch (Exception e) {
+                Utility.createErrorWindow(e.getMessage());
+            }
+        }
+        }
 }

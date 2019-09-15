@@ -1,15 +1,12 @@
-package Client.controller;
+package Models;
 
 import API.APIC;
-import Models.Cantina;
-import Models.Fornitore;
-import Models.Vino;
 
-public class WrapperVino {
+public class WrapperVino extends  Model {
 
-    Vino vino;
-    Cantina cantina;
-    Fornitore fornitore;
+    public Vino vino;
+    public Cantina cantina;
+    public Fornitore fornitore;
 
     private String vinoNome, cantinaNome, fornitoreNome, tipo, uvaggio, stato, regione;
     private double costo, prezzoVendita;
