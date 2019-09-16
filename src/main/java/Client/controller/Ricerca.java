@@ -34,7 +34,7 @@ public class Ricerca {
     private Tab tabVino;
 
     @FXML
-    private ComboBox<String> cmbVinoNome, cmbVinoTipo, cmbVinoCantina, cmbVinoUvaggio, cmbVinoStato, cmbVinoRegione,  cmbVinoFornitore;
+    private ComboBox<String> cmbVinoNome, cmbVinoTipo, cmbVinoCantina, cmbVinoUvaggio, cmbVinoStato, cmbVinoRegione, cmbVinoFornitore;
 
     @FXML
     private ComboBox<Integer> cmbVinoQta, cmbVinoAnnata;
@@ -84,10 +84,10 @@ public class Ricerca {
     private TableView<WrapperEnoteca> tblViewListaEnoteca;
 
     @FXML
-    private TableColumn<WrapperEnoteca,String> tblColumnEnotecaNome, tblColumnEnotecaMail, tblColumnEnotecaTelefono, tblColumnEnotecaStato, tblColumnEnotecaRegione, tblColumnEnotecaCitta, tblColumnEnotecaVia;
+    private TableColumn<WrapperEnoteca, String> tblColumnEnotecaNome, tblColumnEnotecaMail, tblColumnEnotecaTelefono, tblColumnEnotecaStato, tblColumnEnotecaRegione, tblColumnEnotecaCitta, tblColumnEnotecaVia;
 
     @FXML
-    private TableColumn<WrapperEnoteca,Integer> tblColumnEnotecaQtaMin, tblColumnEnotecaQtaMax;
+    private TableColumn<WrapperEnoteca, Integer> tblColumnEnotecaQtaMin, tblColumnEnotecaQtaMax;
 
     @FXML
     private ComboBox<String> cmbEnotecaNome, cmbEnotecaMail, cmbEnotecaTelefono, cmbEnotecaStato, cmbEnotecaRegione, cmbEnotecaCitta, cmbEnotecaVia;
@@ -162,7 +162,7 @@ public class Ricerca {
         tblColumnRappresentanteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     }
 
-    private void loadTblFornitore(){
+    private void loadTblFornitore() {
         tblColumnFornitoreID.setCellValueFactory(new PropertyValueFactory<>("ID"));
         tblColumnFornitoreNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tblColumnFornitoreQtaMax.setCellValueFactory(new PropertyValueFactory<>("qta_max"));
@@ -171,7 +171,7 @@ public class Ricerca {
         tblColumnFornitoreTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
     }
 
-    private void loadTblEnoteca(){
+    private void loadTblEnoteca() {
         tblColumnEnotecaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         tblColumnEnotecaQtaMax.setCellValueFactory(new PropertyValueFactory<>("qta_max"));
         tblColumnEnotecaQtaMin.setCellValueFactory(new PropertyValueFactory<>("qta_min"));
@@ -202,15 +202,15 @@ public class Ricerca {
             }
             tblViewListaVino.setItems(wrapperVinos);
             loadTblVino();
-            cmbVinoNome.setItems(Utility.loadDataForCmb("vino","nome","",Vino.class));
-            cmbVinoTipo.setItems(Utility.loadDataForCmb("vino","tipo","",Vino.class));
-            cmbVinoUvaggio.setItems(Utility.loadDataForCmb("cantina","uvaggio","",Cantina.class));
-            cmbVinoCantina.setItems(Utility.loadDataForCmb("cantina","nome","",Cantina.class));
-            cmbVinoStato.setItems(Utility.loadDataForCmb("cantina","stato","",Cantina.class));
-            cmbVinoRegione.setItems(Utility.loadDataForCmb("cantina","regione","",Cantina.class));
-            cmbVinoFornitore.setItems(Utility.loadDataForCmb("fornitore","nome","",Fornitore.class));
-            cmbVinoAnnata.setItems(Utility.loadDataForCmbInteger("vino","anno",null,Vino.class));
-            cmbVinoQta.setItems(Utility.loadDataForCmbInteger("vino","qta",null,Vino.class));
+            cmbVinoNome.setItems(Utility.loadDataForCmb("vino", "nome", "", Vino.class));
+            cmbVinoTipo.setItems(Utility.loadDataForCmb("vino", "tipo", "", Vino.class));
+            cmbVinoUvaggio.setItems(Utility.loadDataForCmb("cantina", "uvaggio", "", Cantina.class));
+            cmbVinoCantina.setItems(Utility.loadDataForCmb("cantina", "nome", "", Cantina.class));
+            cmbVinoStato.setItems(Utility.loadDataForCmb("cantina", "stato", "", Cantina.class));
+            cmbVinoRegione.setItems(Utility.loadDataForCmb("cantina", "regione", "", Cantina.class));
+            cmbVinoFornitore.setItems(Utility.loadDataForCmb("fornitore", "nome", "", Fornitore.class));
+            cmbVinoAnnata.setItems(Utility.loadDataForCmbInteger("vino", "anno", null, Vino.class));
+            cmbVinoQta.setItems(Utility.loadDataForCmbInteger("vino", "qta", null, Vino.class));
 
 
             //CANTINA
@@ -227,11 +227,11 @@ public class Ricerca {
             APIC c = new APIC("fornitore");
             tblViewListaFornitore.setItems(c.select().toObservableList(Fornitore.class));
             loadTblFornitore();
-            cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore","nome","", Fornitore.class));
-            cmbFornitoreMail.setItems(Utility.loadDataForCmb("fornitore","mail","", Fornitore.class));
-            cmbFornitoreTelefono.setItems(Utility.loadDataForCmb("fornitore","telefono","", Fornitore.class));
-            cmbFornitoreQtaMin.setItems(Utility.loadDataForCmbInteger("fornitore","qta_min",null, Fornitore.class));
-            cmbFornitoreQtaMax.setItems(Utility.loadDataForCmbInteger("fornitore","qta_max",null, Fornitore.class));
+            cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore", "nome", "", Fornitore.class));
+            cmbFornitoreMail.setItems(Utility.loadDataForCmb("fornitore", "mail", "", Fornitore.class));
+            cmbFornitoreTelefono.setItems(Utility.loadDataForCmb("fornitore", "telefono", "", Fornitore.class));
+            cmbFornitoreQtaMin.setItems(Utility.loadDataForCmbInteger("fornitore", "qta_min", null, Fornitore.class));
+            cmbFornitoreQtaMax.setItems(Utility.loadDataForCmbInteger("fornitore", "qta_max", null, Fornitore.class));
 
             //RAPPRESENTANTE
             tblViewListaRappresentate.setItems(Fornitore.getFornitoriRappresentanti(colonne, clausolas));
@@ -244,22 +244,22 @@ public class Ricerca {
 
             //ENOTECA
             ObservableList<WrapperEnoteca> enotecaObservableList = FXCollections.observableArrayList();
-            for(Fornitore cur: Fornitore.getFornitoriEnoteca(colonne,clausolas)){
+            for (Fornitore cur : Fornitore.getFornitoriEnoteca(colonne, clausolas)) {
                 WrapperEnoteca wrapperEnoteca = new WrapperEnoteca(cur);
                 System.out.println(wrapperEnoteca.toString());
                 enotecaObservableList.add(wrapperEnoteca);
             }
             tblViewListaEnoteca.setItems(enotecaObservableList);
             loadTblEnoteca();
-            cmbEnotecaNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(),"nome","", Fornitore.class));
-            cmbEnotecaMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(),"mail","", Fornitore.class));
-            cmbEnotecaTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(),"telefono","", Fornitore.class));
-            cmbEnotecaStato.setItems(Utility.loadDataForCmb("enoteca","stato","", Enoteca.class));
-            cmbEnotecaRegione.setItems(Utility.loadDataForCmb("enoteca","regione","", Enoteca.class));
-            cmbEnotecaCitta.setItems(Utility.loadDataForCmb("enoteca","citta","", Enoteca.class));
-            cmbEnotecaVia.setItems(Utility.loadDataForCmb("enoteca","via","", Enoteca.class));
-            cmbEnotecaQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriEnoteche(),"qta_min",null, Fornitore.class));
-            cmbEnotecaQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriEnoteche(),"qta_max",null, Fornitore.class));
+            cmbEnotecaNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "nome", "", Fornitore.class));
+            cmbEnotecaMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "mail", "", Fornitore.class));
+            cmbEnotecaTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "telefono", "", Fornitore.class));
+            cmbEnotecaStato.setItems(Utility.loadDataForCmb("enoteca", "stato", "", Enoteca.class));
+            cmbEnotecaRegione.setItems(Utility.loadDataForCmb("enoteca", "regione", "", Enoteca.class));
+            cmbEnotecaCitta.setItems(Utility.loadDataForCmb("enoteca", "citta", "", Enoteca.class));
+            cmbEnotecaVia.setItems(Utility.loadDataForCmb("enoteca", "via", "", Enoteca.class));
+            cmbEnotecaQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriEnoteche(), "qta_min", null, Fornitore.class));
+            cmbEnotecaQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriEnoteche(), "qta_max", null, Fornitore.class));
 
 
             //TIPO
@@ -292,11 +292,11 @@ public class Ricerca {
         return cur;
     }
 
-    private void searchVino(Event event, boolean selected){
+    private void searchVino(Event event, boolean selected) {
         try {
             APIC aVino = new APIC("vino");
             APIC aCantina = new APIC("cantina");
-            APIC aFornitore =new APIC("fornitore");
+            APIC aFornitore = new APIC("fornitore");
             String[] strings = {};
             ArrayList<Clausola> clausolasVino = new ArrayList<>();
             ArrayList<Clausola> clausolasCantina = new ArrayList<>();
@@ -372,12 +372,18 @@ public class Ricerca {
                         cmbVinoRegione.setItems(Utility.loadDataForCmb("cantina", "regione", cmbVinoRegione.getSelectionModel().getSelectedItem(), Cantina.class));
                         cmbVinoRegione.show();
                         break;
-                    case "cmbRappresentanteQtaMax":
-                        //TODO CERCARE DI METTERE A POSTO LA RICERCA CON NUMERI
-//                        if (String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem()).equals(""))
-//                            cmbRappresentanteQtaMax.hide();
-//                        cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_max", cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem(), Fornitore.class));
-//                        cmbCantinaVia.show();
+                    case "cmbVinoFornitore":
+                        if (cmbVinoFornitore.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbVinoFornitore.hide();
+                        cmbVinoFornitore.setItems(Utility.loadDataForCmb("fornitore", "nome", cmbVinoFornitore.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbVinoFornitore.show();
+                        break;
+                    case "cmbVinoAnnata":
+//                        //TODO CERCARE DI METTERE A POSTO LA RICERCA CON NUMERI
+//                        if (Integer.valueOf(cmbVinoAnnata.getSelectionModel().getSelectedItem())==Integer.valueOf(""))
+//                            cmbVinoAnnata.hide();
+//                        cmbVinoAnnata.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "anno", cmbVinoAnnata.getSelectionModel().getSelectedItem(), Vino.class));
+//                        cmbVinoAnnata.show();
                         break;
                     case "cmbRappresentanteQtaMin":
 //                        if (String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem()).equals(""))
@@ -393,15 +399,15 @@ public class Ricerca {
 
                 }
             }
-            ObservableList<Cantina> cantinaObservableList = aCantina.select(strings,clausolasCantina).toObservableList(Cantina.class);
-            ObservableList<Fornitore>  fornitoreObservableList = aFornitore.select(strings,clausolasFornitore).toObservableList(Fornitore.class);
+            ObservableList<Cantina> cantinaObservableList = aCantina.select(strings, clausolasCantina).toObservableList(Cantina.class);
+            ObservableList<Fornitore> fornitoreObservableList = aFornitore.select(strings, clausolasFornitore).toObservableList(Fornitore.class);
             ObservableList<WrapperVino> wrapperVinos = FXCollections.observableArrayList();
-            for (Vino vino : aVino.select(strings,clausolasVino).toObservableList(Vino.class)) {
-                if(!cantinaObservableList.isEmpty()){
-                    for(Cantina cantina: cantinaObservableList){
-                        if(cantina.getID()==vino.getIdCantina()){
-                            for(Fornitore fornitore: fornitoreObservableList) {
-                                if(fornitore.getID()==vino.getIdFornitore())
+            for (Vino vino : aVino.select(strings, clausolasVino).toObservableList(Vino.class)) {
+                if (!cantinaObservableList.isEmpty()) {
+                    for (Cantina cantina : cantinaObservableList) {
+                        if (cantina.getID() == vino.getIdCantina()) {
+                            for (Fornitore fornitore : fornitoreObservableList) {
+                                if (fornitore.getID() == vino.getIdFornitore())
                                     wrapperVinos.add(new WrapperVino(vino));
                             }
                         }
@@ -416,13 +422,13 @@ public class Ricerca {
     }
 
     @FXML
-    private void selectVino(Event event){
-        searchVino(event,true);
+    private void selectVino(Event event) {
+        searchVino(event, true);
     }
 
     @FXML
-    private void typeVino(Event event){
-        searchVino(event,false);
+    private void typeVino(Event event) {
+        searchVino(event, false);
     }
 
     //CANTINA
@@ -518,58 +524,59 @@ public class Ricerca {
     @FXML
     private void openContextFornitore(Event event) {
         try {
-            InfoRappresentante infoRappresentante = new InfoRappresentante(this);
-            infoRappresentante.showStage();
+            InfoRappresentante infoFornitore = new InfoRappresentante(this, "fornitore");
+            infoFornitore.showStage();
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
     }
 
     public Fornitore getFornitore() {
-        Fornitore cur = (Fornitore) tblViewListaRappresentate.getSelectionModel().getSelectedItem();
+        Fornitore cur = (Fornitore) tblViewListaFornitore.getSelectionModel().getSelectedItem();
         return cur;
     }
 
     private void searchFornitore(Event event, boolean selected) {
         try {
-            APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
+            APIC a = new APIC("fornitore");
             String[] strings = {};
             ArrayList<Clausola> clausolas = new ArrayList<>();
             JFXComboBox cur = (JFXComboBox) event.getSource();
-            if (cmbRappresentanteNome.getSelectionModel().getSelectedItem() != "" && cmbRappresentanteNome.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("nome", "like", "%" + cmbRappresentanteNome.getSelectionModel().getSelectedItem() + "%"));
+            if (cmbFornitoreNome.getSelectionModel().getSelectedItem() != "" && cmbFornitoreNome.getSelectionModel().getSelectedItem() != null) {
+                clausolas.add(new Clausola("nome", "like", "%" + cmbFornitoreNome.getSelectionModel().getSelectedItem() + "%"));
             }
-            if (!String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem()).equals("") && cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("qta_max", "=", String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem())));
+            if (cmbFornitoreMail.getSelectionModel().getSelectedItem() != "" && cmbFornitoreMail.getSelectionModel().getSelectedItem() != null) {
+                clausolas.add(new Clausola("mail", "like", "%" + cmbFornitoreMail.getSelectionModel().getSelectedItem() + "%"));
             }
-            if (!String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem()).equals("") && cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("qta_min", "=", String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem())));
+            if (cmbFornitoreTelefono.getSelectionModel().getSelectedItem() != "" && cmbFornitoreTelefono.getSelectionModel().getSelectedItem() != null) {
+                clausolas.add(new Clausola("telefono", "like", "%" + cmbFornitoreTelefono.getSelectionModel().getSelectedItem() + "%"));
             }
-            if (cmbRappresentanteMail.getSelectionModel().getSelectedItem() != "" && cmbRappresentanteMail.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("mail", "like", "%" + cmbRappresentanteMail.getSelectionModel().getSelectedItem() + "%"));
+            if (!String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem()).equals("") && cmbEnotecaQtaMax.getSelectionModel().getSelectedItem() != null) {
+                clausolas.add(new Clausola("qta_max", "=", String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem())));
             }
-            if (cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() != "" && cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("telefono", "like", "%" + cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() + "%"));
+            if (!String.valueOf(cmbFornitoreQtaMin.getSelectionModel().getSelectedItem()).equals("") && cmbFornitoreQtaMin.getSelectionModel().getSelectedItem() != null) {
+                clausolas.add(new Clausola("qta_min", "=", String.valueOf(cmbFornitoreQtaMin.getSelectionModel().getSelectedItem())));
             }
+
             if (!selected) {
                 switch (cur.getId()) {
-                    case "cmbRappresentanteNome":
-                        if (cmbRappresentanteNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
-                            cmbRappresentanteNome.hide();
-                        cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", cmbRappresentanteNome.getSelectionModel().getSelectedItem(), Fornitore.class));
-                        cmbRappresentanteNome.show();
+                    case "cmbFornitoreNome":
+                        if (cmbFornitoreNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbFornitoreNome.hide();
+                        cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore", "nome", cmbFornitoreNome.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbFornitoreNome.show();
                         break;
-                    case "cmbRappresentanteMail":
-                        if (cmbRappresentanteMail.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
-                            cmbRappresentanteMail.hide();
-                        cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", cmbRappresentanteMail.getSelectionModel().getSelectedItem(), Fornitore.class));
-                        cmbRappresentanteMail.show();
+                    case "cmbFornitoreMail":
+                        if (cmbFornitoreMail.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbFornitoreMail.hide();
+                        cmbFornitoreMail.setItems(Utility.loadDataForCmb("fornitore", "mail", cmbFornitoreMail.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbFornitoreMail.show();
                         break;
-                    case "cmbRappresentanteTelefono":
-                        if (cmbRappresentanteTelefono.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
-                            cmbRappresentanteTelefono.hide();
-                        cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", cmbRappresentanteTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
-                        cmbRappresentanteTelefono.show();
+                    case "cmbFornitoreTelefono":
+                        if (cmbFornitoreTelefono.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbFornitoreTelefono.hide();
+                        cmbFornitoreTelefono.setItems(Utility.loadDataForCmb("fornitore", "telefono", cmbFornitoreTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbFornitoreTelefono.show();
                         break;
                     case "cmbRappresentanteQtaMax":
                         //TODO CERCARE DI METTERE A POSTO LA RICERCA CON NUMERI
@@ -592,7 +599,7 @@ public class Ricerca {
 
                 }
             }
-            tblViewListaRappresentate.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
+            tblViewListaFornitore.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -613,7 +620,7 @@ public class Ricerca {
     @FXML
     private void openContextRappresentante(Event event) {
         try {
-            InfoRappresentante infoRappresentante = new InfoRappresentante(this);
+            InfoRappresentante infoRappresentante = new InfoRappresentante(this, "rappresentante");
             infoRappresentante.showStage();
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
@@ -708,58 +715,95 @@ public class Ricerca {
     @FXML
     private void openContextEnoteca(Event event) {
         try {
-            InfoRappresentante infoRappresentante = new InfoRappresentante(this);
-            infoRappresentante.showStage();
+            InfoEnoteca infoEnoteca = new InfoEnoteca(this);
+            infoEnoteca.showStage();
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
     }
 
-    public Fornitore getEnoteca() {
-        Fornitore cur = (Fornitore) tblViewListaRappresentate.getSelectionModel().getSelectedItem();
+    public WrapperEnoteca getWrapperEnoteca() {
+        WrapperEnoteca cur = (WrapperEnoteca) tblViewListaEnoteca.getSelectionModel().getSelectedItem();
         return cur;
     }
 
     private void searchEnoteca(Event event, boolean selected) {
         try {
             APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
+            APIC b = new APIC("enoteca");
             String[] strings = {};
-            ArrayList<Clausola> clausolas = new ArrayList<>();
+            ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
+            ArrayList<Clausola> clausolasEnoteca = new ArrayList<>();
             JFXComboBox cur = (JFXComboBox) event.getSource();
-            if (cmbRappresentanteNome.getSelectionModel().getSelectedItem() != "" && cmbRappresentanteNome.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("nome", "like", "%" + cmbRappresentanteNome.getSelectionModel().getSelectedItem() + "%"));
+            if (cmbEnotecaNome.getSelectionModel().getSelectedItem() != "" && cmbEnotecaNome.getSelectionModel().getSelectedItem() != null) {
+                clausolasFornitore.add(new Clausola("nome", "like", "%" + cmbEnotecaNome.getSelectionModel().getSelectedItem() + "%"));
             }
-            if (!String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem()).equals("") && cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("qta_max", "=", String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem())));
+            if (!String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem()).equals("") && cmbEnotecaQtaMax.getSelectionModel().getSelectedItem() != null) {
+                clausolasFornitore.add(new Clausola("qta_max", "=", String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem())));
             }
-            if (!String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem()).equals("") && cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("qta_min", "=", String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem())));
+            if (!String.valueOf(cmbEnotecaQtaMin.getSelectionModel().getSelectedItem()).equals("") && cmbEnotecaQtaMin.getSelectionModel().getSelectedItem() != null) {
+                clausolasFornitore.add(new Clausola("qta_min", "=", String.valueOf(cmbEnotecaQtaMin.getSelectionModel().getSelectedItem())));
             }
-            if (cmbRappresentanteMail.getSelectionModel().getSelectedItem() != "" && cmbRappresentanteMail.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("mail", "like", "%" + cmbRappresentanteMail.getSelectionModel().getSelectedItem() + "%"));
+            if (cmbEnotecaMail.getSelectionModel().getSelectedItem() != "" && cmbEnotecaMail.getSelectionModel().getSelectedItem() != null) {
+                clausolasFornitore.add(new Clausola("mail", "like", "%" + cmbEnotecaMail.getSelectionModel().getSelectedItem() + "%"));
             }
-            if (cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() != "" && cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() != null) {
-                clausolas.add(new Clausola("telefono", "like", "%" + cmbRappresentanteTelefono.getSelectionModel().getSelectedItem() + "%"));
+            if (cmbEnotecaTelefono.getSelectionModel().getSelectedItem() != "" && cmbEnotecaTelefono.getSelectionModel().getSelectedItem() != null) {
+                clausolasFornitore.add(new Clausola("telefono", "like", "%" + cmbEnotecaTelefono.getSelectionModel().getSelectedItem() + "%"));
+            }
+            if (cmbEnotecaStato.getSelectionModel().getSelectedItem() != "" && cmbEnotecaStato.getSelectionModel().getSelectedItem() != null) {
+                clausolasEnoteca.add(new Clausola("stato", "like", "%" + cmbEnotecaStato.getSelectionModel().getSelectedItem() + "%"));
+            }
+            if (cmbEnotecaRegione.getSelectionModel().getSelectedItem() != "" && cmbEnotecaRegione.getSelectionModel().getSelectedItem() != null) {
+                clausolasEnoteca.add(new Clausola("regione", "like", "%" + cmbEnotecaRegione.getSelectionModel().getSelectedItem() + "%"));
+            }
+            if (cmbEnotecaRegione.getSelectionModel().getSelectedItem() != "" && cmbEnotecaRegione.getSelectionModel().getSelectedItem() != null) {
+                clausolasEnoteca.add(new Clausola("telefono", "like", "%" + cmbEnotecaRegione.getSelectionModel().getSelectedItem() + "%"));
+            }
+            if (cmbEnotecaVia.getSelectionModel().getSelectedItem() != "" && cmbEnotecaVia.getSelectionModel().getSelectedItem() != null) {
+                clausolasEnoteca.add(new Clausola("telefono", "like", "%" + cmbEnotecaVia.getSelectionModel().getSelectedItem() + "%"));
             }
             if (!selected) {
                 switch (cur.getId()) {
-                    case "cmbRappresentanteNome":
-                        if (cmbRappresentanteNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
-                            cmbRappresentanteNome.hide();
-                        cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", cmbRappresentanteNome.getSelectionModel().getSelectedItem(), Fornitore.class));
-                        cmbRappresentanteNome.show();
+                    case "cmbEnotecaNome":
+                        if (cmbEnotecaNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbEnotecaNome.hide();
+                        cmbEnotecaNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "nome", cmbEnotecaNome.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbEnotecaNome.show();
                         break;
-                    case "cmbRappresentanteMail":
-                        if (cmbRappresentanteMail.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
-                            cmbRappresentanteMail.hide();
-                        cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", cmbRappresentanteMail.getSelectionModel().getSelectedItem(), Fornitore.class));
-                        cmbRappresentanteMail.show();
+                    case "cmbEnotecaMail":
+                        if (cmbEnotecaMail.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbEnotecaMail.hide();
+                        cmbEnotecaMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "mail", cmbEnotecaMail.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbEnotecaMail.show();
                         break;
-                    case "cmbRappresentanteTelefono":
-                        if (cmbRappresentanteTelefono.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
-                            cmbRappresentanteTelefono.hide();
-                        cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", cmbRappresentanteTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
-                        cmbRappresentanteTelefono.show();
+                    case "cmbEnotecaTelefono":
+                        if (cmbEnotecaTelefono.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbEnotecaTelefono.hide();
+                        cmbEnotecaTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "telefono", cmbEnotecaTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbEnotecaTelefono.show();
+                        break;
+                    case "cmbEnotecaStato":
+                        if (cmbEnotecaStato.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbEnotecaStato.hide();
+                        cmbEnotecaStato.setItems(Utility.loadDataForCmb("enoteca", "stato", cmbEnotecaStato.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaStato.show();
+                        break;
+                    case "cmbEnotecaRegione":
+                        if (cmbEnotecaRegione.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbEnotecaRegione.hide();
+                        cmbEnotecaRegione.setItems(Utility.loadDataForCmb("enoteca", "regione", cmbEnotecaRegione.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaRegione.show();
+                        break;
+                    case "cmbEnotecaCitta":
+                        cmbEnotecaCitta.hide();
+                        cmbEnotecaCitta.setItems(Utility.loadDataForCmb("enoteca", "citta", cmbEnotecaCitta.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaCitta.show();
+                        break;
+                    case "cmbEnotecaVia":
+                        if (cmbEnotecaVia.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbEnotecaVia.hide();
+                        cmbEnotecaVia.setItems(Utility.loadDataForCmb("enoteca", "via", cmbEnotecaTelefono.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaVia.show();
                         break;
                     case "cmbRappresentanteQtaMax":
                         //TODO CERCARE DI METTERE A POSTO LA RICERCA CON NUMERI
@@ -782,7 +826,16 @@ public class Ricerca {
 
                 }
             }
-            tblViewListaRappresentate.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
+            ObservableList<Enoteca> enotecaObservableList = b.select(strings, clausolasEnoteca).toObservableList(Enoteca.class);
+            ObservableList<WrapperEnoteca> wrapperEnotecas = FXCollections.observableArrayList();
+            for (Fornitore fornitore : a.select(strings, clausolasFornitore).toObservableList(Fornitore.class)) {
+                for (Enoteca enoteca : enotecaObservableList) {
+                    if (enoteca.getID() == fornitore.getID()) {
+                        wrapperEnotecas.add(new WrapperEnoteca(fornitore));
+                    }
+                }
+            }
+            tblViewListaEnoteca.setItems(wrapperEnotecas);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -143,6 +143,11 @@ public class InfoVino {
 
             thisStage.setOnCloseRequest((WindowEvent event1) -> {
                 closeProcedure();
+                try {
+                    ricerca.loadAllTbl();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             });
         } catch (IOException e) {
             e.printStackTrace();
@@ -176,11 +181,6 @@ public class InfoVino {
                             valid = false;
                         }
                         clausolas.remove(0);
-//                        clausolas.add(new Clausola("id", "=", String.valueOf(vino.getID())));
-//                        if (a.select(strings, clausolas).toList(Vino.class).size() == 1 && idVinoModified) {
-//                            valid = false;
-//                        }
-//                        clausolas.remove(0);
                         System.out.println(vino.getTipo().toString() + " " + cmbTipo.getSelectionModel().getSelectedItem().toString());
                         if (vino.getTipo() != cmbTipo.getSelectionModel().getSelectedItem()) {
                             vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
@@ -195,17 +195,11 @@ public class InfoVino {
                     } catch (Exception e1) {
                         e1.printStackTrace();
                     }
-                    cantina.update();
-                    //fornitore.update();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
                 System.out.println("Salvo");
-                try {
-                    this.ricerca.loadAllTbl();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
             } else {
                 System.out.println("Non salvo");
             }
@@ -324,7 +318,6 @@ public class InfoVino {
                 ArrayList<Clausola> clausolas = new ArrayList<>();
                 clausolas.add(new Clausola("nome", "like", fornitore.getNome()));
                 fornitore = a.select(strings, clausolas).toList(Fornitore.class).get(0);
-                tfCantinaID.setText(String.valueOf(fornitore.getID()));
                 tfFornitoreID.setText(String.valueOf(fornitore.getID()));
                 tfFornitoreMail.setText((fornitore.getMail()));
                 tfFornitoreTelefono.setText((fornitore.getTelefono()));

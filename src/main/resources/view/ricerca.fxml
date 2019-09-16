@@ -182,7 +182,7 @@
                               <Font size="25.0" />
                            </font>
                         </JFXTextField>
-                        <Label layoutX="513.0" layoutY="270.0" text="Informazioni sul tipo selezionato">
+                        <Label layoutX="513.0" layoutY="199.0" text="Informazioni sul tipo selezionato">
                            <font>
                               <Font size="24.0" />
                            </font>

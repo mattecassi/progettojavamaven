@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="487.0" prefWidth="420.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <JFXTextField fx:id="tfID" editable="false" labelFloat="true" layoutX="38.0" layoutY="48.0" promptText="ID" />
+      <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="233.0" layoutY="48.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Nome" />
+      <JFXTextField fx:id="tfQtaMin" labelFloat="true" layoutX="38.0" layoutY="106.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Qta Min" />
+      <JFXTextField fx:id="tfQtaMax" labelFloat="true" layoutX="233.0" layoutY="106.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Qta Max" />
+      <JFXTextField fx:id="tfMail" labelFloat="true" layoutX="38.0" layoutY="165.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Mail" />
+      <JFXTextField fx:id="tfTelefono" labelFloat="true" layoutX="233.0" layoutY="165.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Telefono" />
+      <JFXTextField fx:id="tfStato" labelFloat="true" layoutX="38.0" layoutY="229.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Stato" />
+      <JFXTextField fx:id="tfRegione" labelFloat="true" layoutX="233.0" layoutY="229.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Regione" />
+      <JFXTextField fx:id="tfCitta" labelFloat="true" layoutX="38.0" layoutY="292.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Città" />
+      <JFXTextField fx:id="tfVia" labelFloat="true" layoutX="233.0" layoutY="292.0" onKeyReleased="#valueModified" onKeyTyped="#valueModified" promptText="Via" />
+      <JFXButton fx:id="btnElimina" layoutX="173.0" layoutY="411.0" onAction="#btnPress" prefHeight="46.0" prefWidth="90.0" text="Elimina" />
+      <JFXButton fx:id="btnSalva" layoutX="288.0" layoutY="411.0" onAction="#btnPress" prefHeight="46.0" prefWidth="90.0" text="Salva" />
+   </children>
 </AnchorPane>

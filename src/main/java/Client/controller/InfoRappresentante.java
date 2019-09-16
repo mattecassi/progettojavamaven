@@ -2,9 +2,7 @@ package Client.controller;
 
 import API.APIC;
 import ClientUtils.Clausola;
-import Models.Cantina;
-import Models.Fornitore;
-import Models.Rappresentante;
+import Models.*;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
@@ -19,8 +17,10 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+import sun.nio.cs.ArrayEncoder;
 
 import java.io.IOException;
+import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -28,6 +28,7 @@ public class InfoRappresentante {
 
     private Stage thisStage;
     private final Ricerca ricerca;
+    private String tipo;
 
     private boolean modified = false, nomeRappresentanteModified = false;
     private Fornitore rappresentante;
@@ -62,9 +63,9 @@ public class InfoRappresentante {
     }
 
 
-    public InfoRappresentante(Ricerca ricerca){
+    public InfoRappresentante(Ricerca ricerca, String tipo) {
         this.ricerca = ricerca;
-
+        this.tipo = tipo;
         thisStage = new Stage();
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/infoRappresentante.fxml"));
@@ -76,9 +77,14 @@ public class InfoRappresentante {
             thisStage.setScene(new Scene(loader.load()));
 
             // Setup the window/stage
-            thisStage.setTitle("Info Cantina");
+            if (tipo.equals("rappresentante")) {
+                thisStage.setTitle("Info Rappresentante");
+                rappresentante = ricerca.getRappresentante();
+            } else {
+                thisStage.setTitle("Info Fornitore");
+                rappresentante = ricerca.getFornitore();
+            }
 
-            rappresentante = ricerca.getRappresentante();
             tfID.setText(String.valueOf(rappresentante.getID()));
             tfQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
             tfQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
@@ -97,11 +103,14 @@ public class InfoRappresentante {
         }
     }
 
-    private void closeProcedure(){
+    private void closeProcedure() {
         if (modified) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Conferma Modifica");
-            alert.setHeaderText("Hai effettuato modifica al rappresentante");
+            if (tipo.equals("rappresentante"))
+                alert.setHeaderText("Hai effettuato modifica al rappresentante");
+            else
+                alert.setHeaderText("Hai effettuato modifica al fornitore");
             alert.setContentText("Vuoi salvare tali modifiche");
 
             Optional<ButtonType> result = alert.showAndWait();
@@ -111,7 +120,16 @@ public class InfoRappresentante {
                         String[] strings = {};
                         boolean valid = true;
                         ArrayList<Clausola> clausolas = new ArrayList<>();
-                        APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
+                        APIC a;
+                        switch (tipo) {
+                            case "rappresentante":
+                                a = new APIC(Fornitore.getTableFornitoriRappresentanti());
+                                break;
+                            default:
+                                a = new APIC("fornitore");
+
+
+                        }
                         clausolas.add(new Clausola("nome", "like", rappresentante.getNome()));
                         if (a.select(strings, clausolas).toList(Fornitore.class).size() == 1 && nomeRappresentanteModified) {
                             valid = false;
@@ -141,20 +159,23 @@ public class InfoRappresentante {
     }
 
     @FXML
-    private void valueModified(Event e){
+    private void valueModified(Event e) {
         modified = true;
+        Integer integer;
         try {
             JFXTextField tfCur = (JFXTextField) e.getSource();
             switch (tfCur.getId()) {
                 case "tfNome":
-                    nomeRappresentanteModified=true;
+                    nomeRappresentanteModified = true;
                     rappresentante.setNome(tfNome.getText());
                     break;
                 case "tfQtaMin":
-                    rappresentante.setQta_min(Integer.valueOf(tfQtaMin.getText()));
+                    integer = Integer.valueOf(tfQtaMin.getText());
+                    rappresentante.setQta_min(integer);
                     break;
                 case "tfQtaMax":
-                    rappresentante.setQta_max(Integer.valueOf(tfQtaMax.getText()));
+                    integer = Integer.valueOf(tfQtaMax.getText());
+                    rappresentante.setQta_max(integer);
                     break;
                 case "tfMail":
                     rappresentante.setMail(tfMail.getText());
@@ -163,41 +184,68 @@ public class InfoRappresentante {
                     rappresentante.setTelefono(tfTelefono.getText());
                     break;
             }
-        }catch (Exception e1){
-            Utility.createErrorWindow(e1.getMessage());
+        } catch (Exception e1) {
         }
     }
 
     @FXML
-    private void btnPress(Event event){
-        Button btnPressed = (Button)event.getSource();
-        switch (btnPressed.getId()){
+    private void btnPress(Event event) {
+        Button btnPressed = (Button) event.getSource();
+        switch (btnPressed.getId()) {
             case "btnElimina":
+                APIC aEnoteca = new APIC("enoteca");
+                String[] stringsEnoteca = {};
+                ArrayList<Clausola> clausolasEnoteca = new ArrayList<>();
+                clausolasEnoteca.add(new Clausola("ID", "=", rappresentante.getID().toString()));
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Conferma Eliminazione");
-                alert.setHeaderText("Stai eliminando il rappresentante \""+rappresentante.getNome() +"\", cosi fancendo eliminerai anche tutte le cantine associate (e i relativi vini!!)!");
+                alert.setHeaderText("Stai eliminando il rappresentante \"" + rappresentante.getNome() + "\", cosi fancendo eliminerai anche tutte le cantine associate (e i relativi vini!!)!");
                 alert.setContentText("Vuoi davvero eliminare la cantina?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     try {
-                        APIC a = new APIC("cantina");
-                        String[] strings ={};
-                        ArrayList<Clausola> clausolasCantina = new ArrayList<>();
-                        ArrayList<Clausola> clausolasVino= new ArrayList<>();
-                        clausolasCantina.add(new Clausola("idRappresentante","=", rappresentante.getID().toString()));
-                        for(Cantina cur: a.select(strings,clausolasCantina).toList(Cantina.class)){
-                            clausolasVino.add(new Clausola("idCantina","=", cur.getID().toString()));
+                        if (aEnoteca.select(stringsEnoteca,clausolasEnoteca).toList(Fornitore.class).isEmpty()) {
+                            APIC a = new APIC("cantina");
+                            String[] strings = {};
+                            ArrayList<Clausola> clausolasCantina = new ArrayList<>();
+                            ArrayList<Clausola> clausolasVino = new ArrayList<>();
+                            clausolasCantina.add(new Clausola("idRappresentante", "=", rappresentante.getID().toString()));
+                            for (Cantina cur : a.select(strings, clausolasCantina).toList(Cantina.class)) {
+                                clausolasVino.add(new Clausola("idCantina", "=", cur.getID().toString()));
+                                ricerca.eliminaVini(clausolasVino);
+                                clausolasVino.remove(0);
+                                cur.delete();
+                            }
+                            clausolasVino.add(new Clausola("idFornitore", "=", rappresentante.getID().toString()));
                             ricerca.eliminaVini(clausolasVino);
-                            clausolasVino.remove(0);
-                            cur.delete();
+                            APIC aRappre = new APIC("rappresentante");
+                            ArrayList<Clausola> clausolasRappresentante = new ArrayList<>();
+                            clausolasRappresentante.add(new Clausola("id", "=", rappresentante.getID().toString()));
+                            aRappre.select(strings, clausolasRappresentante).toList(Rappresentante.class).get(0).delete();
+                            rappresentante.delete();
+                        }else{
+                            APIC aFornitore = new APIC("fornitore");
+                            String[] strings = {};
+                            ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
+                            ArrayList<Clausola> clausolasVino = new ArrayList<>();
+
+                            clausolasFornitore.add(new Clausola("ID","=",rappresentante.getID().toString()));
+                            WrapperEnoteca wrapperEnoteca = new WrapperEnoteca(rappresentante);
+
+
+                            Enoteca enoteca=wrapperEnoteca.enoteca;
+                            enoteca.delete();
+
+                            for (Fornitore cur : aFornitore.select(strings, clausolasFornitore).toList(Fornitore.class)) {
+                                clausolasVino.add(new Clausola("idFornitore", "=", cur.getID().toString()));
+                                ricerca.eliminaVini(clausolasVino);
+                                clausolasVino.remove(0);
+                                cur.delete();
+                            }
+
+                            rappresentante.delete();
+
                         }
-                        clausolasVino.add(new Clausola("idFornitore","=",rappresentante.getID().toString()));
-                        ricerca.eliminaVini(clausolasVino);
-                        APIC aRappre = new APIC("rappresentante");
-                        ArrayList<Clausola> clausolasRappresentante = new ArrayList<>();
-                        clausolasRappresentante.add(new Clausola("id", "=", rappresentante.getID().toString()));
-                        aRappre.select(strings,clausolasRappresentante).toList(Rappresentante.class).get(0).delete();
-                        rappresentante.delete();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -207,7 +255,7 @@ public class InfoRappresentante {
                 break;
             case "btnSalva":
                 closeProcedure();
-                modified=false;
+                modified = false;
                 break;
         }
     }
