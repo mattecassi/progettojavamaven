@@ -45,6 +45,7 @@ public class DAO {
         this.getConnection().getConnection().setAutoCommit(false);
 
         Statement s = this.getConnection().connection.createStatement();
+        System.out.println(sql);
         s.executeUpdate(sql);
 
         Integer afterViolation = getNumberForeignKeyViolation();

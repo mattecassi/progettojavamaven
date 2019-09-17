@@ -1,12 +1,6 @@
 //--module-path C:\Users\bizza\Desktop\ApplicationOOp\FX\javafx-sdk-12.0.2\lib --add-modules javafx.controls,javafx.fxml
 
 package Client;
-import API.APIC;
-import Client.controller.Ricerca;
-import ClientUtils.Clausola;
-import ClientUtils.UpdateElem;
-import Models.Fornitore;
-import Utils.APIReturn;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;

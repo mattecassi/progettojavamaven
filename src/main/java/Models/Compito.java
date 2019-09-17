@@ -1,9 +1,13 @@
 package Models;
 
 import API.APIC;
+import ClientUtils.Clausola;
+import Utils.APIReturn;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Compito extends Model {
 
@@ -64,7 +68,7 @@ public class Compito extends Model {
             //compito settimanale
             int giornoAttuale = oggi.getDayOfWeek().getValue();
             long add;
-            if (this.dow == 0 && giornoAttuale < 7){
+            if (this.dow == 0 && giornoAttuale <= 7){
                 //caso sia domenica
                 add = 7L - (long)giornoAttuale;
                 compitoSvolto.setDataRisoluzioneObj(LocalDate.now().plusDays(add));
@@ -107,7 +111,7 @@ public class Compito extends Model {
      */
     public Integer getTipoCompito(){
 
-        if (this.dow == null && this.dataCompito == null)
+        if (this.dow == null && this.dataCompitoOff == null)
             return 2;
         else if (this.dow == null)
             return 1;
@@ -179,6 +183,15 @@ public class Compito extends Model {
     public void setDataCompitoOff(String dataCompitoOff) throws Exception{
         this.dataCompitoOff = dataCompitoOff;
         this.setDataCompito(LocalDate.parse(this.dataCompitoOff));
+    }
+
+    @Override
+    public APIReturn delete() throws Exception {
+        APIC apicCompitoSvolto = new APIC("compitoSvolto");
+        List<Clausola> l = new ArrayList<>();
+        l.add(new Clausola("idCompito","=",this.getID().toString()));
+        apicCompitoSvolto.delete(l);
+        return super.delete();
     }
 
     public Integer getDow() {

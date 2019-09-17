@@ -7,7 +7,7 @@ where (
     or
     (dow is null and dataCompitoOff is NULL)
     or
-    (dow = 0 or dow >= strftime("%w", "now"))
+    (dow = 0 or ( strftime("%w", "now") not IN ("0") AND dow >= strftime("%w", "now")))
   )
   AND NOT EXISTS(
     SELECT *

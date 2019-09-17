@@ -100,6 +100,39 @@ public class Utility {
 
     }
 
+    public static String convertNumberIntoDayOfTheWeek(Integer n){
+        switch (n){
+            case 1 :{
+                return "LUNEDI'";
+            }
+            case 2 :{
+                return "MARTEDI'";
+            }
+
+            case 3 : {
+                return "MERCOLEDI'";
+            }
+
+            case 4:{
+                return "GIOVEDI'";
+            }
+
+            case 5:{
+                return "VENERDI'";
+            }
+
+            case 6:{
+                return "SABATO";
+            }
+            case 0:{
+                return "DOMENICA";
+            }
+            default: {
+                return "DOMENICA";
+            }
+        }
+    }
+
     public static <T extends Model> ObservableList<Integer> loadDataForCmbInteger(String table, String field,Integer value, Class<T> typeParameter) throws Exception {
 
         JSONObject jsonObject;

@@ -1,0 +1,29 @@
+.custom-jfx-check-box{
+    -jfx-checked-color: YELLOW;
+    -jfx-unchecked-color: BLACK;
+}
+
+.card {
+    -fx-background-color: #fff;
+    -fx-border-radius: 2px;
+    -fx-effect: dropshadow(one-pass-box, rgba(0, 0, 0, .75), 5, 0.19, 0, 1);
+}
+
+
+.btnDown{
+    -fx-background-color:lightgrey ;
+    -fx-background-radius: 5em;
+    /*-fx-min-width: 3px;*/
+    /*-fx-min-height: 3px;*/
+    /*-fx-max-width: 3px;*/
+    /*-fx-max-height: 3px;*/
+}
+
+.Titolo{
+    -fx-font-size: 50px;
+    -fx-alignment: center;
+}
+
+/*.card-2 {*/
+    /*box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);*/
+/*}*/
