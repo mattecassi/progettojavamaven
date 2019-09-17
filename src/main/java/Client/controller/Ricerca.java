@@ -12,15 +12,18 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class Ricerca {
+public class Ricerca implements Initializable {
 
     public boolean allLoaded = false;
     @FXML
@@ -137,6 +140,15 @@ public class Ricerca {
         tblColumnUvaggio.setCellValueFactory(new PropertyValueFactory<>("uvaggio"));
         tblColumnCantina.setCellValueFactory(new PropertyValueFactory<>("cantinaNome"));
         tblColonnaFornitore.setCellValueFactory(new PropertyValueFactory<>("fornitoreNome"));
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+                loadAllTbl();
+        }catch (Exception e){
+            Utility.createErrorWindow(e.getMessage());
+        }
     }
 
     //IMPOSTO I DATI DELLA TABELLA DEI VINI

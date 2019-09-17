@@ -17,6 +17,7 @@ import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class NuovoCheckList {
@@ -120,6 +121,7 @@ public class NuovoCheckList {
                     try {
                         compito = new Compito(tfDescrizione.getText());
                         compito.insert();
+                        this.checkList.getV().getChildren().add(this.checkList.getCardForTask(compito,this.checkList.getV()));
                     }catch (Exception e){
                         e.printStackTrace();
                     }
@@ -160,6 +162,14 @@ public class NuovoCheckList {
                         try {
                             compito = new Compito(tfDescrizione.getText(), cur);
                             compito.insert();
+
+                            Integer oggi = LocalDate.now().getDayOfWeek().getValue();
+                            if (compito.getDow() == 0 || compito.getDow() >= oggi ){
+                                compito.setDescrizione(compito.getDescrizione() + " " + Utility.convertNumberIntoDayOfTheWeek(compito.getDow()));
+                                this.checkList.getvSettimana().getChildren().add(this.checkList.getCardForTask(compito,this.checkList.getvSettimana()));
+                            }
+
+
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -174,7 +184,16 @@ public class NuovoCheckList {
                         try {
                             compito = new Compito(tfDescrizione.getText(), datePicker.getValue());
                             compito.insert();
+
+                            if (LocalDate.parse(compito.getDataCompitoOff()).equals(LocalDate.now()))
+                                this.checkList.getV().getChildren().add(this.checkList.getCardForTask(compito,this.checkList.getV()));
+                            else {
+                                compito.setDescrizione(compito.getDescrizione() + " DATA: " + compito.getDataCompitoOff());
+                                this.checkList.getvSettimana().getChildren().add(this.checkList.getCardForTask(compito,this.checkList.getvSettimana()));
+                            }
+
                         } catch (Exception e) {
+                            Utility.createErrorWindow("ERRORE DURANTE LA CREAZIONE DEL COMPITINO\n" + e.getMessage());
                             e.printStackTrace();
                         }
                         //UNA VOLTA TERMINATO RESETTO I CAMPI
