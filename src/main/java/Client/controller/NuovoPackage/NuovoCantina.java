@@ -42,7 +42,7 @@ public class NuovoCantina {
     @FXML
     private JFXComboBox<String> cmbRappresentante;
 
-    @FXML
+    @FXML//CARICO LA COMBO BOX
     private void loadCmbRappresentante() {
         try {
             cmbRappresentante.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", "", Fornitore.class));
@@ -53,10 +53,10 @@ public class NuovoCantina {
 
     @FXML
     void insertElement(Event event) {
-
+        //CONTROLLO DI AVER INSERITO TUTTI I CAMPI
         if (tfNome.getText().isEmpty() || tfUvaggio.getText().isEmpty() || tfStato.getText().isEmpty() || tfRegione.getText().isEmpty() || tfVia.getText().isEmpty()) {
             Utility.createErrorWindow("Inserisci tutti i campi obbligatori");
-        } else {
+        } else {//CONOTROLLI I DATI
             Cantina cantina = new Cantina();
             cantina.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
             cantina.setUvaggio(Utility.replaceAllDeniedChar(tfUvaggio.getText()));
@@ -68,13 +68,13 @@ public class NuovoCantina {
 
             if (nomeFornitore != "") {
                 try {
+                    //ACQUISICO L'ID DEL RAPPRESENTANTE IN BASE AL NOME SELEZIONATO
                     APIC a = new APIC("fornitore");
                     String[] strings = {};
                     ArrayList<Clausola> clausolas = new ArrayList<>();
                     clausolas.add(new Clausola("nome", "=", nomeFornitore));
-
                     Rappresentante rappresentante = a.select(strings, clausolas).toObservableList(Rappresentante.class).get(0);
-                    System.out.println(rappresentante.toString());
+                    //IMPOSTO L'ID DEL FORNITORE DELLA CANTINA CON IL VALORE APPENA TROVATO
                     cantina.setIdrappresentante(rappresentante.getID());
                     cantina.getIdrappresentante();
 
@@ -84,13 +84,13 @@ public class NuovoCantina {
             }
 
             try {
-                boolean presente = false;
+                //CONTROLLO CHE NON ESISTA UNA CANTINA CON LO STESSO NOME
                 APIC a = new APIC("cantina");
-                APIReturn ret;
                 String[] strings = {"nome"};
                 ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
                 clausolas.add(new Clausola("nome", "LIKE", cantina.getNome()));
                 if (a.select(strings, clausolas).toList(Cantina.class).isEmpty()) {
+                    //INSERISCO E RESETTO I CAMPI
                     cantina.insert();
                     tfNome.setText("");
                     tfUvaggio.setText("");

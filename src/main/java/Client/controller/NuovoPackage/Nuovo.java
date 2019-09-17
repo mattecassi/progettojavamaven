@@ -44,9 +44,7 @@ public class Nuovo{
 
     @FXML
     private void loadCmb(Event event){
-        try{
-            String[] strings = {};
-            ArrayList<Clausola> clausolas = new ArrayList<>();
+        try{    //CARICO COMBO BOX
             cmbTipo.setItems(Utility.loadDataForCmb("tipo_vino","tipo","",TipoVino.class));
             cmbCantina.setItems(Utility.loadDataForCmb("cantina","nome","",Cantina.class));
             cmbFornitore.setItems(Utility.loadDataForCmb("fornitore","nome","",Fornitore.class));
@@ -55,18 +53,14 @@ public class Nuovo{
         }
     }
 
-    //TODO controllare che qta e annata siano dei numeri
     @FXML
-    void inserisciElement(){
-        APIReturn ret;
-        //|| tfCodice.getText().isEmpty()
+    void inserisciElement(){ //CONTROLLO DI AVERE INSERITO TUTTI I CAMPI
         if (tfID.getText().isEmpty() || tfCosto.getText().isEmpty() || tfPrezzoVendita.getText().isEmpty()  || tfAnnata.getText().isEmpty() || cmbTipo.getSelectionModel().getSelectedItem().isEmpty() || tfQta.getText().isEmpty() || cmbCantina.getSelectionModel().getSelectedItem().isEmpty() || tfNome.getText().isEmpty()){
             Utility.createErrorWindow("Inserisci tutti i campi");
         } else {
 
             Vino vino = new Vino();
-
-            //todo aggiunto controllo numeri e controllo stringhe
+            //ACQUISISCO I VALORI
             try {
                 vino.setID(Integer.valueOf(tfID.getText()));
                 vino.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
@@ -92,7 +86,7 @@ public class Nuovo{
                 Utility.createErrorWindow(e.getMessage());
                 e.printStackTrace();
             }
-
+            //ANALOGO PER IL FORNITORE
             APIC aFornitore = new APIC("fornitore");
             String[] stringsFornitore = {};
             ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
@@ -106,7 +100,7 @@ public class Nuovo{
             }
 
 
-            try {
+            try { //CONTROLLO CHE NON ESISTA GIA UN VINO CON STESSO NOME
                 APIC aVino = new APIC("vino");
                 String[] stringsVino = {"nome"};
                 ArrayList<Clausola> clausolasVino = new ArrayList<Clausola>();
@@ -114,6 +108,7 @@ public class Nuovo{
                 if (aVino.select(stringsVino, clausolasVino).toList(Vino.class).isEmpty()) {
                     vino.insert();
                     Utility.createSuccessWindow("Inserimento avvenuto con successo");
+                    //RESETTO I CAMPI COSI DA POTER INSERIRE SUBITO UN VINO NUOVO
                     tfCosto.setText("");
                     tfPrezzoVendita.setText("");
                     tfQta.setText("");
@@ -133,6 +128,8 @@ public class Nuovo{
         }
     }
 
+
+    //CREO NUOVI STAGE IN BASE AL BOTTONO CLICCATO
     @FXML
     private void changeScene(Event event) throws Exception {
         Main2 main = new Main2();

@@ -69,36 +69,13 @@ public class Inventario{
     @FXML
     private JFXButton btnUpdate;
 
-    public Inventario(){
-    }
-
-    public void load(ArrayList<Vino> list){
-        this.list=list;
-//          this.vino=vino;
-//          tfQta.getId();
-//        for(Vino vino: this.list){
-//            System.out.println((vino.toString()));
-//        }
-//        System.out.println(this.list.get(0).getNome());
-//        System.out.println("tutto ok");
-//            setFirst(vino);
-//        for(Vino vino: list){
-//            System.out.println(vino.toString());
-//        }
-    }
-
-//    private void setFirst(Vino vino){
-//        tfNome.setText(vino.getNome());
-//        tfAnnata.setText(String.valueOf(vino.getAnno()));
-//        tfTipo.setText(vino.getTipo());
-//        tfCantina.setText(String.valueOf(vino.getIdCantina()));
-//    }
 
     @FXML
     public void checkInventario() {
         try {
-            ObservableList<Vino> errors = FXCollections.observableArrayList();
-            APIC a = new APIC("vino");
+
+            ObservableList<Vino> errors = FXCollections.observableArrayList();//CREO UN OBSERVABLE LIST PER I VINI CON QUANTITA SBAGLIATA
+            APIC a = new APIC("vino");//CARICO TUTTI I VINI CHE HO NEL DB E LI SALVO IN UNA LISTITERATOR
             String[] strings = {};
             ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
             list = a.select(strings, clausolas).toList(Vino.class);
@@ -109,7 +86,7 @@ public class Inventario{
             tfTipo.setText(vino.getTipo());
             tfAnnata.setText(String.valueOf(vino.getAnno()));
             tfCantina.setText(String.valueOf(vino.getIdCantina()));
-            btnNext.setOnAction(event -> {
+            btnNext.setOnAction(event -> {//OGNI VOLTA CHE PREMO NEXT MI CONTROLLA LA QUANTITA E VADO AVANTI FINO ALLA FINE
                 try {
                     if (vino.getQta() == Integer.valueOf(tfQta.getText())) {
                         Utility.createSuccessWindow("Corretto");
@@ -131,9 +108,9 @@ public class Inventario{
                     tfQta.setText("");
                 } else {
                     Utility.createWarningWindow("Sono finiti i vini da controllare");
-                    try {
+                    try {//UNA VOLTA FINITO FACCIO VEDERE SE CI SONO DEI VINI CON QUANTITA SBAGLIATA E CHIEDO DI AGGIORNARE IL DB
                         if (!errors.isEmpty()) {
-
+                            //MODIFICO LA SCENE
                             tfQta.setVisible(false);
                             tfCantina.setVisible(false);
                             tfAnnata.setVisible(false);
@@ -155,7 +132,7 @@ public class Inventario{
 
                             tblErrore.setItems(errors);
 
-                            btnUpdate.setOnAction(event1 -> {
+                            btnUpdate.setOnAction(event1 -> {//DECIDO DI FARE L'UPDATE DELLE QTA
                                 APIC update = new APIC("vino");
                                 for(Vino cur: errors){
                                     try {
@@ -187,25 +164,5 @@ public class Inventario{
         }catch (Exception e){
             Utility.createWarningWindow(e.getMessage());
         }
-    }/*
-        if (start) {
-            if (tfQta.getText().isEmpty()) {
-                Utility.createErrorWindow("Inserisci un numero valido");
-            } else {
-                String qtaString = tfQta.getText();
-                try {
-                    Integer qta = Integer.valueOf(qtaString);
-                    if (qta < 0)
-                        Utility.createErrorWindow("Inserire numero positivo");
-                    else {
-                        if (qta != vino.getQta())
-                            tfQta.setText(null);
-                    }
-                } catch (Exception stringInput) {
-                    Utility.createErrorWindow("Inserire un numero");
-                }
-            }
-        }else{
-            start=true;
-        }*/
+    }
 }

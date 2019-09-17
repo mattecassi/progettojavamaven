@@ -10,7 +10,7 @@ public class WrapperCantina extends  Model{
     public Cantina cantina;
     public Fornitore rappresentante;
 
-    public WrapperCantina(Cantina cantina) {
+    public WrapperCantina(Cantina cantina) {//CARICO TUTTI I DATI RELATIVO AD UNA CANTINA
         this.cantina = cantina;
         if (this.cantina.getIdrappresentante() != null) {
             APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());

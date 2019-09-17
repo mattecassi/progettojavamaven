@@ -60,7 +60,7 @@ public class NuovoCheckList {
     private HBox hboxData;
 
     public NuovoCheckList(CheckList checkList) {
-        this.checkList = checkList;
+        this.checkList = checkList;//INIZIALIZZO LO STAGE
 
         thisStage = new Stage();
         try {
@@ -81,17 +81,11 @@ public class NuovoCheckList {
         } catch (Exception e) {
         }
         thisStage.setOnCloseRequest((WindowEvent event1) -> {
-            closeProcedure();
         });
     }
 
     public void showStage() {
         thisStage.showAndWait();
-    }
-
-    private void closeProcedure() {
-        //COSA FACCIO QUANDO CHIUDO
-        //checkList.load();
     }
 
     @FXML
@@ -111,7 +105,7 @@ public class NuovoCheckList {
         }
     }
 
-    @FXML
+    @FXML//CREO UN COMPITO E LO MOSTRO NELLO STAGE PADRE
     private void addCompito() {
         if (tfDescrizione.getText().isEmpty()) {
             Utility.createWarningWindow("Inserisci la descrizione");
@@ -120,6 +114,7 @@ public class NuovoCheckList {
             switch (cmbTipoCompito.getSelectionModel().getSelectedItem()) {
                 case "Giornaliero":
                     try {
+                        //CREO UN COMPITO GIORNALIERO CON DESCRIZIONE PRESA DAL TEXTFIELD
                         compito = new Compito(tfDescrizione.getText());
                         compito.insert();
                         this.checkList.getV().getChildren().add(this.checkList.getCardForTask(compito,this.checkList.getV()));
@@ -129,6 +124,7 @@ public class NuovoCheckList {
                     break;
                 case "Settimanale":
                     ArrayList<Integer> giorni = new ArrayList<>();
+                    //CONTROLLO QUALI CHECKBOX HO SELEZEZIONATO
                     if (checkLunedi.isSelected()) {
                         giorni.add(1);
                         checkLunedi.setSelected(false);
@@ -161,6 +157,7 @@ public class NuovoCheckList {
                         giorni.add(0);
                     for (Integer cur : giorni) {
                         try {
+                            //IN BASE A CHE CHECKBOX HO SELEZIONATO CREO UN COMPITO
                             compito = new Compito(tfDescrizione.getText(), cur);
                             compito.insert();
 
@@ -178,10 +175,10 @@ public class NuovoCheckList {
 
                     break;
                 case "Occasionale":
-                    if (datePicker.getValue() == null) {
+                    if (datePicker.getValue() == null) {//CONTROLLO DI AVER SELEZIONATO UNA DATA
                         Utility.createWarningWindow("Inserisci la data");
                     } else {
-                        //SALVO LA DATA SELEZIONATA
+                        //SALVO LA DATA SELEZIONATA E CREO IL COMPITO
                         try {
                             compito = new Compito(tfDescrizione.getText(), datePicker.getValue());
                             compito.insert();

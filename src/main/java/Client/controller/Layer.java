@@ -29,7 +29,7 @@ public class Layer {
                     loader.setLocation(getClass().getResource("/view/checkList.fxml"));
                     break;
                 case "btnNuovo":
-                    loader.setLocation(getClass().getResource("/view/Nuovo.fxml"));
+                    loader.setLocation(getClass().getResource("/view/nuovo.fxml"));
                     break;
                 case "btnInventario": //IN QUESTO CASO CREO UN NUOVO STAGE
                     Main2 main = new Main2();
@@ -40,9 +40,6 @@ public class Layer {
             if(!done){ //IMPOSTO IL RELATIVO FILE
                     AnchorPane newLoadedAp = (AnchorPane) loader.load();
                     Main2.rootLayout.setCenter(newLoadedAp);
-//                    if (loader.getController() instanceof Ricerca) {
-//                        ((Ricerca) loader.getController()).loadAllTbl();
-//                    }
             }
         } catch (IOException e) {
             e.printStackTrace();

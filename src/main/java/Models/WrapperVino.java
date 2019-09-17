@@ -12,7 +12,7 @@ public class WrapperVino extends  Model {
     private double costo, prezzoVendita;
     private int annata, qta;
 
-    public WrapperVino(Vino vino) throws Exception {
+    public WrapperVino(Vino vino) throws Exception { //CARICO TUTTI I DATI RELATIVI AD UN VINO
         APIC a = new APIC("cantina");
         APIC b = new APIC("fornitore");
         this.vino= vino;

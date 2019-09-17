@@ -10,7 +10,7 @@ public class WrapperEnoteca extends Model{
     private int qta_max, qta_min;
 
 
-    public WrapperEnoteca(Fornitore fornitore) throws Exception {
+    public WrapperEnoteca(Fornitore fornitore) throws Exception { //CARICO TUTTI I DATI RELATIVI AD UNA ENOTECA
         APIC a = new APIC("enoteca");
         this.fornitore= fornitore;
         enoteca=a.get(this.fornitore.getID(),Enoteca.class);

@@ -49,7 +49,7 @@ public class NuovoFornitore {
     @FXML
     private JFXTextField tfStato, tfRegione, tfCitta, tfVia;
 
-    @FXML
+    @FXML//CARICO LA COMBOBOX
     private void showElement(Event event){
         if(!false) {
             ObservableList<String> opzioni = FXCollections.observableArrayList("Rappresentante","Enoteca","Fornitore");
@@ -58,7 +58,7 @@ public class NuovoFornitore {
         }
     }
 
-    @FXML
+    @FXML//IN BASE ALLA SCELTA DELLA COMBOBOX FACCIO VEDERE ALTRI TEXTFIELD
     private void showTf(Event event) {
         tfStato.setVisible(false);
         tfRegione.setVisible(false);
@@ -79,7 +79,7 @@ public class NuovoFornitore {
         }
     }
 
-    @FXML
+    @FXML//CONTROLLO I DATI POI INSERISCO
     void insertElement(ActionEvent event) {
         boolean check = true;
         if(tfNome.getText().isEmpty() || tfMail.getText().isEmpty() || tfQtaMin.getText().isEmpty() || tfQtaMax.getText().isEmpty() || tfTelefono.getText().isEmpty()){
@@ -94,9 +94,9 @@ public class NuovoFornitore {
         }
         try{
         if (check){
-            //Button btnPressed = (Button)event.getSource();
             Fornitore fornitore = new Fornitore();
             try {
+                //ACQUISISCO I DATI
                 fornitore.setNome(Utility.replaceAllDeniedChar(tfNome.getText()));
                 fornitore.setMail(Utility.replaceAllDeniedChar(tfMail.getText()));
                 fornitore.setQta_max(Integer.valueOf(tfQtaMax.getText()));
@@ -111,13 +111,13 @@ public class NuovoFornitore {
             }
 
             try {
-                boolean presente = false;
+                //CONTROLLO NON ESISTA GIA UN FORNITORE CON STESSO NOME
                 APIC a = new APIC("fornitore");
-                APIReturn ret;
                 String[] strings={"nome"};
                 ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
                 clausolas.add(new Clausola("nome", "LIKE", fornitore.getNome()));
                 if(a.select(strings,clausolas).toList(Fornitore.class).isEmpty()) {
+                    //INSERISCO POI RESETTO
                     fornitore.insert();
                     tfNome.setText("");
                     tfQtaMax.setText("");
@@ -133,7 +133,7 @@ public class NuovoFornitore {
             }catch (Exception e){
                 Utility.createErrorWindow(e.getMessage());
             }
-            if(check) {
+            if(check) {//ORA CONTROLLO L'OPZIONE SCELTA E CREO UN FORNITORE SPECIALIZZATO DI CONSEGUENZA, ANALOGAMENTE
                 switch (opzione) {
                     case "Enoteca":
 
