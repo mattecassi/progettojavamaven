@@ -348,8 +348,10 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextVino(Event event) {
         try {
-            InfoVino infoVino = new InfoVino(this);
-            infoVino.showStage();
+            if(getWrapperVino()!=null) {
+                InfoVino infoVino = new InfoVino(this);
+                infoVino.showStage();
+            }
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
@@ -488,8 +490,10 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextCantina(Event event) {
         try {
-            InfoCantina infoCantina = new InfoCantina(this);
-            infoCantina.showStage();
+            if(getWrapperCantina()!=null) {
+                InfoCantina infoCantina = new InfoCantina(this);
+                infoCantina.showStage();
+            }
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
@@ -577,8 +581,10 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextFornitore(Event event) {
         try {
-            InfoRappresentante infoFornitore = new InfoRappresentante(this, "fornitore");
-            infoFornitore.showStage();
+            if(getFornitore()!=null) {
+                InfoRappresentante infoFornitore = new InfoRappresentante(this, "fornitore");
+                infoFornitore.showStage();
+            }
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
@@ -654,8 +660,10 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextRappresentante(Event event) {
         try {
-            InfoRappresentante infoRappresentante = new InfoRappresentante(this, "rappresentante");
-            infoRappresentante.showStage();
+            if(getRappresentante()!=null) {
+                InfoRappresentante infoRappresentante = new InfoRappresentante(this, "rappresentante");
+                infoRappresentante.showStage();
+            }
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
@@ -730,8 +738,10 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextEnoteca(Event event) {
         try {
-            InfoEnoteca infoEnoteca = new InfoEnoteca(this);
-            infoEnoteca.showStage();
+                if(getWrapperEnoteca()!=null) {
+                    InfoEnoteca infoEnoteca = new InfoEnoteca(this);
+                    infoEnoteca.showStage();
+                }
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }

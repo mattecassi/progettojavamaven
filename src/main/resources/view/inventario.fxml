@@ -17,13 +17,12 @@
    <center>
       <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="409.0" prefWidth="502.0">
          <children>
-            <Label fx:id="lblTesto" text="Vini Sbagliati" visible="false">
+            <Label fx:id="lblTesto" layoutX="196.0" text="Vini Sbagliati" visible="false">
                <font>
                   <Font size="35.0" />
                </font>
             </Label>
-            <JFXButton fx:id="btnUpdate" prefHeight="25.0" prefWidth="600.0" text="Aggiorna quantita in magazzino" visible="false" />
-            <TableView fx:id="tblErrore" prefHeight="394.0" prefWidth="600.0" visible="false">
+            <TableView fx:id="tblErrore" layoutY="53.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="394.0" prefWidth="600.0" visible="false" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="53.0">
                <columns>
                   <TableColumn fx:id="tblColumnNome" prefWidth="132.0" text="Nome" />
                   <TableColumn fx:id="tblColumnAnnata" minWidth="1.0" prefWidth="18.0" text="Annata" />
@@ -100,6 +99,7 @@
                   </JFXTextField>
                </children>
             </GridPane>
+            <JFXButton fx:id="btnUpdate" layoutY="447.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="55.0" prefWidth="600.0" text="Aggiorna quantita in magazzino" visible="false" AnchorPane.bottomAnchor="-1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
          </children>
       </AnchorPane>
    </center>
