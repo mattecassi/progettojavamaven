@@ -149,8 +149,8 @@ public class Ricerca implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-                loadAllTbl();
-        }catch (Exception e){
+            loadAllTbl();
+        } catch (Exception e) {
             Utility.createErrorWindow(e.getMessage());
         }
     }
@@ -171,6 +171,7 @@ public class Ricerca implements Initializable {
         //IMPOSTO L'OBSERVABLE LIST DI WRAPPER VINO
         tblViewListaVino.setItems(wrapperVinos);
     }
+
     //IMPOSTO IN QUALE COLONNA DOVRANNO ANDARE I DATI
     private void initTblCantina() {
         tblColumnCantinaId.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -181,6 +182,7 @@ public class Ricerca implements Initializable {
         tblColumnCantinaUvaggio.setCellValueFactory(new PropertyValueFactory<>("uvaggio"));
         tblColumnCantinaIdRappr.setCellValueFactory(new PropertyValueFactory<>("idrappresentante"));
     }
+
     //IMPOSTO I DATI DELLA TABELLA DELLE CANTINE
     public void loadTblCantina() {
         APIC b = new APIC("cantina");
@@ -190,6 +192,7 @@ public class Ricerca implements Initializable {
             e.printStackTrace();
         }
     }
+
     //IMPOSTO IN QUALE COLONNA DOVRANNO ANDARE I DATI
     private void initTblRappresentante() {
         tblColumnRappresentanteID.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -199,6 +202,7 @@ public class Ricerca implements Initializable {
         tblColumnRappresentanteMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         tblColumnRappresentanteNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
     }
+
     //IMPOSTO I DATI DELLA TABELLA DEI RAPPRESENTANTI
     public void loadTblRappresentante() {
         String[] strings = {};
@@ -209,6 +213,7 @@ public class Ricerca implements Initializable {
             e.printStackTrace();
         }
     }
+
     //IMPOSTO IN QUALE COLONNA DOVRANNO ANDARE I DATI
     private void initTblFornitore() {
         tblColumnFornitoreID.setCellValueFactory(new PropertyValueFactory<>("ID"));
@@ -218,6 +223,7 @@ public class Ricerca implements Initializable {
         tblColumnFornitoreMail.setCellValueFactory(new PropertyValueFactory<>("mail"));
         tblColumnFornitoreTelefono.setCellValueFactory(new PropertyValueFactory<>("telefono"));
     }
+
     //IMPOSTO I DATI DELLA TABELLA DEI FORNITORI, INCLUDO ANCHE RAPPRESENTANTI E ENOTECHE
     public void loadTblFornitore() {
         APIC c = new APIC("fornitore");
@@ -227,6 +233,7 @@ public class Ricerca implements Initializable {
             e.printStackTrace();
         }
     }
+
     //IMPOSTO IN QUALE COLONNA DOVRANNO ANDARE I DATI
     private void iniTblEnoteca() {
         tblColumnEnotecaNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
@@ -239,6 +246,7 @@ public class Ricerca implements Initializable {
         tblColumnEnotecaRegione.setCellValueFactory(new PropertyValueFactory<>("regione"));
         tblColumnEnotecaVia.setCellValueFactory(new PropertyValueFactory<>("via"));
     }
+
     //IMPOSTO I DATI DELLA TABELLA DELL'ENOTECHE
     public void loadTblEnoteca() {
         String[] strings = {};
@@ -255,6 +263,7 @@ public class Ricerca implements Initializable {
             e.printStackTrace();
         }
     }
+
     //IMPOSTO IN QUALE COLONNA DOVRANNO ANDARE I DATI
     private void initTblTipo() {
         tblColumnTipoNome.setCellValueFactory(new PropertyValueFactory<>("tipo"));
@@ -352,7 +361,7 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextVino(Event event) {
         try {
-            if(getWrapperVino()!=null) {
+            if (getWrapperVino() != null) {
                 InfoVino infoVino = new InfoVino(this);
                 infoVino.showStage();
             }
@@ -360,6 +369,7 @@ public class Ricerca implements Initializable {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
     }
+
     //METODO PER CARICARE IL DATO SELEZIONATO NEL NUOVO STAGE
     public WrapperVino getWrapperVino() {
         WrapperVino cur = (WrapperVino) tblViewListaVino.getSelectionModel().getSelectedItem();
@@ -484,6 +494,7 @@ public class Ricerca implements Initializable {
     private void selectVino(Event event) {
         searchVino(event, true);
     }
+
     //METODO CHIAMATO QUANDO SCRIVO QUALCOSA NELLA COMBOBOX
     @FXML
     private void typeVino(Event event) {
@@ -494,7 +505,7 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextCantina(Event event) {
         try {
-            if(getWrapperCantina()!=null) {
+            if (getWrapperCantina() != null) {
                 InfoCantina infoCantina = new InfoCantina(this);
                 infoCantina.showStage();
             }
@@ -585,7 +596,7 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextFornitore(Event event) {
         try {
-            if(getFornitore()!=null) {
+            if (getFornitore() != null) {
                 InfoRappresentante infoFornitore = new InfoRappresentante(this, "fornitore");
                 infoFornitore.showStage();
             }
@@ -645,7 +656,7 @@ public class Ricerca implements Initializable {
             }
             tblViewListaFornitore.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
         } catch (Exception e) {
-           // e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -664,7 +675,7 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextRappresentante(Event event) {
         try {
-            if(getRappresentante()!=null) {
+            if (getRappresentante() != null) {
                 InfoRappresentante infoRappresentante = new InfoRappresentante(this, "rappresentante");
                 infoRappresentante.showStage();
             }
@@ -723,7 +734,7 @@ public class Ricerca implements Initializable {
             }
             tblViewListaRappresentate.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
         } catch (Exception e) {
-           // e.printStackTrace();
+            // e.printStackTrace();
         }
     }
 
@@ -742,10 +753,10 @@ public class Ricerca implements Initializable {
     @FXML
     private void openContextEnoteca(Event event) {
         try {
-                if(getWrapperEnoteca()!=null) {
-                    InfoEnoteca infoEnoteca = new InfoEnoteca(this);
-                    infoEnoteca.showStage();
-                }
+            if (getWrapperEnoteca() != null) {
+                InfoEnoteca infoEnoteca = new InfoEnoteca(this);
+                infoEnoteca.showStage();
+            }
         } catch (Exception e) {
             Utility.createErrorWindow("Nessuna azione disponibile, selezionare una riga");
         }
@@ -758,7 +769,7 @@ public class Ricerca implements Initializable {
 
     private void searchEnoteca(Event event, boolean selected) {
         try {
-            APIC a = new APIC(Fornitore.getTableFornitoriRappresentanti());
+            APIC a = new APIC(Fornitore.getTableFornitoriEnoteche());
             APIC b = new APIC("enoteca");
             String[] strings = {};
             ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
@@ -767,11 +778,11 @@ public class Ricerca implements Initializable {
             if (cmbEnotecaNome.getSelectionModel().getSelectedItem() != "" && cmbEnotecaNome.getSelectionModel().getSelectedItem() != null) {
                 clausolasFornitore.add(new Clausola("nome", "like", "%" + cmbEnotecaNome.getSelectionModel().getSelectedItem() + "%"));
             }
-            if (!String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem()).equals("") && cmbEnotecaQtaMax.getSelectionModel().getSelectedItem() != null) {
-                clausolasFornitore.add(new Clausola("qta_max", "=", String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem())));
-            }
             if (!String.valueOf(cmbEnotecaQtaMin.getSelectionModel().getSelectedItem()).equals("") && cmbEnotecaQtaMin.getSelectionModel().getSelectedItem() != null) {
                 clausolasFornitore.add(new Clausola("qta_min", "=", String.valueOf(cmbEnotecaQtaMin.getSelectionModel().getSelectedItem())));
+            }
+            if (!String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem()).equals("") && cmbEnotecaQtaMax.getSelectionModel().getSelectedItem() != null) {
+                clausolasFornitore.add(new Clausola("qta_max", "=", String.valueOf(cmbEnotecaQtaMax.getSelectionModel().getSelectedItem())));
             }
             if (cmbEnotecaMail.getSelectionModel().getSelectedItem() != "" && cmbEnotecaMail.getSelectionModel().getSelectedItem() != null) {
                 clausolasFornitore.add(new Clausola("mail", "like", "%" + cmbEnotecaMail.getSelectionModel().getSelectedItem() + "%"));
@@ -837,10 +848,11 @@ public class Ricerca implements Initializable {
                         break;
                 }
             }
+
             ObservableList<Enoteca> enotecaObservableList = b.select(strings, clausolasEnoteca).toObservableList(Enoteca.class);
             ObservableList<WrapperEnoteca> wrapperEnotecas = FXCollections.observableArrayList();
-            for (Fornitore fornitore : a.select(strings, clausolasFornitore).toObservableList(Fornitore.class)) {
-                for (Enoteca enoteca : enotecaObservableList) {
+            for (Enoteca enoteca : enotecaObservableList) {
+                for (Fornitore fornitore : a.select(strings, clausolasFornitore).toObservableList(Fornitore.class)) {
                     if (enoteca.getID() == fornitore.getID()) {
                         wrapperEnotecas.add(new WrapperEnoteca(fornitore));
                     }
@@ -878,6 +890,7 @@ public class Ricerca implements Initializable {
         } catch (Exception e) {
         }
     }
+
     //PRENDO IL NOME DEL TIPO DI VINO E DOPO AVERE CHIESTO CONFERMA ELIMININO IL TIPO E TUTTI I VINI CHE HANNO QUEL TIPO
     @FXML
     private void btnPress(Event event) {
