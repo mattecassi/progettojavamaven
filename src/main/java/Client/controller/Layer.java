@@ -40,9 +40,9 @@ public class Layer {
             if(!done){ //IMPOSTO IL RELATIVO FILE
                     AnchorPane newLoadedAp = (AnchorPane) loader.load();
                     Main2.rootLayout.setCenter(newLoadedAp);
-                    if (loader.getController() instanceof Ricerca) {
-                        ((Ricerca) loader.getController()).loadAllTbl();
-                    }
+//                    if (loader.getController() instanceof Ricerca) {
+//                        ((Ricerca) loader.getController()).loadAllTbl();
+//                    }
             }
         } catch (IOException e) {
             e.printStackTrace();

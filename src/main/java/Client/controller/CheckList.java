@@ -90,18 +90,18 @@ public class CheckList implements Initializable {
                 case 1:{
 
                     if (LocalDate.parse(c.getDataCompitoOff()).equals(LocalDate.now()))
-                        v.getChildren().add(getCardForTask(c,tipo,v));
+                        v.getChildren().add(getCardForTask(c,v));
                     else {
                         c.setDescrizione(c.getDescrizione() + " DATA:" + c.getDataCompitoOff());
-                        vSettimana.getChildren().add(getCardForTask(c, tipo,vSettimana));
+                        vSettimana.getChildren().add(getCardForTask(c,vSettimana));
                     }
                 }break;
                 case 2:{
-                    v.getChildren().add(getCardForTask(c,tipo,v));
+                    v.getChildren().add(getCardForTask(c,v));
                 }break;
                 case 3:{
                     c.setDescrizione(c.getDescrizione() + " " + Utility.convertNumberIntoDayOfTheWeek(c.getDow()));
-                    vSettimana.getChildren().add(getCardForTask(c,tipo,vSettimana));
+                    vSettimana.getChildren().add(getCardForTask(c,vSettimana));
                 }break;
             }
         }
@@ -121,11 +121,10 @@ public class CheckList implements Initializable {
      * e configura l'operazione di click soopra di essa
      *
      * @param c
-     * @param tipo
      * @param hisContainer
      * @return
      */
-    private JFXCheckBox getCardForTask(Compito c,Integer tipo,VBox hisContainer){
+    public JFXCheckBox getCardForTask(Compito c,VBox hisContainer){
 
 //        System.out.println(c);
         JFXCheckBox checkBox = new JFXCheckBox(c.getDescrizione());
@@ -160,6 +159,7 @@ public class CheckList implements Initializable {
     }
 
 
+
     @FXML
     void addCompito(ActionEvent event) {
 
@@ -168,4 +168,11 @@ public class CheckList implements Initializable {
     }
 
 
+    public VBox getV() {
+        return v;
+    }
+
+    public VBox getvSettimana() {
+        return vSettimana;
+    }
 }
