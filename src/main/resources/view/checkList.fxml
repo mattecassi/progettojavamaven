@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXCheckBox?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -42,6 +43,11 @@
                   <Insets right="10.0" />
                </GridPane.margin>
             </JFXButton>
+            <JFXCheckBox fx:id="JFXCheckBoxEliminazione" contentDisplay="CENTER" style="-jfx-checked-color: RED; -fx-cursor: HAND;" text="ATTIVA ELIMINAZIONE" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </JFXCheckBox>
          </children>
       </GridPane>
    </children>

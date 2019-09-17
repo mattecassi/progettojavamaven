@@ -1,6 +1,7 @@
 .custom-jfx-check-box{
-    -jfx-checked-color: YELLOW;
     -jfx-unchecked-color: BLACK;
+    -fx-font-size: 20px;
+    -fx-cursor: hand;
 }
 
 .card {
@@ -13,6 +14,7 @@
 .btnDown{
     -fx-background-color:lightgrey ;
     -fx-background-radius: 5em;
+    -fx-cursor: hand;
     /*-fx-min-width: 3px;*/
     /*-fx-min-height: 3px;*/
     /*-fx-max-width: 3px;*/
