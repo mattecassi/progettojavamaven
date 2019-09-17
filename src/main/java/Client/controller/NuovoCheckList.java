@@ -89,7 +89,7 @@ public class NuovoCheckList {
 
     private void closeProcedure() {
         //COSA FACCIO QUANDO CHIUDO
-        checkList.load();
+        //checkList.load();
     }
 
     @FXML
