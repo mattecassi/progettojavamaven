@@ -187,8 +187,7 @@ public class Utility {
         HashSet<String> hashSet = new HashSet<>();
         //AGGIUNGO TUTTE LE STRINGHE AD UN HASHSET COSI IN AUTOMATICO MI ELIMINA I DUPLICATI
         for(String cur :observableList){
-            cur.toUpperCase();
-            hashSet.add(cur);
+            hashSet.add(cur.toUpperCase());
         }
         ObservableList<String> observableListReturn = FXCollections.observableArrayList();
         //RITORNO UN'OBSERVABLE LIST CHE ANDRO A CARICARE NELLE COMBOBOX

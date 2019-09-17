@@ -413,43 +413,43 @@ public class Ricerca implements Initializable {
                     case "cmbVinoNome":
                         if (cmbVinoNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbVinoNome.hide();
-                        cmbVinoNome.setItems(Utility.loadDataForCmb("vino", "nome", cmbVinoNome.getSelectionModel().getSelectedItem(), Vino.class));
+                        cmbVinoNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("vino", "nome", cmbVinoNome.getSelectionModel().getSelectedItem(), Vino.class)));
                         cmbVinoNome.show();
                         break;
                     case "cmbVinoTipo":
                         if (cmbVinoTipo.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbRappresentanteMail.hide();
-                        cmbVinoTipo.setItems(Utility.loadDataForCmb("vino", "tipo", cmbVinoTipo.getSelectionModel().getSelectedItem(), Vino.class));
+                        cmbVinoTipo.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("vino", "tipo", cmbVinoTipo.getSelectionModel().getSelectedItem(), Vino.class)));
                         cmbVinoTipo.show();
                         break;
                     case "cmbVinoCantina":
                         if (cmbVinoCantina.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbVinoCantina.hide();
-                        cmbVinoCantina.setItems(Utility.loadDataForCmb("cantina", "nome", cmbVinoCantina.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbVinoCantina.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "nome", cmbVinoCantina.getSelectionModel().getSelectedItem(), Cantina.class)));
                         cmbVinoCantina.show();
                         break;
                     case "cmbVinoUvaggio":
                         if (cmbVinoUvaggio.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbVinoUvaggio.hide();
-                        cmbVinoUvaggio.setItems(Utility.loadDataForCmb("cantina", "uvaggio", cmbVinoUvaggio.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbVinoUvaggio.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "uvaggio", cmbVinoUvaggio.getSelectionModel().getSelectedItem(), Cantina.class)));
                         cmbVinoUvaggio.show();
                         break;
                     case "cmbVinoStato":
                         if (cmbVinoStato.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbVinoStato.hide();
-                        cmbVinoStato.setItems(Utility.loadDataForCmb("cantina", "stato", cmbVinoStato.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbVinoStato.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "stato", cmbVinoStato.getSelectionModel().getSelectedItem(), Cantina.class)));
                         cmbVinoStato.show();
                         break;
                     case "cmbVinoRegione":
                         if (cmbVinoRegione.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbVinoRegione.hide();
-                        cmbVinoRegione.setItems(Utility.loadDataForCmb("cantina", "regione", cmbVinoRegione.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbVinoRegione.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "regione", cmbVinoRegione.getSelectionModel().getSelectedItem(), Cantina.class)));
                         cmbVinoRegione.show();
                         break;
                     case "cmbVinoFornitore":
                         if (cmbVinoFornitore.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbVinoFornitore.hide();
-                        cmbVinoFornitore.setItems(Utility.loadDataForCmb("fornitore", "nome", cmbVinoFornitore.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbVinoFornitore.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "nome", cmbVinoFornitore.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbVinoFornitore.show();
                         break;
                 }
@@ -535,32 +535,32 @@ public class Ricerca implements Initializable {
                     case "cmbCantinaNome":
                         if (cmbCantinaNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbCantinaNome.hide();
-                        cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina", "nome", cmbCantinaNome.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbCantinaNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "nome", cmbCantinaNome.getSelectionModel().getSelectedItem(), Cantina.class)));
                         cmbCantinaNome.show();
                         break;
                     case "cmbCantinaVia":
                         if (cmbCantinaVia.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbCantinaVia.hide();
-                        cmbCantinaVia.setItems(Utility.loadDataForCmb("cantina", "via", cmbCantinaVia.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbCantinaVia.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "via", cmbCantinaVia.getSelectionModel().getSelectedItem(), Cantina.class)));
                         cmbCantinaVia.show();
                         break;
                     case "cmbCantinaUvaggio":
                         if (cmbCantinaUvaggio.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbCantinaUvaggio.hide();
-                        cmbCantinaUvaggio.setItems(Utility.loadDataForCmb("cantina", "uvaggio", cmbCantinaUvaggio.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbCantinaUvaggio.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "uvaggio", cmbCantinaUvaggio.getSelectionModel().getSelectedItem(), Cantina.class)));
                         cmbCantinaUvaggio.show();
                         break;
                     case "cmbCantinaStato":
                         if (cmbCantinaStato.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbCantinaStato.hide();
                         cmbCantinaStato.show();
-                        cmbCantinaStato.setItems(Utility.loadDataForCmb("cantina", "stato", cmbCantinaStato.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbCantinaStato.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "stato", cmbCantinaStato.getSelectionModel().getSelectedItem(), Cantina.class)));
                         break;
                     case "cmbCantinaRegione":
                         if (cmbCantinaRegione.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbCantinaRegione.hide();
                         cmbCantinaRegione.show();
-                        cmbCantinaRegione.setItems(Utility.loadDataForCmb("cantina", "regione", cmbCantinaRegione.getSelectionModel().getSelectedItem(), Cantina.class));
+                        cmbCantinaRegione.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "regione", cmbCantinaRegione.getSelectionModel().getSelectedItem(), Cantina.class)));
                         break;
 
                 }
@@ -626,19 +626,19 @@ public class Ricerca implements Initializable {
                     case "cmbFornitoreNome":
                         if (cmbFornitoreNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbFornitoreNome.hide();
-                        cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore", "nome", cmbFornitoreNome.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbFornitoreNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "nome", cmbFornitoreNome.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbFornitoreNome.show();
                         break;
                     case "cmbFornitoreMail":
                         if (cmbFornitoreMail.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbFornitoreMail.hide();
-                        cmbFornitoreMail.setItems(Utility.loadDataForCmb("fornitore", "mail", cmbFornitoreMail.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbFornitoreMail.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "mail", cmbFornitoreMail.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbFornitoreMail.show();
                         break;
                     case "cmbFornitoreTelefono":
                         if (cmbFornitoreTelefono.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbFornitoreTelefono.hide();
-                        cmbFornitoreTelefono.setItems(Utility.loadDataForCmb("fornitore", "telefono", cmbFornitoreTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbFornitoreTelefono.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "telefono", cmbFornitoreTelefono.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbFornitoreTelefono.show();
                         break;
                 }
@@ -704,19 +704,19 @@ public class Ricerca implements Initializable {
                     case "cmbRappresentanteNome":
                         if (cmbRappresentanteNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbRappresentanteNome.hide();
-                        cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", cmbRappresentanteNome.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbRappresentanteNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", cmbRappresentanteNome.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbRappresentanteNome.show();
                         break;
                     case "cmbRappresentanteMail":
                         if (cmbRappresentanteMail.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbRappresentanteMail.hide();
-                        cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", cmbRappresentanteMail.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbRappresentanteMail.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", cmbRappresentanteMail.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbRappresentanteMail.show();
                         break;
                     case "cmbRappresentanteTelefono":
                         if (cmbRappresentanteTelefono.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbRappresentanteTelefono.hide();
-                        cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", cmbRappresentanteTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbRappresentanteTelefono.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", cmbRappresentanteTelefono.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbRappresentanteTelefono.show();
                         break;
                 }
@@ -796,43 +796,43 @@ public class Ricerca implements Initializable {
                     case "cmbEnotecaNome":
                         if (cmbEnotecaNome.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbEnotecaNome.hide();
-                        cmbEnotecaNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "nome", cmbEnotecaNome.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbEnotecaNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "nome", cmbEnotecaNome.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbEnotecaNome.show();
                         break;
                     case "cmbEnotecaMail":
                         if (cmbEnotecaMail.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbEnotecaMail.hide();
-                        cmbEnotecaMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "mail", cmbEnotecaMail.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbEnotecaMail.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "mail", cmbEnotecaMail.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbEnotecaMail.show();
                         break;
                     case "cmbEnotecaTelefono":
                         if (cmbEnotecaTelefono.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbEnotecaTelefono.hide();
-                        cmbEnotecaTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "telefono", cmbEnotecaTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
+                        cmbEnotecaTelefono.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "telefono", cmbEnotecaTelefono.getSelectionModel().getSelectedItem(), Fornitore.class)));
                         cmbEnotecaTelefono.show();
                         break;
                     case "cmbEnotecaStato":
                         if (cmbEnotecaStato.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbEnotecaStato.hide();
-                        cmbEnotecaStato.setItems(Utility.loadDataForCmb("enoteca", "stato", cmbEnotecaStato.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaStato.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "stato", cmbEnotecaStato.getSelectionModel().getSelectedItem(), Enoteca.class)));
                         cmbEnotecaStato.show();
                         break;
                     case "cmbEnotecaRegione":
                         if (cmbEnotecaRegione.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbEnotecaRegione.hide();
-                        cmbEnotecaRegione.setItems(Utility.loadDataForCmb("enoteca", "regione", cmbEnotecaRegione.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaRegione.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "regione", cmbEnotecaRegione.getSelectionModel().getSelectedItem(), Enoteca.class)));
                         cmbEnotecaRegione.show();
                         break;
                     case "cmbEnotecaCitta":
                         if (cmbEnotecaCitta.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbEnotecaCitta.hide();
-                        cmbEnotecaCitta.setItems(Utility.loadDataForCmb("enoteca", "citta", cmbEnotecaCitta.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaCitta.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "citta", cmbEnotecaCitta.getSelectionModel().getSelectedItem(), Enoteca.class)));
                         cmbEnotecaCitta.show();
                         break;
                     case "cmbEnotecaVia":
                         if (cmbEnotecaVia.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
                             cmbEnotecaVia.hide();
-                        cmbEnotecaVia.setItems(Utility.loadDataForCmb("enoteca", "via", cmbEnotecaTelefono.getSelectionModel().getSelectedItem(), Enoteca.class));
+                        cmbEnotecaVia.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "via", cmbEnotecaTelefono.getSelectionModel().getSelectedItem(), Enoteca.class)));
                         cmbEnotecaVia.show();
                         break;
                 }
