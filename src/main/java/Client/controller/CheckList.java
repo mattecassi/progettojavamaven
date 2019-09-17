@@ -1,29 +1,21 @@
 package Client.controller;
 
-import API.APIC;
 import Client.Main2;
 import Models.Compito;
-import Models.Fornitore;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
-import javax.rmi.CORBA.Util;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class CheckList implements Initializable {
@@ -34,7 +26,7 @@ public class CheckList implements Initializable {
     private AnchorPane menuAP;
 
     @FXML
-    private GridPane GridPaneContainer;
+    private GridPane gridPaneContainer;
 
     @FXML
     private JFXButton btnAddCompito;
@@ -46,6 +38,10 @@ public class CheckList implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        load();
+    }
+
+    public void load(){
         VBox fin = new VBox();
 
         v.paddingProperty().setValue(new Insets(10,10,10,10));
@@ -77,7 +73,6 @@ public class CheckList implements Initializable {
         VBox.setVgrow(scSettimana, Priority.ALWAYS);
         scSettimana.setVmax(500);
         scSettimana.setContent(vSettimana);
-
 
 
         ArrayList<Compito> lista = new ArrayList<>();
@@ -114,8 +109,8 @@ public class CheckList implements Initializable {
 
 
 
-        GridPaneContainer.add(fin,0,1);
-        GridPaneContainer.add(finSettimana,1,1);
+        gridPaneContainer.add(fin,0,1);
+        gridPaneContainer.add(finSettimana,1,1);
 
     }
 
@@ -166,12 +161,8 @@ public class CheckList implements Initializable {
     @FXML
     void addCompito(ActionEvent event) {
 
-        System.out.println("CI SIAMO");
-//        try{
-//            main.createStage("/view/addGiornaliero.view","Aggiungi compito giornaliero");
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        NuovoCheckList nuovoCheckList = new NuovoCheckList(this);
+        nuovoCheckList.showStage();
     }
 
 
