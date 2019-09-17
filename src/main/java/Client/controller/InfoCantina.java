@@ -16,6 +16,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Optional;
@@ -76,57 +77,57 @@ public class InfoCantina {
         thisStage.showAndWait();
     }
 
-    public InfoCantina(Ricerca ricerca){
-    this.ricerca = ricerca;
+    public InfoCantina(Ricerca ricerca) {
+        this.ricerca = ricerca;
 
-    thisStage = new Stage();
+        thisStage = new Stage();
         try {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/infoCantina.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/infoCantina.fxml"));
 
-        // IMPOSTO LA CLASSE ATTUALE COME CONTROLLER
-        loader.setController(this);
+            // IMPOSTO LA CLASSE ATTUALE COME CONTROLLER
+            loader.setController(this);
 
-        // CARICA LA SCENA
-        thisStage.setScene(new Scene(loader.load()));
+            // CARICA LA SCENA
+            thisStage.setScene(new Scene(loader.load()));
 
-        // INIZIALIZZO LO STAGE
-        thisStage.setTitle("Info Cantina");
+            // INIZIALIZZO LO STAGE
+            thisStage.setTitle("Info Cantina");
 
 
-        //IMPOSTO IL DATO DA PRENDERE IN CONSIDERARIONE
+            //IMPOSTO IL DATO DA PRENDERE IN CONSIDERARIONE
             // CARICO TUTTI I DATI RELATIVI ALLA CANTINA
-        WrapperCantina cur = ricerca.getWrapperCantina();
+            WrapperCantina cur = ricerca.getWrapperCantina();
 
-        cantina = cur.cantina;
-        tfCantinaID.setText(String.valueOf(cantina.getID()));
-        tfCantinaNome.setText(cantina.getNome());
-        tfCantinaStato.setText(cantina.getStato());
-        tfCantinaRegione.setText(cantina.getRegione());
-        tfCantinaVia.setText(cantina.getVia());
-        tfCantinaUvaggio.setText(cantina.getUvaggio());
+            cantina = cur.cantina;
+            tfCantinaID.setText(String.valueOf(cantina.getID()));
+            tfCantinaNome.setText(cantina.getNome());
+            tfCantinaStato.setText(cantina.getStato());
+            tfCantinaRegione.setText(cantina.getRegione());
+            tfCantinaVia.setText(cantina.getVia());
+            tfCantinaUvaggio.setText(cantina.getUvaggio());
 
-        rappresentante=cur.rappresentante;
-        tfRappresentanteMail.setText(rappresentante.getMail());
-        tfRappresentanteID.setText(String.valueOf(rappresentante.getID()));
-        tfRappresentanteTelefono.setText(rappresentante.getTelefono());
-        tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
-        tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
-        cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","", Fornitore.class));
-        cmbRappresentanteNome.getSelectionModel().select(rappresentante.getNome());
+            rappresentante = cur.rappresentante;
+            tfRappresentanteMail.setText(rappresentante.getMail());
+            tfRappresentanteID.setText(String.valueOf(rappresentante.getID()));
+            tfRappresentanteTelefono.setText(rappresentante.getTelefono());
+            tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
+            tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
+            cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", "", Fornitore.class));
+            cmbRappresentanteNome.getSelectionModel().select(rappresentante.getNome());
             //COSA FARE QUANDO DEVO CHIUDERE LO STAGE
-        thisStage.setOnCloseRequest((WindowEvent event1) -> {
-            closeProcedure();
-        });
-    } catch (
-    IOException e) {
-        e.printStackTrace();
-    } catch (Exception e) {
-        e.printStackTrace();
+            thisStage.setOnCloseRequest((WindowEvent event1) -> {
+                closeProcedure();
+            });
+        } catch (
+                IOException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-}
 
     //COSA FARE QUANDO DEVO CHIUDERE LO STAGE
-    private void closeProcedure(){
+    private void closeProcedure() {
         if (modified) {//SE HO MODIFICATO UN VALORE CHIEDO CONFERMA DI SALVATAGGIO
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Conferma Modifica");
@@ -159,11 +160,6 @@ public class InfoCantina {
                     e.printStackTrace();
                 }
                 System.out.println("Salvo");
-//                try {
-//                    this.ricerca.loadAllTbl();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
             } else {
                 System.out.println("Non salvo");
             }
@@ -171,13 +167,13 @@ public class InfoCantina {
     }
 
     @FXML
-    private void valueModified(Event e){
+    private void valueModified(Event e) {
         modified = true;
         try {
             JFXTextField tfCur = (JFXTextField) e.getSource();
             switch (tfCur.getId()) {
                 case "tfCantinaNome":
-                    nomeCantinaModified=true;
+                    nomeCantinaModified = true;
                     cantina.setNome(tfCantinaNome.getText());
                     break;
                 case "tfCantinaUvaggio":
@@ -193,14 +189,14 @@ public class InfoCantina {
                     cantina.setVia(tfCantinaVia.getText());
                     break;
             }
-        }catch (Exception e1){
+        } catch (Exception e1) {
             Utility.createErrorWindow(e1.getMessage());
         }
     }
 
     @FXML
-    private void changeRappresentante(){
-        if(cmbRappresentanteNome.getSelectionModel().getSelectedItem()!=rappresentante.getNome()){
+    private void changeRappresentante() {
+        if (cmbRappresentanteNome.getSelectionModel().getSelectedItem() != rappresentante.getNome()) {
             try {
                 modified = true;
                 rappresentante.setNome(cmbRappresentanteNome.getSelectionModel().getSelectedItem());
@@ -215,26 +211,26 @@ public class InfoCantina {
                 tfRappresentanteQtaMax.setText(String.valueOf(rappresentante.getQta_max()));
                 tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
                 cantina.setIdrappresentante(rappresentante.getID());
-            }catch (Exception e){
+            } catch (Exception e) {
                 Utility.createErrorWindow(e.getMessage());
             }
         }
     }
 
     @FXML
-    private void btnPress(Event event){
-        Button btnPressed = (Button)event.getSource();
-        switch (btnPressed.getId()){
+    private void btnPress(Event event) {
+        Button btnPressed = (Button) event.getSource();
+        switch (btnPressed.getId()) {
             case "btnElimina":
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Conferma Eliminazione");
-                alert.setHeaderText("Stai eliminando la cantina \""+cantina.getNome() +"\", cosi fancendo eliminerai anche tutti i vini ad essa associati!");
+                alert.setHeaderText("Stai eliminando la cantina \"" + cantina.getNome() + "\", cosi fancendo eliminerai anche tutti i vini ad essa associati!");
                 alert.setContentText("Vuoi davvero eliminare la cantina?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     try {
                         ArrayList<Clausola> clausolas = new ArrayList<>();
-                        clausolas.add(new Clausola("idCantina","=", cantina.getID().toString()));
+                        clausolas.add(new Clausola("idCantina", "=", cantina.getID().toString()));
                         ricerca.eliminaVini(clausolas);
                         cantina.delete();
                     } catch (Exception e) {
@@ -246,7 +242,7 @@ public class InfoCantina {
                 break;
             case "btnSalva":
                 closeProcedure();
-                modified=false;
+                modified = false;
                 break;
         }
     }
