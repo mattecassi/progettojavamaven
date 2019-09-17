@@ -469,7 +469,7 @@ public class Ricerca implements Initializable {
             //INFINE CARICO NELLA TABELLA I RISULTATI
             tblViewListaVino.setItems(wrapperVinos);
         } catch (Exception e) {
-            Utility.createWarningWindow("Controllare i dati inseriti");
+            //Utility.createWarningWindow("Controllare i dati inseriti");
         }
     }
 
@@ -559,7 +559,7 @@ public class Ricerca implements Initializable {
             }
             tblViewListaCantina.setItems(a.select(strings, clausolas).toObservableList(Cantina.class));
         } catch (Exception e) {
-            Utility.createErrorWindow(e.getMessage());
+            //Utility.createErrorWindow(e.getMessage());
         }
     }
 
@@ -635,7 +635,7 @@ public class Ricerca implements Initializable {
             }
             tblViewListaFornitore.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
     }
 
@@ -711,7 +711,7 @@ public class Ricerca implements Initializable {
             }
             tblViewListaRappresentate.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
         } catch (Exception e) {
-            e.printStackTrace();
+           // e.printStackTrace();
         }
     }
 
@@ -810,7 +810,8 @@ public class Ricerca implements Initializable {
                         cmbEnotecaRegione.show();
                         break;
                     case "cmbEnotecaCitta":
-                        cmbEnotecaCitta.hide();
+                        if (cmbEnotecaCitta.getSelectionModel().getSelectedItem().equalsIgnoreCase(""))
+                            cmbEnotecaCitta.hide();
                         cmbEnotecaCitta.setItems(Utility.loadDataForCmb("enoteca", "citta", cmbEnotecaCitta.getSelectionModel().getSelectedItem(), Enoteca.class));
                         cmbEnotecaCitta.show();
                         break;
@@ -833,7 +834,7 @@ public class Ricerca implements Initializable {
             }
             tblViewListaEnoteca.setItems(wrapperEnotecas);
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
         }
     }
 
