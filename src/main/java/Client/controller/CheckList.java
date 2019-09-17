@@ -1,21 +1,29 @@
 package Client.controller;
 
+import API.APIC;
 import Client.Main2;
 import Models.Compito;
+import Models.Fornitore;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
+import javax.rmi.CORBA.Util;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.ResourceBundle;
 
 public class CheckList implements Initializable {
@@ -26,10 +34,14 @@ public class CheckList implements Initializable {
     private AnchorPane menuAP;
 
     @FXML
-    private GridPane gridPaneContainer;
+    private GridPane GridPaneContainer;
 
     @FXML
     private JFXButton btnAddCompito;
+
+    @FXML
+    private JFXCheckBox JFXCheckBoxEliminazione;
+
 
     private VBox v = new VBox(10);
     private VBox vSettimana = new VBox(10);
@@ -38,34 +50,26 @@ public class CheckList implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        load();
-    }
 
-    public void load(){
+
+        //CONFIFURO LE VARIE IMPOSTAZIONI GRAFICHE DEGLI SCROLL PANE E VBOX
         VBox fin = new VBox();
-
         v.paddingProperty().setValue(new Insets(10,10,10,10));
-
         VBox finSettimana = new VBox();
-
         vSettimana.paddingProperty().setValue(new Insets(10,10,10,10));
-
         v.setAlignment(Pos.CENTER);
         vSettimana.setAlignment(Pos.CENTER);
 
         ScrollPane sc = new ScrollPane();
         ScrollPane scSettimana = new ScrollPane();
-
         fin.getChildren().add(sc);
         finSettimana.getChildren().add(scSettimana);
-
         fin.setFillWidth(true);
         v.setFillWidth(true);
         sc.setFitToWidth(true);
         VBox.setVgrow(sc, Priority.ALWAYS);
         sc.setVmax(500);
         sc.setContent(v);
-
 
         finSettimana.setFillWidth(true);
         vSettimana.setFillWidth(true);
@@ -75,82 +79,80 @@ public class CheckList implements Initializable {
         scSettimana.setContent(vSettimana);
 
 
-        ArrayList<Compito> lista = new ArrayList<>();
+
         try {
-            lista = Compito.getCompitiNonSvoltiQuestaSettimana();
-        }catch (Exception e){
-            System.out.println(e);
-        }
-//        System.out.println("Stampa lista");
-        Integer tipo;
-        for (Compito c: lista) {
+        Integer tipo;//conterrà il tipo di evento [giornaliero,settimanale,occasionale]
+        //scorro tutti i compiti non svolti di questa settimana
+        for (Compito c : Compito.getCompitiNonSvoltiQuestaSettimana()) {
 //            System.out.println(c);
             tipo = c.getTipoCompito();
-            switch (tipo){
+            switch (tipo){ //in base al tipo scelgo in quale VBOX buttarlo
                 case 1:{
 
                     if (LocalDate.parse(c.getDataCompitoOff()).equals(LocalDate.now()))
-                        v.getChildren().add(getCardForTask(c,tipo));
+                        v.getChildren().add(getCardForTask(c,tipo,v));
                     else {
-                        c.setDescrizione(c.getDescrizione() + " " + c.getDataCompitoOff());
-                        vSettimana.getChildren().add(getCardForTask(c, tipo));
+                        c.setDescrizione(c.getDescrizione() + " DATA:" + c.getDataCompitoOff());
+                        vSettimana.getChildren().add(getCardForTask(c, tipo,vSettimana));
                     }
                 }break;
                 case 2:{
-                    v.getChildren().add(getCardForTask(c,tipo));
+                    v.getChildren().add(getCardForTask(c,tipo,v));
                 }break;
                 case 3:{
                     c.setDescrizione(c.getDescrizione() + " " + Utility.convertNumberIntoDayOfTheWeek(c.getDow()));
-                    vSettimana.getChildren().add(getCardForTask(c,tipo));
+                    vSettimana.getChildren().add(getCardForTask(c,tipo,vSettimana));
                 }break;
             }
         }
+        }catch (Exception e){
+            Utility.createErrorWindow("ERRORE DURANTE LA RICEZIONE DEI DATI|CREAZIONE VBOX\n"+e.getMessage());
+        }
 
-
-
-
-        gridPaneContainer.add(fin,0,1);
-        gridPaneContainer.add(finSettimana,1,1);
+        //aggiungo gli elementi al gridPaneContainer
+        GridPaneContainer.add(fin,0,1);
+        GridPaneContainer.add(finSettimana,1,1);
 
     }
 
-    private JFXCheckBox getCardForTask(Compito c,Integer tipo){
+
+    /**
+     * Funzione che, dato un compito,genera la combo box
+     * e configura l'operazione di click soopra di essa
+     *
+     * @param c
+     * @param tipo
+     * @param hisContainer
+     * @return
+     */
+    private JFXCheckBox getCardForTask(Compito c,Integer tipo,VBox hisContainer){
 
 //        System.out.println(c);
         JFXCheckBox checkBox = new JFXCheckBox(c.getDescrizione());
         checkBox.setId(c.getID().toString());
         checkBox.setAlignment(Pos.CENTER);
         checkBox.getStylesheets().add("/css/checkList.css");
-        checkBox.getStyleClass().add("custom-jfx-check-box card");
+        checkBox.getStyleClass().add("custom-jfx-check-box");
 
 
 
+        //SETTO COSA FARE SUL CLICK
         checkBox.setOnAction((event) -> {
-            boolean selected = checkBox.isSelected();
             System.out.println("Mi sto riferendo a " + c);
             try {
-                c.svolgi();
+                //In base al fatto che la checkbox sia stata selezionata o meno
+                //elimino o copio
+                if (this.JFXCheckBoxEliminazione.isSelected())
+                    c.delete();
+                else
+                    c.svolgi();
+                //rimuovo l'elemento dal suo container
+                hisContainer.getChildren().remove(checkBox);
 
-                switch (tipo){
-                    case 1:{
-
-                        if (LocalDate.parse(c.getDataCompitoOff()).equals(LocalDate.now()))
-                            v.getChildren().remove(checkBox);
-                        else
-                            vSettimana.getChildren().remove(checkBox);
-                    }break;
-                    case 2:{
-                        v.getChildren().remove(checkBox);
-                    }break;
-                    case 3:{
-                        vSettimana.getChildren().remove(checkBox);
-                    }break;
-                }
             }catch (Exception e){
-                Utility.createErrorWindow("Errore durante lo svolgimento del compitino");
+                Utility.createErrorWindow("Errore durante lo svolgimento|eliminazione del compitino");
                 System.out.println(e.getMessage());
             }
-            System.out.println("CheckBox Action (selected: " + selected + ")");
         });
 
         return checkBox;
