@@ -3,79 +3,125 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.RadialGradient?>
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Nuovo">
-    <center>
-        <AnchorPane fx:id="menuAP" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
-            <children>
-                <JFXTextField fx:id="tfNome" labelFloat="true" layoutX="90.0" layoutY="160.0" promptText="Nome">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-            <JFXComboBox fx:id="cmbTipo" labelFloat="true" layoutX="450.0" layoutY="159.0" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Tipo" />
-            <JFXComboBox fx:id="cmbCantina" labelFloat="true" layoutX="92.0" layoutY="254.0" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Cantina" />
-                <JFXTextField fx:id="tfAnnata" labelFloat="true" layoutX="450.0" layoutY="256.0" promptText="Annata">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="tfCosto" labelFloat="true" layoutX="90.0" layoutY="355.0" promptText="Costo">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="tfPrezzoVendita" labelFloat="true" layoutX="450.0" layoutY="355.0" promptText="Prezzo Vendita">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-                <JFXTextField fx:id="tfQta" labelFloat="true" layoutX="90.0" layoutY="458.0" promptText="Quantità">
-                    <font>
-                        <Font size="21.0" />
-                    </font>
-                </JFXTextField>
-                <JFXButton fx:id="btnInserisci" layoutX="677.0" layoutY="695.0" onAction="#inserisciElement" prefHeight="50.0" prefWidth="50.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff; -fx-background-radius: 50; -fx-border-radius: 50;" text="+">
-                    <font>
-                        <Font name="Calibri" size="25.0" />
-                    </font>
-                    <ripplerFill>
-                        <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
-                            <stops>
-                                <Stop color="#2c87ff" />
-                                <Stop color="#67abff" offset="0.6828613184816523" />
-                                <Stop color="#89b8f5" offset="1.0" />
-                            </stops>
-                        </RadialGradient>
-                    </ripplerFill>
-                </JFXButton>
-            <JFXTextField fx:id="tfID" labelFloat="true" layoutX="91.0" layoutY="580.0" promptText="Codice">
+<AnchorPane prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Nuovo">
+   <children>
+      <GridPane hgap="60.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="570.0" prefWidth="736.0" AnchorPane.bottomAnchor="80.0" AnchorPane.leftAnchor="80.0" AnchorPane.rightAnchor="184.0" AnchorPane.topAnchor="150.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="289.0" minWidth="10.0" prefWidth="261.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="328.0" minWidth="10.0" prefWidth="212.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <JFXTextField fx:id="tfNome" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Nome" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                <font>
                   <Font size="21.0" />
                </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
             </JFXTextField>
-                <Text layoutX="208.0" layoutY="92.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserisci un nuovo ordine">
-                    <font>
-                        <Font name="System Bold Italic" size="31.0" />
-                    </font>
-                </Text>
-            <JFXComboBox fx:id="cmbFornitore" labelFloat="true" layoutX="451.0" layoutY="456.0" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Fornitore" />
-            </children>
-        </AnchorPane>
-    </center>
-   <right>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <children>
-            <JFXButton fx:id="btnFornitore" layoutY="236.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Fornitore" />
-            <JFXButton fx:id="btnTipoVino" layoutY="350.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Tipo Vino" />
-            <JFXButton fx:id="btnCantina" layoutY="450.0" onAction="#changeScene" prefHeight="100.0" prefWidth="100.0" text="Cantina" />
+            <JFXComboBox fx:id="cmbTipo" labelFloat="true" maxWidth="1.7976931348623157E308" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Tipo" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXComboBox>
+            <JFXComboBox fx:id="cmbCantina" labelFloat="true" maxWidth="1.7976931348623157E308" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Cantina" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXComboBox>
+            <JFXTextField fx:id="tfAnnata" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Annata" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="tfCosto" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Costo" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="tfPrezzoVendita" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Prezzo Vendita" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="2" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <JFXTextField fx:id="tfQta" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Quantità" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <JFXComboBox fx:id="cmbFornitore" labelFloat="true" maxWidth="1.7976931348623157E308" onShowing="#loadCmb" prefHeight="49.0" prefWidth="235.0" promptText="Fornitore" GridPane.columnIndex="1" GridPane.hgrow="ALWAYS" GridPane.rowIndex="3" GridPane.vgrow="ALWAYS">
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXComboBox>
+            <JFXTextField fx:id="tfID" labelFloat="true" maxWidth="1.7976931348623157E308" promptText="Codice" GridPane.hgrow="ALWAYS" GridPane.rowIndex="4" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font size="21.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
+               </GridPane.margin>
+            </JFXTextField>
+            <JFXButton fx:id="btnInserisci" onAction="#inserisciElement" prefHeight="50.0" prefWidth="50.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff; -fx-background-radius: 50; -fx-border-radius: 50;" text="+" GridPane.columnIndex="1" GridPane.rowIndex="4">
+               <font>
+                  <Font name="Calibri" size="25.0" />
+               </font>
+               <ripplerFill>
+                  <RadialGradient centerX="0.5" centerY="0.5" radius="0.5">
+                     <stops>
+                        <Stop color="#2c87ff" />
+                        <Stop color="#67abff" offset="0.6828613184816523" />
+                        <Stop color="#89b8f5" offset="1.0" />
+                     </stops>
+                  </RadialGradient>
+               </ripplerFill>
+               <GridPane.margin>
+                  <Insets left="200.0" />
+               </GridPane.margin>
+            </JFXButton>
          </children>
-      </AnchorPane>
-   </right>
-</BorderPane>
+      </GridPane>
+      <Text layoutX="305.0" layoutY="120.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inserisci un nuovo ordine">
+         <font>
+            <Font name="System Bold Italic" size="31.0" />
+         </font>
+      </Text>
+      <VBox layoutX="842.0" layoutY="206.0" prefHeight="459.0" prefWidth="100.0" AnchorPane.bottomAnchor="135.0" AnchorPane.rightAnchor="58.0" AnchorPane.topAnchor="206.0">
+         <children>
+            <JFXButton fx:id="btnFornitore" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" prefWidth="100.0" text="Fornitore" />
+            <JFXButton fx:id="btnCantina" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" prefWidth="100.0" text="Cantina" />
+            <JFXButton fx:id="btnTipoVino" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" prefWidth="100.0" text="Tipo Vino" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>

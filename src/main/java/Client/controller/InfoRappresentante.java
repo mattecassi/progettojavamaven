@@ -1,5 +1,6 @@
 package Client.controller;
 
+import API.API;
 import API.APIC;
 import ClientUtils.Clausola;
 import Models.*;
@@ -191,61 +192,65 @@ public class InfoRappresentante {
     @FXML
     private void btnPress(Event event) {
         Button btnPressed = (Button) event.getSource();
+        String[] strings = {};
+        ArrayList<Clausola> clausolasVino = new ArrayList<>();
+        //Rappresentante
+        APIC aFornitoreRappresentante = new APIC(Fornitore.getTableFornitoriRappresentanti());
+        APIC aRappresentante = new APIC("rappresentante");
+        ArrayList<Clausola> clausolasRappresentante = new ArrayList<>();
+        clausolasRappresentante.add(new Clausola("ID", "=", rappresentante.getID().toString()));
+
         switch (btnPressed.getId()) {
             case "btnElimina":
-                APIC aEnoteca = new APIC("enoteca");
-                String[] stringsEnoteca = {};
-                ArrayList<Clausola> clausolasEnoteca = new ArrayList<>();
-                clausolasEnoteca.add(new Clausola("ID", "=", rappresentante.getID().toString()));
                 Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                 alert.setTitle("Conferma Eliminazione");
-                alert.setHeaderText("Stai eliminando il rappresentante \"" + rappresentante.getNome() + "\", cosi fancendo eliminerai anche tutte le cantine associate (e i relativi vini!!)!");
-                alert.setContentText("Vuoi davvero eliminare la cantina?");
+                alert.setHeaderText("Stai eliminando \"" + rappresentante.getNome() + "\", cosi fancendo eliminerai anche tutte le cantine associate (e i relativi vini!!)!");
+                alert.setContentText("Vuoi davvero eliminare l'elemento?");
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     try {
-                        if (aEnoteca.select(stringsEnoteca,clausolasEnoteca).toList(Fornitore.class).isEmpty()) {
-                            APIC a = new APIC("cantina");
-                            String[] strings = {};
+                        //Nel caso in cui sia un rapprasentante
+                        if (!aFornitoreRappresentante.select(strings, clausolasRappresentante).toList(Fornitore.class).isEmpty()) {
+
+                            //PRIMA CERCA LE CANTINE COLLEGATE AL RAPPRESENTANTE E ELIMINO I VINI COLLEGATI AD ESSE
+                            APIC aCantina = new APIC("cantina");
                             ArrayList<Clausola> clausolasCantina = new ArrayList<>();
-                            ArrayList<Clausola> clausolasVino = new ArrayList<>();
                             clausolasCantina.add(new Clausola("idRappresentante", "=", rappresentante.getID().toString()));
-                            for (Cantina cur : a.select(strings, clausolasCantina).toList(Cantina.class)) {
-                                clausolasVino.add(new Clausola("idCantina", "=", cur.getID().toString()));
+                            for (Cantina cantina : aCantina.select(strings, clausolasCantina).toList(Cantina.class)) {
+                                clausolasVino.add(new Clausola("idCantina", "=", cantina.getID().toString()));
                                 ricerca.eliminaVini(clausolasVino);
+                                cantina.delete();
                                 clausolasVino.remove(0);
-                                cur.delete();
                             }
+                            clausolasCantina.remove(0);
+                            //POI ELIMINO I VINI COLLEGATI AL RAPPRESENTANTE DIRETTAMENTE
                             clausolasVino.add(new Clausola("idFornitore", "=", rappresentante.getID().toString()));
                             ricerca.eliminaVini(clausolasVino);
-                            APIC aRappre = new APIC("rappresentante");
-                            ArrayList<Clausola> clausolasRappresentante = new ArrayList<>();
-                            clausolasRappresentante.add(new Clausola("id", "=", rappresentante.getID().toString()));
-                            aRappre.select(strings, clausolasRappresentante).toList(Rappresentante.class).get(0).delete();
-                            rappresentante.delete();
-                        }else{
-                            APIC aFornitore = new APIC("fornitore");
-                            String[] strings = {};
-                            ArrayList<Clausola> clausolasFornitore = new ArrayList<>();
-                            ArrayList<Clausola> clausolasVino = new ArrayList<>();
+                            clausolasVino.remove(0);
+                            //INFINE ELIMINO IL RAPPRESENTANTE
 
-                            clausolasFornitore.add(new Clausola("ID","=",rappresentante.getID().toString()));
-                            WrapperEnoteca wrapperEnoteca = new WrapperEnoteca(rappresentante);
-
-
-                            Enoteca enoteca=wrapperEnoteca.enoteca;
-                            enoteca.delete();
-
-                            for (Fornitore cur : aFornitore.select(strings, clausolasFornitore).toList(Fornitore.class)) {
-                                clausolasVino.add(new Clausola("idFornitore", "=", cur.getID().toString()));
+                            aRappresentante.select(strings, clausolasRappresentante).toList(Rappresentante.class).get(0).delete();
+                        } else {
+                            //Nel caso sia un'enoteca
+                            APIC aFornitoreEnoteca = new APIC(Fornitore.getTableFornitoriEnoteche());
+                            ArrayList<Clausola> clausolasEnoteca = new ArrayList<>();
+                            clausolasEnoteca.add(new Clausola("ID", "=", rappresentante.getID().toString()));
+                            if (!aFornitoreEnoteca.select(strings, clausolasEnoteca).toList(Fornitore.class).isEmpty()) {
+                                //ELIMINO I VINI RELATIVI ALL'ENOTECA
+                                clausolasVino.add(new Clausola("idFornitore", "=", rappresentante.getID().toString()));
                                 ricerca.eliminaVini(clausolasVino);
                                 clausolasVino.remove(0);
-                                cur.delete();
+                                //ELIMINO L'ENOTECA
+                                APIC aEnoteca = new APIC("enoteca");
+                                aEnoteca.select(strings, clausolasEnoteca).toList(Enoteca.class).get(0).delete();
+                            } else { //Infine se è un fornitore semplice
+                                APIC aFornitore = new APIC("fornitore");
+                                clausolasVino.add(new Clausola("idFornitore", "=", rappresentante.getID().toString()));
+                                ricerca.eliminaVini(clausolasVino);
                             }
-
-                            rappresentante.delete();
-
                         }
+                        //FINISCO ELIMINANDO IL FORNITORE
+                        rappresentante.delete();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -260,3 +265,4 @@ public class InfoRappresentante {
         }
     }
 }
+

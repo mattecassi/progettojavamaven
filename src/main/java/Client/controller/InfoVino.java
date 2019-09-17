@@ -94,6 +94,7 @@ public class InfoVino {
     private JFXButton btnAggiungi1, btnTogli1, btnElimina;
 
     public InfoVino(Ricerca ricerca) {
+        //IMPOSTO IL LAYOUT DELLO STAGE CREATO
         this.ricerca = ricerca;
 
         thisStage = new Stage();
@@ -109,6 +110,7 @@ public class InfoVino {
             // Setup the window/stage
             thisStage.setTitle("Info Vino");
 
+            //CARICO I DATI NEI RISPETTIVI COMPONENTS
             WrapperVino cur = ricerca.getWrapperVino();
             vino = cur.vino;
             tfVinoNome.setText(vino.getNome());
@@ -127,51 +129,50 @@ public class InfoVino {
             tfCantinaRegione.setText(cantina.getRegione());
             tfCantinaVia.setText(cantina.getVia());
             tfCantinaUvaggio.setText(cantina.getUvaggio());
-            cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina","nome","", Cantina.class));
+            cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina", "nome", "", Cantina.class));
             cmbCantinaNome.getSelectionModel().select(cantina.getNome());
 
 
-            fornitore=cur.fornitore;
+            fornitore = cur.fornitore;
             tfFornitoreID.setText(String.valueOf(fornitore.getID()));
             tfFornitoreMail.setText(fornitore.getMail());
             tfFornitoreQtaMax.setText(String.valueOf(fornitore.getQta_max()));
             tfFornitoreQtaMin.setText(String.valueOf(fornitore.getQta_min()));
             tfFornitoreTelefono.setText(String.valueOf(fornitore.getTelefono()));
-            cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore","nome","", Fornitore.class));
+            cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore", "nome", "", Fornitore.class));
             cmbFornitoreNome.getSelectionModel().select(fornitore.getNome());
-
-
-            thisStage.setOnCloseRequest((WindowEvent event1) -> {
-                closeProcedure();
-                try {
-                    ricerca.loadAllTbl();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            });
-        } catch (IOException e) {
-            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
+        //DEFISCO L'EVENT HANDLER DELLA CHIUSURO DELLO STAGE
+        thisStage.setOnCloseRequest((WindowEvent event1) -> {
+            closeProcedure();
+            try {
+                ricerca.loadTblVino();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
+
     }
 
     public void showStage() {
-        thisStage.setResizable(false);
         thisStage.showAndWait();
     }
 
+    //COSA FARE IN CASO DI CHIUSURA DELLA FINESTRA
     private void closeProcedure() {
-        if (modified) {
+        if (modified) { //SE SONO STATE FATTE DELLE MODIFICHE CHIEDO SE SALVARLE O NO
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Conferma Modifica");
             alert.setHeaderText("Hai effettuato modifica al vino");
             alert.setContentText("Vuoi salvare tali modifiche");
 
             Optional<ButtonType> result = alert.showAndWait();
-            if (result.get() == ButtonType.OK) {
+            if (result.get() == ButtonType.OK) { // IN CASO POSITIVO, SALVO
                 try {
                     try {
+                        //CONTROLLO CHE IL NUOVO DATO NON ABBIA STESSO NOME DI UN DATO GIA PRESENTE
                         String[] strings = {};
                         boolean valid = true;
                         ArrayList<Clausola> clausolas = new ArrayList<>();
@@ -181,14 +182,12 @@ public class InfoVino {
                             valid = false;
                         }
                         clausolas.remove(0);
-                        System.out.println(vino.getTipo().toString() + " " + cmbTipo.getSelectionModel().getSelectedItem().toString());
                         if (vino.getTipo() != cmbTipo.getSelectionModel().getSelectedItem()) {
                             vino.setTipo(cmbTipo.getSelectionModel().getSelectedItem());
                         }
-                        System.out.println(valid);
+                        //SE TUTTO VA BENE, CHIAMO L'UPDATE SUL DATO IN CONSIDERAZIONE
                         if (valid) {
                             vino.update();
-                            System.out.println(vino.toString());
                         } else {
                             Utility.createErrorWindow("Impossibile completare a causa di un altro vino con stesso nome o codice");
                         }
@@ -200,17 +199,19 @@ public class InfoVino {
                 }
                 System.out.println("Salvo");
 
-            } else {
+            } else {//NON SALVO ED ESCO
                 System.out.println("Non salvo");
             }
         }
     }
 
+
+    //IN BASE AL BOTTONO PREMUTO, HO RISULTATI DIVERSI
     @FXML
     private void btnPress(Event e) {
         JFXButton btnPressed = (JFXButton) e.getSource();
         switch (btnPressed.getId()) {
-            case "btnAggiungi1":
+            case "btnAggiungi1": //AGGIUNGO UN SOLO VINO ALLA QTA ATTUALE
                 try {
                     vino.setQta(vino.getQta() + 1);
                     tfVinoQta.setText(String.valueOf(vino.getQta()));
@@ -219,7 +220,7 @@ public class InfoVino {
                     e1.printStackTrace();
                 }
                 break;
-            case "btnTogli1":
+            case "btnTogli1": //TOLOG UN SOLO VINO DALLA QTA ATTUALE
                 try {
                     vino.setQta(vino.getQta() - 1);
                     tfVinoQta.setText(String.valueOf(vino.getQta()));
@@ -228,7 +229,8 @@ public class InfoVino {
                     e1.printStackTrace();
                 }
                 break;
-            case "btnElimina":
+            case "btnElimina": //ELIMINO IN TOTO IL VINO PRESO IN CONSIDERAZIONE, DOPO AVER CHIESTO CONFERMA ALL'UTENTE
+                                //IN CASO AFFERMATIVO ELIMINO E POI CHIUDO LO STAGE
                 try {
                     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                     alert.setTitle("Conferma Eliminazione");
@@ -245,7 +247,7 @@ public class InfoVino {
                     Utility.createErrorWindow(e1.getMessage());
                 }
                 break;
-            case "btnSalva":
+            case "btnSalva": //SALVO
                 closeProcedure();
                 modified = false;
                 break;
@@ -308,7 +310,7 @@ public class InfoVino {
     }
 
     @FXML
-    private void changeFornitore(Event event){
+    private void changeFornitore(Event event) {
         if (cmbFornitoreNome.getSelectionModel().getSelectedItem() != fornitore.getNome()) {
             try {
                 modified = true;
@@ -328,5 +330,5 @@ public class InfoVino {
                 Utility.createErrorWindow(e.getMessage());
             }
         }
-        }
+    }
 }

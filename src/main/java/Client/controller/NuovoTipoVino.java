@@ -17,20 +17,17 @@ public class NuovoTipoVino {
     private JFXTextField tfTipoVino;
 
     @FXML
-    private Button btnAdd;
-
-    @FXML
     private void insertElement(){
-        APIC a = new APIC("tipo_vino");
-        APIReturn ret;
-        boolean presente=false;
+        //CONTROLLO CHE TUTTI I CAMPI SIANO STATI INSERITI
         if (tfTipoVino.getText().isEmpty()){
             Utility.createErrorWindow("Inserisci tutti i campi");
         } else{
+        //CARICO LA TABELLA DEI TIPI DI VINI, CONTROLLO CHE SIA STATO INSERITO UN NUMERO
+            APIC a = new APIC("tipo_vino");
             TipoVino nuovo = new TipoVino();
             nuovo.setTipo(Utility.replaceAllDeniedChar(tfTipoVino.getText()));
-            //ordine.setidFornitore(idFornitore);
             try {
+                //CONTROLLO CHE NON ESISTA GIA NEL DB, POI INSERISCO E RESETTO IL TF
                 String[] strings={"tipo"};
                 ArrayList<Clausola> clausolas = new ArrayList<Clausola>();
                 clausolas.add(new Clausola("tipo", "LIKE", nuovo.getTipo()));
@@ -39,7 +36,6 @@ public class NuovoTipoVino {
                 else
                     Utility.createErrorWindow("Presente");
                 tfTipoVino.setText(null);
-
                 Utility.createSuccessWindow("Inserimento avvenuto con successo");
             }catch (Exception e){
                 Utility.createErrorWindow(e.getMessage());
