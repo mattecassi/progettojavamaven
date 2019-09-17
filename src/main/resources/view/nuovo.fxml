@@ -92,7 +92,7 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="50.0" />
                </GridPane.margin>
             </JFXTextField>
-            <JFXButton fx:id="btnInserisci" onAction="#inserisciElement" prefHeight="50.0" prefWidth="50.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-color: #bfdaff; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="btnDown" stylesheets="@../css/checkList.css" text="+" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <JFXButton fx:id="btnInserisci" onAction="#inserisciElement" prefHeight="50.0" prefWidth="50.0" style="-fx-border-width: 0.2; -fx-border-color: black; -fx-background-radius: 50; -fx-border-radius: 50;" styleClass="btnDown" stylesheets="@../css/checkList.css" text="+" GridPane.columnIndex="1" GridPane.rowIndex="4">
                <font>
                   <Font name="Calibri" size="25.0" />
                </font>
@@ -121,7 +121,7 @@
             <JFXButton fx:id="btnFornitore" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" prefWidth="100.0" stylesheets="@../css/checkList.css" text="Fornitore" />
             <JFXButton fx:id="btnCantina" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" prefWidth="100.0" stylesheets="@../css/checkList.css" text="Cantina">
                <VBox.margin>
-                  <Insets bottom="1.0" top="1.0" />
+                  <Insets bottom="5.0" top="5.0" />
                </VBox.margin></JFXButton>
             <JFXButton fx:id="btnTipoVino" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" prefWidth="100.0" stylesheets="@../css/checkList.css" text="Tipo Vino" />
          </children>

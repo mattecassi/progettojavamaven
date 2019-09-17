@@ -472,7 +472,7 @@ public class Ricerca {
         searchVino(event, false);
     }
 
-    //CANTINA
+    //CANTINA ANALOGO A VINO
     @FXML
     private void openContextCantina(Event event) {
         try {
@@ -561,7 +561,7 @@ public class Ricerca {
         searchCantina(event, false);
     }
 
-    //FORNITORE
+    //FORNITORE ANALOGO A VINO
     @FXML
     private void openContextFornitore(Event event) {
         try {
@@ -619,25 +619,6 @@ public class Ricerca {
                         cmbFornitoreTelefono.setItems(Utility.loadDataForCmb("fornitore", "telefono", cmbFornitoreTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
                         cmbFornitoreTelefono.show();
                         break;
-                    case "cmbRappresentanteQtaMax":
-                        //TODO CERCARE DI METTERE A POSTO LA RICERCA CON NUMERI
-//                        if (String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem()).equals(""))
-//                            cmbRappresentanteQtaMax.hide();
-//                        cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_max", cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem(), Fornitore.class));
-//                        cmbCantinaVia.show();
-                        break;
-                    case "cmbRappresentanteQtaMin":
-//                        if (String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem()).equals(""))
-//                            cmbRappresentanteQtaMin.hide();
-//                        System.out.println("ok");
-//                            try {
-//                                System.out.println("ok2");
-//                                cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_min", cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem(), Fornitore.class));
-//                                cmbRappresentanteQtaMin.show();
-//                                System.out.println("ok3");
-//                        }catch (Exception e){Utility.createErrorWindow(e.getMessage());}
-                        break;
-
                 }
             }
             tblViewListaFornitore.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
@@ -657,7 +638,7 @@ public class Ricerca {
     }
 
 
-    //RAPPRESENTANTE
+    //RAPPRESENTANTE ANALOGO A VINO
     @FXML
     private void openContextRappresentante(Event event) {
         try {
@@ -714,25 +695,6 @@ public class Ricerca {
                         cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", cmbRappresentanteTelefono.getSelectionModel().getSelectedItem(), Fornitore.class));
                         cmbRappresentanteTelefono.show();
                         break;
-                    case "cmbRappresentanteQtaMax":
-                        //TODO CERCARE DI METTERE A POSTO LA RICERCA CON NUMERI
-//                        if (String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem()).equals(""))
-//                            cmbRappresentanteQtaMax.hide();
-//                        cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_max", cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem(), Fornitore.class));
-//                        cmbCantinaVia.show();
-                        break;
-                    case "cmbRappresentanteQtaMin":
-//                        if (String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem()).equals(""))
-//                            cmbRappresentanteQtaMin.hide();
-//                        System.out.println("ok");
-//                            try {
-//                                System.out.println("ok2");
-//                                cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_min", cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem(), Fornitore.class));
-//                                cmbRappresentanteQtaMin.show();
-//                                System.out.println("ok3");
-//                        }catch (Exception e){Utility.createErrorWindow(e.getMessage());}
-                        break;
-
                 }
             }
             tblViewListaRappresentate.setItems(a.select(strings, clausolas).toObservableList(Fornitore.class));
@@ -751,7 +713,7 @@ public class Ricerca {
         searchRappresentante(event, false);
     }
 
-    //ENOTECA
+    //ENOTECA ANALOGO A VINO
 
     @FXML
     private void openContextEnoteca(Event event) {
@@ -846,25 +808,6 @@ public class Ricerca {
                         cmbEnotecaVia.setItems(Utility.loadDataForCmb("enoteca", "via", cmbEnotecaTelefono.getSelectionModel().getSelectedItem(), Enoteca.class));
                         cmbEnotecaVia.show();
                         break;
-                    case "cmbRappresentanteQtaMax":
-                        //TODO CERCARE DI METTERE A POSTO LA RICERCA CON NUMERI
-//                        if (String.valueOf(cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem()).equals(""))
-//                            cmbRappresentanteQtaMax.hide();
-//                        cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_max", cmbRappresentanteQtaMax.getSelectionModel().getSelectedItem(), Fornitore.class));
-//                        cmbCantinaVia.show();
-                        break;
-                    case "cmbRappresentanteQtaMin":
-//                        if (String.valueOf(cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem()).equals(""))
-//                            cmbRappresentanteQtaMin.hide();
-//                        System.out.println("ok");
-//                            try {
-//                                System.out.println("ok2");
-//                                cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_min", cmbRappresentanteQtaMin.getSelectionModel().getSelectedItem(), Fornitore.class));
-//                                cmbRappresentanteQtaMin.show();
-//                                System.out.println("ok3");
-//                        }catch (Exception e){Utility.createErrorWindow(e.getMessage());}
-                        break;
-
                 }
             }
             ObservableList<Enoteca> enotecaObservableList = b.select(strings, clausolasEnoteca).toObservableList(Enoteca.class);
@@ -893,7 +836,7 @@ public class Ricerca {
     }
 
 
-    //TIPO VINO
+    //TIPO VINOANALOGO A VINO
 
     private TipoVino getTipoVino() {
         return (TipoVino) tblViewListaTipo.getSelectionModel().getSelectedItem();
@@ -908,8 +851,7 @@ public class Ricerca {
         } catch (Exception e) {
         }
     }
-
-    @FXML
+    //PRENDO IL NOME DEL TIPO DI VINO E DOPO AVERE CHIESTO CONFERMA ELIMININO IL TIPO E TUTTI I VINI CHE HANNO QUEL TIPO
     private void btnPress(Event event) {
         Button btnPressed = (Button) event.getSource();
         try {
@@ -920,6 +862,7 @@ public class Ricerca {
                 switch (btnPressed.getId()) {
                     case "btnTipoElimina":
                         try {
+                            //POP UP PER LA CONFERMA DELL'ELIMINAZIONE
                             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
                             alert.setTitle("Conferma Eliminazione");
                             alert.setHeaderText("Stai eliminando il tipo \"" + tipoVino.getTipo() + "\", eliminerai ogni vino ad esso associato!");
@@ -928,6 +871,7 @@ public class Ricerca {
                             Optional<ButtonType> result = alert.showAndWait();
                             if (result.get() == ButtonType.OK) {
                                 try {
+                                    //CLAUSOLO PER TIPO DEL VINO CHE DOVRO ELIMINARE
                                     ArrayList<Clausola> clausolas = new ArrayList<>();
                                     clausolas.add(new Clausola("tipo", "like", tipoVino.getTipo()));
                                     eliminaVini(clausolas);

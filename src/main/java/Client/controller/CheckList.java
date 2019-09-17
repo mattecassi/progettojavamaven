@@ -159,7 +159,6 @@ public class CheckList implements Initializable {
 
     }
 
-
     @FXML
     void addCompito(ActionEvent event) {
 

@@ -83,15 +83,18 @@ public class InfoCantina {
         try {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/view/infoCantina.fxml"));
 
-        // Set this class as the controller
+        // IMPOSTO LA CLASSE ATTUALE COME CONTROLLER
         loader.setController(this);
 
-        // Load the scene
+        // CARICA LA SCENA
         thisStage.setScene(new Scene(loader.load()));
 
-        // Setup the window/stage
+        // INIZIALIZZO LO STAGE
         thisStage.setTitle("Info Cantina");
 
+
+        //IMPOSTO IL DATO DA PRENDERE IN CONSIDERARIONE
+            // CARICO TUTTI I DATI RELATIVI ALLA CANTINA
         WrapperCantina cur = ricerca.getWrapperCantina();
 
         cantina = cur.cantina;
@@ -110,7 +113,7 @@ public class InfoCantina {
         tfRappresentanteQtaMin.setText(String.valueOf(rappresentante.getQta_min()));
         cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(),"nome","", Fornitore.class));
         cmbRappresentanteNome.getSelectionModel().select(rappresentante.getNome());
-
+            //COSA FARE QUANDO DEVO CHIUDERE LO STAGE
         thisStage.setOnCloseRequest((WindowEvent event1) -> {
             closeProcedure();
         });
@@ -122,8 +125,9 @@ public class InfoCantina {
     }
 }
 
+    //COSA FARE QUANDO DEVO CHIUDERE LO STAGE
     private void closeProcedure(){
-        if (modified) {
+        if (modified) {//SE HO MODIFICATO UN VALORE CHIEDO CONFERMA DI SALVATAGGIO
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Conferma Modifica");
             alert.setHeaderText("Hai effettuato modifica alla cantina");
@@ -133,6 +137,7 @@ public class InfoCantina {
             if (result.get() == ButtonType.OK) {
                 try {
                     try {
+                        //CONTROLLO CHE IL NUOVO DATO NON ABBIA NOME UGUAUGLE AD UNO GIA PRESENTE NEL DB
                         String[] strings = {};
                         boolean valid = true;
                         ArrayList<Clausola> clausolas = new ArrayList<>();

@@ -37,12 +37,8 @@ public class Vendita {
         try {
 
             List<File> files = event.getDragboard().getFiles();
-        /*Image img = new Image(new FileInputStream(files.get(0)));
-        imgView.setImage(img);*/
-            File file = files.get(0);
-            //System.out.println(file.getName());
-//      System.out.println("Stampa file" + FilenameUtils.getExtension(file.toString()));
 
+            File file = files.get(0);
             Operazione o;
             //controllo che sia un file xls
             if (FilenameUtils.getExtension(file.toString()).equalsIgnoreCase("xls")){
@@ -55,15 +51,10 @@ public class Vendita {
                 boolean errore = false; //in caso di errore non inserisco le operazioni
 
                 Cell celldata = sheet.getCell("C1");//ottengo la cella contenente la data
-//                System.out.println(celldata.getContents());
                 APIC a = new APIC("vino");
                 ArrayList<Operazione> listOperazioni = new ArrayList<>();
 
-
-
                 for (int j = 0; j < sheet.getRows(); j++) { //scorro le righe
-
-
                     if (!printValue) {
                         Cell cell = sheet.getCell(0, j);//ottengo la cella
                         if (cell.getContents().equalsIgnoreCase("codice")) {
@@ -84,10 +75,8 @@ public class Vendita {
                         o.setData_operazione(dt);
                         o.setTipoOperazione(2); //2 sarà la vendita
                         o.setIdvino(Integer.valueOf(sheet.getCell(0, j).getContents()));
-//                        System.out.println("Vendita 80");
                         try {
                             Vino v = a.get(o.getIdvino(),Vino.class); //controllo esistenza vino con quell'id
-//                            System.out.println(v);
                             o.setDescrizione(sheet.getCell(1, j).getContents()); //descrizione del vino//
                             o.setSconto(Double.valueOf(sheet.getCell(2, j).getContents().replace(",",".")));
                             o.setQta(Integer.valueOf(sheet.getCell(3, j).getContents()));
