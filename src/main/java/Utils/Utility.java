@@ -182,4 +182,16 @@ public class Utility {
     }
 
 
+    //METODO PER EVITARE DI INSERIRE DUPLICATI ALL'INTERNO DELLE COMBO BOX
+    public static ObservableList<String> cmbToUpperCase(ObservableList<String> observableList){
+        HashSet<String> hashSet = new HashSet<>();
+        //AGGIUNGO TUTTE LE STRINGHE AD UN HASHSET COSI IN AUTOMATICO MI ELIMINA I DUPLICATI
+        for(String cur :observableList){
+            hashSet.add(cur);
+        }
+        ObservableList<String> observableListReturn = FXCollections.observableArrayList();
+        //RITORNO UN'OBSERVABLE LIST CHE ANDRO A CARICARE NELLE COMBOBOX
+        observableListReturn.addAll(hashSet);
+        return observableListReturn;
+    }
 }

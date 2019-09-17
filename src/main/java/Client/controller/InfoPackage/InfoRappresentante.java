@@ -1,7 +1,8 @@
-package Client.controller;
+package Client.controller.InfoPackage;
 
 import API.API;
 import API.APIC;
+import Client.controller.Ricerca;
 import ClientUtils.Clausola;
 import Models.*;
 import Utils.Utility;

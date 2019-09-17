@@ -1,29 +1,21 @@
 package Client.controller;
 
-import API.APIC;
 import Client.Main2;
+import Client.controller.NuovoPackage.NuovoCheckList;
 import Models.Compito;
-import Models.Fornitore;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXCheckBox;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.layout.*;
 
-import javax.rmi.CORBA.Util;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.Random;
 import java.util.ResourceBundle;
 
 public class CheckList implements Initializable {

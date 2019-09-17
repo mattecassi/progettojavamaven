@@ -3,6 +3,10 @@ package Client.controller;
 import API.APIC;
 //import Client.Vino;
 
+import Client.controller.InfoPackage.InfoCantina;
+import Client.controller.InfoPackage.InfoEnoteca;
+import Client.controller.InfoPackage.InfoRappresentante;
+import Client.controller.InfoPackage.InfoVino;
 import ClientUtils.Clausola;
 import Models.*;
 import Utils.Utility;
@@ -277,13 +281,13 @@ public class Ricerca implements Initializable {
             loadTblVino();
             initTblVino();
             //CARICO TUTTI I DATI NELLE COMBOBOX DEI VINI
-            cmbVinoNome.setItems(Utility.loadDataForCmb("vino", "nome", "", Vino.class));
-            cmbVinoTipo.setItems(Utility.loadDataForCmb("vino", "tipo", "", Vino.class));
-            cmbVinoUvaggio.setItems(Utility.loadDataForCmb("cantina", "uvaggio", "", Cantina.class));
-            cmbVinoCantina.setItems(Utility.loadDataForCmb("cantina", "nome", "", Cantina.class));
-            cmbVinoStato.setItems(Utility.loadDataForCmb("cantina", "stato", "", Cantina.class));
-            cmbVinoRegione.setItems(Utility.loadDataForCmb("cantina", "regione", "", Cantina.class));
-            cmbVinoFornitore.setItems(Utility.loadDataForCmb("fornitore", "nome", "", Fornitore.class));
+            cmbVinoNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("vino", "nome", "", Vino.class)));
+            cmbVinoTipo.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("vino", "tipo", "", Vino.class)));
+            cmbVinoUvaggio.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "uvaggio", "", Cantina.class)));
+            cmbVinoCantina.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "nome", "", Cantina.class)));
+            cmbVinoStato.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "stato", "", Cantina.class)));
+            cmbVinoRegione.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "regione", "", Cantina.class)));
+            cmbVinoFornitore.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "nome", "", Fornitore.class)));
             cmbVinoAnnata.setItems(Utility.loadDataForCmbInteger("vino", "anno", null, Vino.class));
             cmbVinoQta.setItems(Utility.loadDataForCmbInteger("vino", "qta", null, Vino.class));
 
@@ -292,19 +296,19 @@ public class Ricerca implements Initializable {
             loadTblCantina();
             initTblCantina();
             //CARICO TUTTI I DATI NELLE COMBOBOX DELLE CANTINE
-            cmbCantinaNome.setItems(Utility.loadDataForCmb("cantina", "nome", "", Cantina.class));
-            cmbCantinaRegione.setItems(Utility.loadDataForCmb("cantina", "regione", "", Cantina.class));
-            cmbCantinaStato.setItems(Utility.loadDataForCmb("cantina", "stato", "", Cantina.class));
-            cmbCantinaUvaggio.setItems(Utility.loadDataForCmb("cantina", "uvaggio", "", Cantina.class));
-            cmbCantinaVia.setItems(Utility.loadDataForCmb("cantina", "via", "", Cantina.class));
+            cmbCantinaNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "nome", "", Cantina.class)));
+            cmbCantinaRegione.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "regione", "", Cantina.class)));
+            cmbCantinaStato.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "stato", "", Cantina.class)));
+            cmbCantinaUvaggio.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "uvaggio", "", Cantina.class)));
+            cmbCantinaVia.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("cantina", "via", "", Cantina.class)));
 
             //FORNITORE
             loadTblFornitore();
             initTblFornitore();
             //CARICO TUTTI I DATI NELLE COMBOBOX DEI FORNITORI
-            cmbFornitoreNome.setItems(Utility.loadDataForCmb("fornitore", "nome", "", Fornitore.class));
-            cmbFornitoreMail.setItems(Utility.loadDataForCmb("fornitore", "mail", "", Fornitore.class));
-            cmbFornitoreTelefono.setItems(Utility.loadDataForCmb("fornitore", "telefono", "", Fornitore.class));
+            cmbFornitoreNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "nome", "", Fornitore.class)));
+            cmbFornitoreMail.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "mail", "", Fornitore.class)));
+            cmbFornitoreTelefono.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("fornitore", "telefono", "", Fornitore.class)));
             cmbFornitoreQtaMin.setItems(Utility.loadDataForCmbInteger("fornitore", "qta_min", null, Fornitore.class));
             cmbFornitoreQtaMax.setItems(Utility.loadDataForCmbInteger("fornitore", "qta_max", null, Fornitore.class));
 
@@ -312,9 +316,9 @@ public class Ricerca implements Initializable {
             //CARICO TUTTI I DATI NELLE COMBOBOX DEI RAPPRESENTANTI
             loadTblRappresentante();
             initTblRappresentante();
-            cmbRappresentanteNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", "", Fornitore.class));
-            cmbRappresentanteMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", "", Fornitore.class));
-            cmbRappresentanteTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", "", Fornitore.class));
+            cmbRappresentanteNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "nome", "", Fornitore.class)));
+            cmbRappresentanteMail.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "mail", "", Fornitore.class)));
+            cmbRappresentanteTelefono.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriRappresentanti(), "telefono", "", Fornitore.class)));
             cmbRappresentanteQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_max", null, Fornitore.class));
             cmbRappresentanteQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriRappresentanti(), "qta_min", null, Fornitore.class));
 
@@ -322,13 +326,13 @@ public class Ricerca implements Initializable {
             //CARICO TUTTI I DATI NELLE COMBOBOX DELLE ENOTECHE
             loadTblEnoteca();
             iniTblEnoteca();
-            cmbEnotecaNome.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "nome", "", Fornitore.class));
-            cmbEnotecaMail.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "mail", "", Fornitore.class));
-            cmbEnotecaTelefono.setItems(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "telefono", "", Fornitore.class));
-            cmbEnotecaStato.setItems(Utility.loadDataForCmb("enoteca", "stato", "", Enoteca.class));
-            cmbEnotecaRegione.setItems(Utility.loadDataForCmb("enoteca", "regione", "", Enoteca.class));
-            cmbEnotecaCitta.setItems(Utility.loadDataForCmb("enoteca", "citta", "", Enoteca.class));
-            cmbEnotecaVia.setItems(Utility.loadDataForCmb("enoteca", "via", "", Enoteca.class));
+            cmbEnotecaNome.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "nome", "", Fornitore.class)));
+            cmbEnotecaMail.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "mail", "", Fornitore.class)));
+            cmbEnotecaTelefono.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb(Fornitore.getTableFornitoriEnoteche(), "telefono", "", Fornitore.class)));
+            cmbEnotecaStato.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "stato", "", Enoteca.class)));
+            cmbEnotecaRegione.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "regione", "", Enoteca.class)));
+            cmbEnotecaCitta.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "citta", "", Enoteca.class)));
+            cmbEnotecaVia.setItems(Utility.cmbToUpperCase(Utility.loadDataForCmb("enoteca", "via", "", Enoteca.class)));
             cmbEnotecaQtaMin.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriEnoteche(), "qta_min", null, Fornitore.class));
             cmbEnotecaQtaMax.setItems(Utility.loadDataForCmbInteger(Fornitore.getTableFornitoriEnoteche(), "qta_max", null, Fornitore.class));
 

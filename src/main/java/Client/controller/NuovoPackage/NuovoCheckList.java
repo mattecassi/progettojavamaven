@@ -1,5 +1,6 @@
-package Client.controller;
+package Client.controller.NuovoPackage;
 
+import Client.controller.CheckList;
 import Models.Compito;
 import Models.Enoteca;
 import Models.Fornitore;

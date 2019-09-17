@@ -1,4 +1,4 @@
-package Client.controller;
+package Client.controller.NuovoPackage;
 
 import API.APIC;
 import ClientUtils.Clausola;
