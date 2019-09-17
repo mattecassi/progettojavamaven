@@ -59,7 +59,6 @@ public class InfoRappresentante {
     private JFXButton btnSalva;
 
     public void showStage() {
-        thisStage.setResizable(false);
         thisStage.showAndWait();
     }
 

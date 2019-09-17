@@ -1,47 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import javafx.scene.control.Menu?>
-<?import javafx.scene.control.MenuBar?>
-<?import javafx.scene.control.MenuItem?>
-<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 
 <BorderPane prefHeight="800.0" prefWidth="1200.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Layer">
-   <top>
-      <MenuBar prefHeight="25.0" prefWidth="980.0" BorderPane.alignment="CENTER">
-        <menus>
-          <Menu mnemonicParsing="false" text="File">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Import Backup" />
-                  <MenuItem mnemonicParsing="false" text="Export Backup" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-                  <MenuItem mnemonicParsing="false" text="Disconnetti" />
-                  <MenuItem mnemonicParsing="false" text="Accedi" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Delete" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </top>
    <right>
       <VBox prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton fx:id="btnRicerca" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" text="Ricerca" />
-            <JFXButton fx:id="btnAggiorna" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" text="Vendita" />
-            <JFXButton fx:id="btnNuovo" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" text="Nuovo" />
-            <JFXButton fx:id="btnInventario" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" text="Inventario" />
-            <JFXButton fx:id="btnCheckList" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" text="Checklist" />
+            <JFXButton fx:id="btnRicerca" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Ricerca">
+               <VBox.margin>
+                  <Insets top="2.0" />
+               </VBox.margin></JFXButton>
+            <JFXButton fx:id="btnAggiorna" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Vendita" />
+            <JFXButton fx:id="btnNuovo" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Nuovo" />
+            <JFXButton fx:id="btnInventario" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Inventario" />
+            <JFXButton fx:id="btnCheckList" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Checklist">
+               <VBox.margin>
+                  <Insets bottom="1.0" />
+               </VBox.margin></JFXButton>
          </children>
       </VBox>
    </right>

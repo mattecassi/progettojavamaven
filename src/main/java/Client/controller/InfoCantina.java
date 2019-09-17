@@ -73,7 +73,6 @@ public class InfoCantina {
     private JFXButton btnSalva;
 
     public void showStage() {
-        thisStage.setResizable(false);
         thisStage.showAndWait();
     }
 

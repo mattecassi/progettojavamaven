@@ -402,7 +402,7 @@
                                     <Font size="24.0" />
                                  </font>
                               </Label>
-                              <JFXButton fx:id="btnTipoElimina" layoutX="408.0" layoutY="605.0" onAction="#btnPress" prefHeight="127.0" prefWidth="164.0" text="Elimina" wrapText="true" AnchorPane.bottomAnchor="39.0" AnchorPane.rightAnchor="31.0" />
+                              <JFXButton fx:id="btnTipoElimina" layoutX="408.0" layoutY="605.0" onAction="#btnPress" prefHeight="127.0" prefWidth="164.0" stylesheets="@../css/checkList.css" text="Elimina" wrapText="true" AnchorPane.bottomAnchor="39.0" AnchorPane.rightAnchor="31.0" />
                               <TableView fx:id="tblViewListaTipo" onContextMenuRequested="#openContextTipo" onMouseClicked="#openContextTipo" prefHeight="771.0" prefWidth="396.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <columns>
                                   <TableColumn fx:id="tblColumnTipoNome" prefWidth="75.0" text="Tipo di Vino" />

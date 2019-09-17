@@ -69,7 +69,6 @@ public class InfoEnoteca {
     private JFXButton btnSalva;
 
     public void showStage() {
-        thisStage.setResizable(false);
         thisStage.showAndWait();
     }
 

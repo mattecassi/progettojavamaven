@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.NuovoTipoVino">
    <children>
-      <HBox layoutX="63.0" layoutY="107.0" prefHeight="187.0" prefWidth="474.0" spacing="40.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="107.0">
+      <HBox alignment="CENTER" layoutX="63.0" layoutY="107.0" prefHeight="187.0" prefWidth="474.0" spacing="40.0" AnchorPane.bottomAnchor="106.0" AnchorPane.leftAnchor="63.0" AnchorPane.rightAnchor="63.0" AnchorPane.topAnchor="107.0">
          <children>
             <JFXTextField fx:id="tfTipoVino" labelFloat="true" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="331.0" promptText="Tipo Di Vino">
                <font>
@@ -20,10 +20,16 @@
                   <Insets top="100.0" />
                </HBox.margin>
             </JFXTextField>
-            <JFXButton fx:id="btnAdd" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#insertElement" prefHeight="187.0" prefWidth="254.0" text="Add" />
+            <JFXButton fx:id="btnAdd" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#insertElement" prefHeight="173.0" prefWidth="179.0" stylesheets="@../css/checkList.css" text="Add" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets top="100.0" />
+               </HBox.margin>
+               <font>
+                  <Font size="26.0" />
+               </font></JFXButton>
          </children>
       </HBox>
-      <Label layoutX="23.0" layoutY="48.0" prefHeight="59.0" prefWidth="555.0" text="Inserisci un nuovo tipo di vino" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="48.0">
+      <Label alignment="CENTER" layoutX="23.0" layoutY="48.0" prefHeight="59.0" prefWidth="555.0" text="Inserisci un nuovo tipo di vino" AnchorPane.leftAnchor="23.0" AnchorPane.rightAnchor="22.0" AnchorPane.topAnchor="48.0">
          <font>
             <Font size="41.0" />
          </font>

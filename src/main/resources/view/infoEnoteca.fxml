@@ -105,12 +105,12 @@
                   <Font size="18.0" />
                </font>
             </JFXTextField>
-            <JFXButton fx:id="btnElimina" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btnPress" prefHeight="46.0" prefWidth="90.0" text="Elimina" GridPane.rowIndex="5">
+            <JFXButton fx:id="btnElimina" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btnPress" prefHeight="46.0" prefWidth="90.0" stylesheets="@../css/checkList.css" text="Elimina" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </GridPane.margin>
             </JFXButton>
-            <JFXButton fx:id="btnSalva" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btnPress" prefHeight="46.0" prefWidth="90.0" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="5">
+            <JFXButton fx:id="btnSalva" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#btnPress" prefHeight="46.0" prefWidth="90.0" stylesheets="@../css/checkList.css" text="Salva" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <GridPane.margin>
                   <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                </GridPane.margin>

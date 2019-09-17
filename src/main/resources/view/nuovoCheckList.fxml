@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="333.0" prefWidth="718.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="410.0" prefWidth="681.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -46,39 +45,39 @@
                         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                      </GridPane.margin>
                   </JFXDatePicker>
-                  <HBox fx:id="hboxData" prefHeight="92.0" prefWidth="709.0" visible="false" GridPane.rowIndex="2">
+                  <HBox fx:id="hboxData" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="92.0" prefWidth="709.0" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <children>
-                        <JFXCheckBox fx:id="checkLunedi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Lunedì">
+                        <JFXCheckBox fx:id="checkLunedi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/checkList.css" text="Lunedì">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="checkMartedi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Martedì">
+                        <JFXCheckBox fx:id="checkMartedi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/checkList.css" text="Martedì">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="checkMercoledi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Mercoledì">
+                        <JFXCheckBox fx:id="checkMercoledi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/checkList.css" text="Mercoledì">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="checkGiovedi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Giovedì">
+                        <JFXCheckBox fx:id="checkGiovedi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/checkList.css" text="Giovedì">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="checkVenerdi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Venerdì">
+                        <JFXCheckBox fx:id="checkVenerdi" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/checkList.css" text="Venerdì">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="checkSabato" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Sabato">
+                        <JFXCheckBox fx:id="checkSabato" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/checkList.css" text="Sabato">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
                         </JFXCheckBox>
-                        <JFXCheckBox fx:id="checkDomenica" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="Domenica">
+                        <JFXCheckBox fx:id="checkDomenica" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../css/checkList.css" text="Domenica">
                            <padding>
                               <Insets right="30.0" />
                            </padding>
@@ -87,8 +86,11 @@
                      <padding>
                         <Insets right="50.0" />
                      </padding>
+                     <GridPane.margin>
+                        <Insets right="50.0" />
+                     </GridPane.margin>
                   </HBox>
-                  <JFXButton fx:id="btnAdd" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#addCompito" prefHeight="61.0" prefWidth="199.0" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <JFXButton fx:id="btnAdd" maxHeight="-Infinity" maxWidth="-Infinity" onAction="#addCompito" prefHeight="61.0" prefWidth="199.0" styleClass="b" stylesheets="@../css/checkList.css" text="Add" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
                      <GridPane.margin>
                         <Insets bottom="30.0" left="100.0" right="100.0" top="30.0" />
                      </GridPane.margin>
@@ -97,11 +99,15 @@
             </GridPane>
          </center>
          <top>
-            <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="389.0" text="Crea un nuovo compito da svolgere" BorderPane.alignment="CENTER">
-               <font>
-                  <Font size="24.0" />
-               </font>
-            </Label>
+            <AnchorPane prefHeight="53.0" prefWidth="641.0" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="165.0" layoutY="18.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="35.0" prefWidth="389.0" text="Crea un nuovo compito da svolgere" AnchorPane.leftAnchor="165.0" AnchorPane.rightAnchor="164.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
          </top>
       </BorderPane>
    </children>
