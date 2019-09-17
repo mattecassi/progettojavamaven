@@ -864,6 +864,7 @@ public class Ricerca implements Initializable {
         }
     }
     //PRENDO IL NOME DEL TIPO DI VINO E DOPO AVERE CHIESTO CONFERMA ELIMININO IL TIPO E TUTTI I VINI CHE HANNO QUEL TIPO
+    @FXML
     private void btnPress(Event event) {
         Button btnPressed = (Button) event.getSource();
         try {
