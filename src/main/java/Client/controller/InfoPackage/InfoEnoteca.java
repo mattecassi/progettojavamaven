@@ -91,7 +91,7 @@ public class InfoEnoteca {
 
 
 
-
+            //imposto i dati nei rispettivi componenents
             fornitore = ricerca.getWrapperEnoteca().fornitore;
             tfID.setText(String.valueOf(fornitore.getID()));
             tfQtaMax.setText(String.valueOf(fornitore.getQta_max()));
@@ -105,7 +105,7 @@ public class InfoEnoteca {
             tfRegione.setText(enoteca.getRegione());
             tfCitta.setText(enoteca.getCitta());
             tfVia.setText(enoteca.getVia());
-
+            //cosa fare in caso di chisuura
             thisStage.setOnCloseRequest((WindowEvent event1) -> {
                 closeProcedure();
             });
@@ -118,7 +118,7 @@ public class InfoEnoteca {
     }
 
     private void closeProcedure(){
-        if (modified) {
+        if (modified) {//se ho modificato qualcosa chiedo
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Conferma Modifica");
             alert.setHeaderText("Hai effettuato modifica all'enoteca");
@@ -153,11 +153,6 @@ public class InfoEnoteca {
                     e.printStackTrace();
                 }
                 System.out.println("Salvo");
-//                try {
-//                    this.ricerca.loadAllTbl();
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
             } else {
                 System.out.println("Non salvo");
             }
@@ -165,7 +160,7 @@ public class InfoEnoteca {
     }
 
     @FXML
-    private void valueModified(Event e){
+    private void valueModified(Event e){//in base a cosa modifico, acquisisco il nuovo valore
         modified = true;
         try {
             JFXTextField tfCur = (JFXTextField) e.getSource();
@@ -215,6 +210,7 @@ public class InfoEnoteca {
                 Optional<ButtonType> result = alert.showAndWait();
                 if (result.get() == ButtonType.OK) {
                     try {
+                        //in caso positivo inizio la ricerca dei vini associati
                         APIC aEnoteca = new APIC("enoteca");
                         APIC aFornitore = new APIC("fornitore");
                         String[] strings ={};
@@ -224,13 +220,13 @@ public class InfoEnoteca {
                         enoteca.delete();
 
                         clausolasFornitore.add(new Clausola("ID", "=", fornitore.getID().toString()));
-                        for(Fornitore cur: aFornitore.select(strings,clausolasFornitore).toList(Fornitore.class)){
+                        for(Fornitore cur: aFornitore.select(strings,clausolasFornitore).toList(Fornitore.class)){//collego i vini all'id dell'enoteca e li elimino
                             clausolasVino.add(new Clausola("idFornitore","=", cur.getID().toString()));
                             ricerca.eliminaVini(clausolasVino);
                             clausolasVino.remove(0);
-                            cur.delete();
                         }
 
+                        //infine elimino l'enoteca e la sua controparte fornitore
                         fornitore.delete();
 
                     } catch (Exception e) {
