@@ -55,7 +55,7 @@ public class Nuovo{
 
     @FXML
     void inserisciElement(){ //CONTROLLO DI AVERE INSERITO TUTTI I CAMPI
-        if (tfID.getText().isEmpty() || tfCosto.getText().isEmpty() || tfPrezzoVendita.getText().isEmpty()  || tfAnnata.getText().isEmpty() || cmbTipo.getSelectionModel().getSelectedItem().isEmpty() || tfQta.getText().isEmpty() || cmbCantina.getSelectionModel().getSelectedItem().isEmpty() || tfNome.getText().isEmpty()){
+        if (cmbFornitore.getSelectionModel().getSelectedItem()==null||  tfID.getText().isEmpty() || tfCosto.getText().isEmpty() || tfPrezzoVendita.getText().isEmpty()  || tfAnnata.getText().isEmpty() || cmbTipo.getSelectionModel().getSelectedItem() == null || tfQta.getText().isEmpty() || cmbCantina.getSelectionModel().getSelectedItem() == null || tfNome.getText().isEmpty()){
             Utility.createErrorWindow("Inserisci tutti i campi");
         } else {
 

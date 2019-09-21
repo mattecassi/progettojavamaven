@@ -228,7 +228,6 @@ public class InfoEnoteca {
                             clausolasVino.add(new Clausola("idFornitore","=", cur.getID().toString()));
                             ricerca.eliminaVini(clausolasVino);
                             clausolasVino.remove(0);
-                            cur.delete();
                         }
 
                         fornitore.delete();

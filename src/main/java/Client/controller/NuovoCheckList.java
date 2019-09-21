@@ -1,9 +1,6 @@
-package Client.controller.NuovoPackage;
+package Client.controller;
 
-import Client.controller.CheckList;
 import Models.Compito;
-import Models.Enoteca;
-import Models.Fornitore;
 import Utils.Utility;
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
@@ -78,6 +75,8 @@ public class NuovoCheckList {
 
             cmbTipoCompito.setItems(tipoCompiti);
             cmbTipoCompito.getSelectionModel().selectFirst();
+            thisStage.showAndWait();
+
         } catch (Exception e) {
         }
         thisStage.setOnCloseRequest((WindowEvent event1) -> {

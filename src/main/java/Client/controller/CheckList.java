@@ -1,7 +1,6 @@
 package Client.controller;
 
 import Client.Main2;
-import Client.controller.NuovoPackage.NuovoCheckList;
 import Models.Compito;
 import Utils.Utility;
 import com.jfoenix.controls.JFXButton;
@@ -156,7 +155,7 @@ public class CheckList implements Initializable {
     void addCompito(ActionEvent event) {
 
         NuovoCheckList nuovoCheckList = new NuovoCheckList(this);
-        nuovoCheckList.showStage();
+
     }
 
 

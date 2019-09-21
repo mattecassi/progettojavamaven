@@ -19,7 +19,6 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
-import sun.nio.cs.ArrayEncoder;
 
 import java.io.IOException;
 import java.sql.Wrapper;

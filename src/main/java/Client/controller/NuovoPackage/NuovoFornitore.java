@@ -82,7 +82,7 @@ public class NuovoFornitore {
     @FXML//CONTROLLO I DATI POI INSERISCO
     void insertElement(ActionEvent event) {
         boolean check = true;
-        if(tfNome.getText().isEmpty() || tfMail.getText().isEmpty() || tfQtaMin.getText().isEmpty() || tfQtaMax.getText().isEmpty() || tfTelefono.getText().isEmpty()){
+        if(cmbSelect.getSelectionModel().getSelectedItem() == null || tfNome.getText().isEmpty() || tfMail.getText().isEmpty() || tfQtaMin.getText().isEmpty() || tfQtaMax.getText().isEmpty() || tfTelefono.getText().isEmpty()){
             check=false;
             Utility.createErrorWindow("Inserisci tutti i campi");
             }
@@ -124,6 +124,7 @@ public class NuovoFornitore {
                     tfQtaMin.setText("");
                     tfTelefono.setText("");
                     tfMail.setText("");
+                    cmbSelect.getSelectionModel().clearSelection();
 
                 }
                 else{
