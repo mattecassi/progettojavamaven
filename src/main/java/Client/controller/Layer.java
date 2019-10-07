@@ -22,8 +22,8 @@ public class Layer {
                 case "btnRicerca":
                     loader.setLocation(getClass().getResource("/view/ricerca.fxml"));
                     break;
-                case "btnAggiorna":
-                    loader.setLocation(getClass().getResource("/view/vendita.fxml"));
+                case "btnVendita":
+                    loader.setLocation(getClass().getResource("/view/vendita2.fxml"));
                     break;
                 case "btnCheckList":
                     loader.setLocation(getClass().getResource("/view/checkList.fxml"));

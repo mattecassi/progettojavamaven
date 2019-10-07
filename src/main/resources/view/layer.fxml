@@ -13,7 +13,7 @@
                <VBox.margin>
                   <Insets top="2.0" />
                </VBox.margin></JFXButton>
-            <JFXButton fx:id="btnAggiorna" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Vendita" />
+            <JFXButton fx:id="btnVendita" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Vendita" />
             <JFXButton fx:id="btnNuovo" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Nuovo" />
             <JFXButton fx:id="btnInventario" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Inventario" />
             <JFXButton fx:id="btnCheckList" buttonType="RAISED" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#changeScene" prefHeight="1000.0" stylesheets="@../css/checkList.css" text="Checklist">

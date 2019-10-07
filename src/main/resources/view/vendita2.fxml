@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.text.Font?>
+<?import com.jfoenix.controls.JFXListView?>
+<?import javafx.scene.Cursor?>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Client.controller.Vendita">
+    <children>
+        <JFXListView fx:id="lstViewVendita" layoutX="7.0" layoutY="73.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onDragDropped="#dragDropped" onDragOver="#dragOver" prefHeight="321.0" prefWidth="483.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="7.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="73.0">
+            <cursor>
+                <Cursor fx:constant="DEFAULT" />
+            </cursor>
+        </JFXListView>
+        <Label layoutX="92.0" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="63.0" prefWidth="781.0" text="Trascina File Excel contenente i vini venduti" AnchorPane.leftAnchor="92.0" AnchorPane.rightAnchor="127.0" AnchorPane.topAnchor="0.0">
+            <font>
+                <Font name="System Bold" size="36.0" />
+            </font>
+        </Label>
+    </children>
+</AnchorPane>
